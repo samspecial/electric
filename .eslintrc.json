@@ -1,0 +1,28 @@
+{
+    "extends":["eslint:recommended", "prettier", "plugin:react/recommended"],
+    "plugins": ["react"],
+    "parserOptions":{
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx":true
+        }
+    },
+    "env":{
+        "es6":true,
+        "browser": true,
+        "node": true
+
+    },
+    "settings": {
+        "react": {
+          "createClass": "createReactClass", 
+                                          
+          "pragma": "React", 
+          "fragment": "Fragment", 
+          "version": "detect"
+         
+        }
+    }
+    
+}
