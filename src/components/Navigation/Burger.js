@@ -6,9 +6,9 @@ const Burger = () => {
   return (
     <>
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
-        <div>1</div>
-        <div>1</div>
-        <div>1</div>
+              <div></div>
+              <div></div>
+              <div></div>
       </StyledBurger>
       <MenuList open={open} />
     </>
@@ -20,7 +20,7 @@ const StyledBurger = styled.div`
   height: 2rem;
   position: fixed;
   top: 15px;
-  right: 20px;
+  right: 25px;
   z-index: 20;
   display: none;
 
@@ -33,7 +33,7 @@ const StyledBurger = styled.div`
   div {
     width: 2rem;
     height: 0.25rem;
-    background-color: ${({ open }) => (open ? "#ccc" : "#333")};
+    background-color: ${({ open }) => (open ? "#bbb" : "#333")};
     border-radius: 10px;
     transform-origin: 1px;
     transition: all 0.3s linear;
