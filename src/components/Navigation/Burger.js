@@ -1,20 +1,50 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { LinkStyle } from "../Styles";
 import MenuList from "./MenuList";
+
 const Burger = () => {
   const [open, setOpen] = useState(false);
+
+  const navButtonLinks = [
+    { id: 1, name: "Sign In", path: "/login", type: "clear" },
+    { id: 2, name: "Register", path: "/register", type: "color" },
+
+  ];
+
+  const linkStyles = {
+    height: "100%",
+
+    display: "flex",
+    justifyContent: "flex-end",
+    margin: { marginRight: "1rem", marginTop: "0px", height: "40px", },
+    width: "60%",
+    marginLeft: "auto"
+
+
+  }
   return (
-    <>
+    <Div>
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
               <div></div>
               <div></div>
               <div></div>
       </StyledBurger>
-      <MenuList open={open} />
-    </>
+      <MenuList open={open} ><span style={linkStyles}>{navButtonLinks.map(link => (<LinkStyle style={linkStyles.margin} cta={link.type} key={link.id} exact to={link.path} >{link.name}</LinkStyle>))}</span></MenuList>
+      {/* <span></span> */}
+
+    </Div>
   );
 };
 
+const Div = styled.div`
+width:100%;
+&:last-child{
+  width:95%;
+  display:flex;
+  align-items:center;
+}
+`;
 const StyledBurger = styled.div`
   width: 2rem;
   height: 2rem;
