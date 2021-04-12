@@ -12,12 +12,12 @@ const showLoader = () => loader.classList.remove("loader--hide");
 const hideLoader = () => loader.classList.add("loader--hide");
 
 render(
-    <React.StrictMode>
-        <Router>
-            <App hideLoader={hideLoader} showLoader={showLoader} />
-        </Router>
-        </React.StrictMode>,
-    document.querySelector("#root")
+  <React.StrictMode>
+    <Router>
+      <App hideLoader={hideLoader} showLoader={showLoader} />
+    </Router>
+  </React.StrictMode>,
+  document.querySelector("#root")
 );
 
 // App.propTypes = {
