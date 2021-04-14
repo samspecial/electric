@@ -1,9 +1,10 @@
 import React from "react";
 import CardList from "../WhyChooseUs/CardList";
+// import { Panel } from "../WhyChooseUs/CardStyle"
 import data from "../../data/whyChooseUs.json";
 
 const CardPanel = () => {
-  return <CardList title="n" cardItems={data} />;
+    return <CardList cardItems={data} />
 };
 
 export default CardPanel;

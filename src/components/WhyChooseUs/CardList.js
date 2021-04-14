@@ -1,24 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
-import { Text } from "../Styles";
+import { Panel } from "./CardStyle";
 
-const CardList = ({ cardItems, title }) => {
-  return (
-    <div>
-      <Text>{title}</Text>
-      <>
+
+const CardList = ({ cardItems }) => {
+    return (
+        <Panel>
         {cardItems.map((cardItem, i) => (
           <Card key={i} {...cardItem} />
         ))}
-      </>
-    </div>
+        </Panel>
   );
 };
 
 export default CardList;
 
 CardList.propTypes = {
-  cardItems: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired,
+    cardItems: PropTypes.array.isRequired,
 };

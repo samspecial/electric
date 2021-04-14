@@ -1,17 +1,17 @@
 import React from "react";
-import { Title, Panel, TextContainer } from "./CardStyle";
+import { Title, PanelHorizontal, TextContainer, Img } from "./CardStyle";
 import PropTypes from "prop-types";
 import { Text } from "../Styles";
 
 const Card = ({ title, icon, text }) => {
   return (
-    <Panel id={title}>
-      <img src={icon} alt="" />
+      <PanelHorizontal id={title}>
+          <Img src={icon} alt="" />
       <TextContainer>
         <Title>{title}</Title>
         <Text style={{ width: "auto" }}>{text}</Text>
       </TextContainer>
-    </Panel>
+      </PanelHorizontal>
   );
 };
 
