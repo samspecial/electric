@@ -70,8 +70,9 @@ export const MenuListGroup = styled.ul`
   }
 
   @media (max-width: 768px) {
+    padding-top:8rem;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: #ccc;
     align-items: flex-start;
     position: fixed;
@@ -81,7 +82,6 @@ export const MenuListGroup = styled.ul`
     left: 0;
     height: 100vh;
     width: 80%;
-    padding-left: 1rem;
     transition: transform 0.3s ease-in-out;
   }
 `;

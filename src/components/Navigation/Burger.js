@@ -11,15 +11,15 @@ const Burger = () => {
     { id: 2, name: "Register", path: "/register", type: "color" },
   ];
 
-  const linkStyles = {
-    height: "100%",
+  // const linkStyles = {
+  //   height: "100%",
 
-    display: "flex",
-    justifyContent: "flex-end",
-    margin: { marginRight: "1rem", marginTop: "0px", height: "40px" },
-    width: "60%",
-    marginLeft: "auto",
-  };
+  //   display: "flex",
+  //   justifyContent: "flex-end",
+  //   margin: { marginRight: "1rem", marginTop: "0px", height: "40px" },
+  //   width: "60%",
+  //   marginLeft: "auto",
+  // };
   return (
     <Div>
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
@@ -28,10 +28,9 @@ const Burger = () => {
         <div></div>
       </StyledBurger>
       <MenuList open={open}>
-        <span style={linkStyles}>
+        <Span>
           {navButtonLinks.map((link) => (
             <LinkStyle
-              style={linkStyles.margin}
               cta={link.type}
               key={link.id}
               to={link.path}
@@ -39,7 +38,7 @@ const Burger = () => {
               {link.name}
             </LinkStyle>
           ))}
-        </span>
+        </Span>
       </MenuList>
     </Div>
   );
@@ -52,6 +51,29 @@ const Div = styled.div`
     display: flex;
     align-items: center;
   }
+  }
+`;
+
+const Span = styled.span`
+height:100%;
+display: flex;
+justify-content: flex-end;
+width: 60%;
+margin-left: auto;
+
+&:nth-child(){
+  margin:0 1rem 0 0;
+  height:40px;
+}
+
+@media (max-width:768px){
+  margin-left:0;
+  padding-top:0;
+  height:0;
+  flex-direction:column;
+  justify-content:flex-start;
+  // align-items:center;
+}
 `;
 const StyledBurger = styled.div`
   width: 2rem;
