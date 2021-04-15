@@ -107,11 +107,12 @@ export const LinkStyle = styled(Link)`
     color: ${(props) => (props.cta === "color" ? "#880212" : "white")};
     background: ${(props) => (props.cta === "color" ? "white" : "#880212")};
     border: ${(props) =>
-      props.cta === "color" ? "0.05rem solid #880212" : "none"};
+    props.cta === "color" ? "0.05rem solid #880212" : "none"};
   }
   @media (max-width: 768px) {
     width: fit-content;
     text-align: left;
+    padding:0.6rem 0;
     background: transparent;
     color: #880212;
   }
@@ -124,17 +125,34 @@ export const Heading = styled.h2`
   color: #880212;
   text-align: left;
   margin-bottom: 1.25rem;
+
+   @media (max-width:768px){
+   width:250px;
+   font-size:2rem;
+  }
 `;
 
 export const Text = styled.p`
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #555;
   line-height: 1.35;
   width: 350px;
+
+  @media (max-width:768px){
+    width:220px;
+  }
 `;
 
 export const Container = styled.section`
   padding: 3rem 6rem;
   widh: 100%;
   height: 450px;
+
+  @media (min-width:480px) and (max-width:768px){
+    padding:2rem 1.5rem;
+  }
+
+  @media (max-width:480px){
+    padding:2rem 1rem;
+  }
 `;
