@@ -100,7 +100,6 @@ export const LinkStyle = styled(Link)`
   cursor: pointer;
   text-align: center;
   font-weight: bold;
-  margin-top: 40px;
   background: ${(props) => (props.cta === "color" ? "#880212" : "white")};
 
   &:hover {
@@ -137,7 +136,7 @@ export const Text = styled.p`
   color: #555;
   line-height: 1.35;
   width: 350px;
-
+  margin-bottom:30px;
   @media (max-width:768px){
     width:220px;
   }

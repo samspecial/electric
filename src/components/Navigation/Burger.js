@@ -55,24 +55,21 @@ const Div = styled.div`
 `;
 
 const Span = styled.span`
-height:100%;
+height:60px;
 display: flex;
 justify-content: flex-end;
+align-items:center;
 width: 60%;
 margin-left: auto;
-
-&:nth-child(){
-  margin:0 1rem 0 0;
-  height:40px;
-}
 
 @media (max-width:768px){
   margin-left:0;
   padding-top:0;
-  height:0;
+  
   flex-direction:column;
   justify-content:flex-start;
-  // align-items:center;
+  align-items:flex-start;
+  padding-left:1rem;
 }
 `;
 const StyledBurger = styled.div`
