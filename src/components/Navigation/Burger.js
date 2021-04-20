@@ -30,11 +30,7 @@ const Burger = () => {
       <MenuList open={open}>
         <Span>
           {navButtonLinks.map((link) => (
-            <LinkStyle
-              cta={link.type}
-              key={link.id}
-              to={link.path}
-            >
+            <LinkStyle cta={link.type} key={link.id} to={link.path}>
               {link.name}
             </LinkStyle>
           ))}
@@ -55,22 +51,22 @@ const Div = styled.div`
 `;
 
 const Span = styled.span`
-height:60px;
-display: flex;
-justify-content: flex-end;
-align-items:center;
-width: 60%;
-margin-left: auto;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 60%;
+  margin-left: auto;
 
-@media (max-width:768px){
-  margin-left:0;
-  padding-top:0;
-  
-  flex-direction:column;
-  justify-content:flex-start;
-  align-items:flex-start;
-  padding-left:1rem;
-}
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding-top: 0;
+
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 1rem;
+  }
 `;
 const StyledBurger = styled.div`
   width: 2rem;

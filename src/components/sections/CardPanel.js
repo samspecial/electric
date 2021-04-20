@@ -4,7 +4,7 @@ import CardList from "../WhyChooseUs/CardList";
 import data from "../../data/whyChooseUs.json";
 
 const CardPanel = () => {
-    return <CardList cardItems={data} />
+  return <CardList cardItems={data} />;
 };
 
 export default CardPanel;

@@ -26,8 +26,8 @@ const HeroContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  @media screen only and (max-width:768px){
-    flex-flow:column wrap;
+  @media screen only and (max-width: 768px) {
+    flex-flow: column wrap;
   }
 `;
 

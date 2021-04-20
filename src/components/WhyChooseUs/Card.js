@@ -5,13 +5,13 @@ import { Text } from "../Styles";
 
 const Card = ({ title, icon, text }) => {
   return (
-      <PanelHorizontal id={title}>
-          <Img src={icon} alt="" />
+    <PanelHorizontal id={title}>
+      <Img src={icon} alt="" />
       <TextContainer>
         <Title>{title}</Title>
         <Text style={{ width: "auto" }}>{text}</Text>
       </TextContainer>
-      </PanelHorizontal>
+    </PanelHorizontal>
   );
 };
 

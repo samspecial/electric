@@ -70,7 +70,7 @@ export const MenuListGroup = styled.ul`
   }
 
   @media (max-width: 768px) {
-    padding-top:8rem;
+    padding-top: 8rem;
     flex-flow: column nowrap;
     justify-content: flex-start;
     background-color: #ccc;
@@ -106,12 +106,12 @@ export const LinkStyle = styled(Link)`
     color: ${(props) => (props.cta === "color" ? "#880212" : "white")};
     background: ${(props) => (props.cta === "color" ? "white" : "#880212")};
     border: ${(props) =>
-    props.cta === "color" ? "0.05rem solid #880212" : "none"};
+      props.cta === "color" ? "0.05rem solid #880212" : "none"};
   }
   @media (max-width: 768px) {
     width: fit-content;
     text-align: left;
-    padding:0.6rem 0;
+    padding: 0.6rem 0;
     background: transparent;
     color: #880212;
   }
@@ -125,9 +125,9 @@ export const Heading = styled.h2`
   text-align: left;
   margin-bottom: 1.25rem;
 
-   @media (max-width:768px){
-   width:250px;
-   font-size:2rem;
+  @media (max-width: 768px) {
+    width: 250px;
+    font-size: 2rem;
   }
 `;
 
@@ -136,9 +136,9 @@ export const Text = styled.p`
   color: #555;
   line-height: 1.35;
   width: 350px;
-  margin-bottom:30px;
-  @media (max-width:768px){
-    width:220px;
+  margin-bottom: 30px;
+  @media (max-width: 768px) {
+    width: 220px;
   }
 `;
 
@@ -147,11 +147,11 @@ export const Container = styled.section`
   widh: 100%;
   height: 450px;
 
-  @media (min-width:480px) and (max-width:768px){
-    padding:2rem 1.5rem;
+  @media (min-width: 480px) and (max-width: 768px) {
+    padding: 2rem 1.5rem;
   }
 
-  @media (max-width:480px){
-    padding:2rem 1rem;
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
   }
 `;
