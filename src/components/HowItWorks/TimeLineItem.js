@@ -4,28 +4,28 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const TimeLineItem = ({ timeline }) => {
-    return (
-        <TimeLine>
-            <div>
-                <img src={timeline.illustration} alt={timeline.illustration} />
-            </div>
-            <div>
-                <div>
-                    <h2>{timeline.heading}</h2>
-                    <h2>0{timeline.id}</h2>
-                    <p>{timeline.paragraph}</p>
-                    <InternalLink>{timeline.illustration} { }</InternalLink>
-                </div>
-                <span></span>
-            </div>
-        </TimeLine>
-    );
+  return (
+    <TimeLine>
+      <div>
+        <img src={timeline.illustration} alt={timeline.illustration} />
+      </div>
+      <div>
+        <div>
+          <h2>{timeline.heading}</h2>
+          <h2>0{timeline.id}</h2>
+          <p>{timeline.paragraph}</p>
+          <InternalLink to="/products">{timeline.illustration}</InternalLink>
+        </div>
+        <span></span>
+      </div>
+    </TimeLine>
+  );
 };
 
 export default TimeLineItem;
 
 TimeLineItem.propTypes = {
-    timeline: PropTypes.object.isRequired,
+  timeline: PropTypes.object.isRequired,
 };
 
 const TimeLine = styled.div`
@@ -48,11 +48,10 @@ const TimeLine = styled.div`
         h2:nth-child(2){
             position:absolute;
             font-size:4.5rem;
-            color:#fff;
-            left:80%;
+            color:#FC0221;
+            left:65%;
             top:-20%;
             font-weight:400;
-
         }
     }
   }
@@ -65,7 +64,7 @@ const TimeLine = styled.div`
 
   div:nth-child(2) {
     order: 2;
-    background: pink;
+    background:#88021219;
   }
  
 
@@ -80,31 +79,25 @@ const TimeLine = styled.div`
     left: calc(50% - 20px);
     top: calc(50% - 20px);
 
-    &:after {
+    &::after {
       content: "";
-      width: 360px;
-      height: 90px;
-      transform: rotateX(180);
-      z-index: -1;
+      width: 380px;
+      height: 60px;
       background: transparent;
       border: none;
       border-radius: 50%;
-
+        transform:rotate(270deg);
       box-sizing: border-box;
       display: block;
       position: absolute;
-      right: -140px;
+      border-bottom: dashed 2px #e17b77;
+      left:-180px;
+      top:195px;
     }
-
-    &:nth-child(odd):after {
-      border-bottom: dashed 2px orange;
-      left: -20px;
-    }
-
-    &:nth-child(even):after {
-      border-bottom: dashed 2px orange;
-      right: -20px;
-    }
+    &:nth-child(2):after{
+      transform:rotate(-270deg, 0);
+    }  
+    
   }
 `;
 

@@ -11,15 +11,6 @@ const Burger = () => {
     { id: 2, name: "Register", path: "/register", type: "color" },
   ];
 
-  // const linkStyles = {
-  //   height: "100%",
-
-  //   display: "flex",
-  //   justifyContent: "flex-end",
-  //   margin: { marginRight: "1rem", marginTop: "0px", height: "40px" },
-  //   width: "60%",
-  //   marginLeft: "auto",
-  // };
   return (
     <Div>
       <StyledBurger open={open} onClick={() => setOpen(!open)}>

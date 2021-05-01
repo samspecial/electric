@@ -2,14 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
 import { Panel } from "./CardStyle";
+import { FullWidth } from "../Styles";
 
 const CardList = ({ cardItems }) => {
   return (
-    <Panel>
-      {cardItems.map((cardItem, i) => (
-        <Card key={i} {...cardItem} />
-      ))}
-    </Panel>
+    <FullWidth>
+      <Panel>
+        {cardItems.map((cardItem, i) => (
+          <Card key={i} {...cardItem} />
+        ))}
+      </Panel>
+    </FullWidth>
   );
 };
 

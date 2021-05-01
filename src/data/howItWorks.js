@@ -20,14 +20,7 @@ const data = [
         paragraph:
             "The first step to getting amazing jobs done is through registration",
         illustration: join,
-    },
-    {
-        id: 4,
-        heading: "close the ticket",
-        paragraph:
-            "The first step to getting amazing jobs done is through registration",
-        illustration: join,
-    },
+    }
 ];
 
 export default data;

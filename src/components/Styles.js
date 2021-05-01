@@ -105,8 +105,7 @@ export const LinkStyle = styled(Link)`
   &:hover {
     color: ${(props) => (props.cta === "color" ? "#880212" : "white")};
     background: ${(props) => (props.cta === "color" ? "white" : "#880212")};
-    border: ${(props) =>
-      props.cta === "color" ? "0.05rem solid #880212" : "none"};
+    border: ${(props) => props.cta === "color" ? "0.05rem solid #880212" : "none"};
   }
   @media (max-width: 768px) {
     width: fit-content;
@@ -118,11 +117,12 @@ export const LinkStyle = styled(Link)`
 `;
 
 export const Heading = styled.h2`
-  width: 400px;
-  font-size: 3rem;
+  width: 100%;
+  font-size: 3.5rem;
   font-weight: 900;
   color: #880212;
   text-align: left;
+  line-height:1.2;
   margin-bottom: 1.25rem;
 
   @media (max-width: 768px) {
@@ -138,14 +138,32 @@ export const Text = styled.p`
   width: 350px;
   margin-bottom: 30px;
   @media (max-width: 768px) {
-    width: 220px;
+    width: 100%;
   }
 `;
 
 export const Container = styled.section`
   padding: 3rem 6rem;
-  widh: 100%;
+  width: 100%;
   height: 450px;
+
+  @media (min-width: 480px) and (max-width: 768px) {
+    padding: 2rem 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
+  }
+`;
+
+export const FullWidth = styled.section`
+  padding: 3rem 6rem;
+  width: 100%;
+  min-height: 450px;
+  background:linear-gradient(60deg, #D0021B, #970214);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 
   @media (min-width: 480px) and (max-width: 768px) {
     padding: 2rem 1.5rem;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Title = styled.h2`
   font-weight: 900;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #d0021b;
   text-transform: capitalize;
 `;
@@ -12,7 +12,7 @@ export const Panel = styled.div`
   height: fit-content;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
   line-height: 1.5;
 `;
@@ -25,7 +25,7 @@ export const PanelHorizontal = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   line-height: 1.5;
-  background: #dcd;
+  background: rgb(238, 236, 236);
 
   @media only screen and (min-width: 480px) and (max-width: 768px) {
     width: 46%;
@@ -37,14 +37,12 @@ export const PanelHorizontal = styled.div`
     padding: 2rem 1.5rem;
     margin: 0 0.8rem 0.85rem 0.85rem;
   }
-  //#ddc
 `;
 
 export const TextContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   width: 80%;
-  //   justify-content: center;
 `;
 
 export const Img = styled.img`
