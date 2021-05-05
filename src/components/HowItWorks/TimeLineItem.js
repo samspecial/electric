@@ -30,11 +30,11 @@ TimeLineItem.propTypes = {
 
 const TimeLine = styled.div`
   display: flex;
-  padding: 4rem 10rem;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
   position: relative;
+  margin-bottom:30px;
 
   div {
     width: 35%;
@@ -62,11 +62,10 @@ const TimeLine = styled.div`
     margin: 0 auto;
   }
 
-  div:nth-child(2) {
+  div:nth-child(even) {
     order: 2;
-    background:#88021219;
+    background:#F5F7FA;
   }
- 
 
   span {
     width: 40px;
@@ -81,8 +80,8 @@ const TimeLine = styled.div`
 
     &::after {
       content: "";
-      width: 380px;
-      height: 60px;
+      width: 250px;
+      height: 40px;
       background: transparent;
       border: none;
       border-radius: 50%;
@@ -91,8 +90,8 @@ const TimeLine = styled.div`
       display: block;
       position: absolute;
       border-bottom: dashed 2px #e17b77;
-      left:-180px;
-      top:195px;
+      left:-115px;
+      top:140px;
     }
     &:nth-child(2):after{
       transform:rotate(-270deg, 0);

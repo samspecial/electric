@@ -2,13 +2,18 @@ import React from "react";
 import TimeLineItem from "./TimeLineItem";
 import data from "../../data/howItWorks";
 import styled from "styled-components";
+import { SectionHeading, Container } from "../Styles";
 
 const TimeLineContainer = () => (
-  <Div>
-    {data.map((d) => (
-      <TimeLineItem timeline={d} key={d.id}></TimeLineItem>
-    ))}
-  </Div>
+  <Container background="white">
+    <SectionHeading>How It Works</SectionHeading>
+
+    <Div>
+      {data.map((d) => (
+        <TimeLineItem timeline={d} key={d.id}></TimeLineItem>
+      ))}
+    </Div>
+  </Container>
 );
 
 export default TimeLineContainer;

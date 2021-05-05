@@ -29,13 +29,13 @@ export const PanelHorizontal = styled.div`
 
   @media only screen and (min-width: 480px) and (max-width: 768px) {
     width: 46%;
-    margin: 0 0.8rem 1.2rem 0.85rem;
+    margin: 0 0 0.85rem 0;
     padding: 2rem 1.5rem;
   }
   @media only screen and (max-width: 480px) {
     width: 100%;
     padding: 2rem 1.5rem;
-    margin: 0 0.8rem 0.85rem 0.85rem;
+    margin: 0 0 0.85rem 0;
   }
 `;
 
