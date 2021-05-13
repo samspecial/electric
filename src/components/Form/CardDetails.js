@@ -61,8 +61,8 @@ const CardDetails = ({ cardname, cardDigit, cvv, expiryDate, handleChange, nextS
                     onChange={handleChange}
                 />
             </div>
-            <button type="button" disable={!shouldProceed()} onClick={goBackward}>Previous</button>
-            <button type="button" disable={!shouldProceed()} onClick={proceed}>Next</button>
+            <button type="button" onClick={goBackward}>Previous</button>
+            <button type="button" onClick={proceed}>Next</button>
         </form>
     )
 }
@@ -71,8 +71,8 @@ export default CardDetails;
 
 CardDetails.propTypes = {
     cardname: PropTypes.string.isRequired,
-    cardDigit: PropTypes.number.isRequired,
-    cvv: PropTypes.number.isRequired,
+    cardDigit: PropTypes.string.isRequired,
+    cvv: PropTypes.string.isRequired,
     expiryDate: PropTypes.string.isRequired,
     nextStep: PropTypes.func.isRequired,
     previousStep: PropTypes.func.isRequired,
