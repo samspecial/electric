@@ -19,5 +19,5 @@ const CardList = ({ cardItems }) => {
 export default CardList;
 
 CardList.propTypes = {
-  cardItems: PropTypes.array.isRequired,
+  cardItems: PropTypes.object,
 };

@@ -9,7 +9,7 @@ const TimeLineItem = ({ timeline }) => {
       <div>
         <img src={timeline.illustration} alt={timeline.illustration} />
       </div>
-      <div>
+      <aside>
         <div>
           <h2>{timeline.heading}</h2>
           <h2>0{timeline.id}</h2>
@@ -17,7 +17,7 @@ const TimeLineItem = ({ timeline }) => {
           <InternalLink to="/products">{timeline.illustration}</InternalLink>
         </div>
         <span></span>
-      </div>
+      </aside>
     </TimeLine>
   );
 };
@@ -35,16 +35,22 @@ const TimeLine = styled.div`
   align-items: center;
   flex-direction: row;
   position: relative;
+  width:100%;
 
-  div {
+
+  aside {
     width: 35%;
     height: 100%;
     padding:3rem 1.5rem;
     border-radius:10px;
+    background:#88021219;
     div{
         width:100%;
         position:relative;
-
+        height:100%;
+        h2{
+          margin-bottom:1.5rem;
+        }
         h2:nth-child(2){
             position:absolute;
             font-size:4.5rem;
@@ -52,19 +58,19 @@ const TimeLine = styled.div`
             left:65%;
             top:-20%;
             font-weight:400;
+            mrgin-bottom:0;
         }
     }
   }
 
   img {
-    width: 70%;
+    width: 65%;
     height: 100%;
     margin: 0 auto;
   }
 
-  div:nth-child(2) {
+  aside:nth-child(2) {
     order: 2;
-    background:#88021219;
   }
  
 
@@ -82,22 +88,46 @@ const TimeLine = styled.div`
     &::after {
       content: "";
       width: 380px;
-      height: 60px;
+      height: 10px;
       background: transparent;
-      border: none;
-      border-radius: 50%;
-        transform:rotate(270deg);
+      transform:rotate(270deg);
       box-sizing: border-box;
       display: block;
       position: absolute;
       border-bottom: dashed 2px #e17b77;
       left:-180px;
-      top:195px;
+      top:230px;
     }
-    &:nth-child(2):after{
-      transform:rotate(-270deg, 0);
-    }  
+
+    span:last-child{
+      display:none;
+    }
     
+  }
+
+  @media (max-width:480px){
+    flex-direction:column;
+    padding: 1rem;
+    img{
+      display:none;
+      width:0px;
+    }
+
+    aside{
+      width:100%;
+      div{
+        padding:2rem 0;
+        h2:nth-child(2){
+            font-size:2.3rem;
+            left:85%;
+            top:-10%;
+            font-weight:400;
+        }
+      }
+    }
+    span{
+      display:none;
+    }
   }
 `;
 
