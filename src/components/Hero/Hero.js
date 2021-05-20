@@ -12,7 +12,7 @@ const Hero = () => {
           home.
         </Text>
         <LinkStyle cta="color" to="/about">
-          Getting Started
+          Get Started
         </LinkStyle>
       </TextContent>
     </HeroContainer>
@@ -25,6 +25,10 @@ const HeroContainer = styled.div`
   height: 100%;
   justify-content: flex-start;
   align-items: center;
+
+  @media screen only and (max-width:768px){
+    flex-flow:column wrap;
+  }
 `;
 
 const TextContent = styled.div`
