@@ -70,8 +70,9 @@ export const MenuListGroup = styled.ul`
   }
 
   @media (max-width: 768px) {
+    padding-top: 8rem;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: #ccc;
     align-items: flex-start;
     position: fixed;
@@ -81,7 +82,6 @@ export const MenuListGroup = styled.ul`
     left: 0;
     height: 100vh;
     width: 80%;
-    padding-left: 1rem;
     transition: transform 0.3s ease-in-out;
   }
 `;
@@ -100,35 +100,34 @@ export const LinkStyle = styled(Link)`
   cursor: pointer;
   text-align: center;
   font-weight: bold;
-  margin-top: 40px;
   background: ${(props) => (props.cta === "color" ? "#880212" : "white")};
 
   &:hover {
     color: ${(props) => (props.cta === "color" ? "#880212" : "white")};
     background: ${(props) => (props.cta === "color" ? "white" : "#880212")};
-    border: ${(props) =>
-    props.cta === "color" ? "0.05rem solid #880212" : "none"};
+    border: ${(props) => props.cta === "color" ? "0.05rem solid #880212" : "none"};
   }
   @media (max-width: 768px) {
     width: fit-content;
     text-align: left;
-    padding:0.6rem 0;
+    padding: 0.6rem 0;
     background: transparent;
     color: #880212;
   }
 `;
 
 export const Heading = styled.h2`
-  width: 400px;
-  font-size: 3rem;
+  width: 100%;
+  font-size: 3.5rem;
   font-weight: 900;
   color: #880212;
   text-align: left;
+  line-height:1.2;
   margin-bottom: 1.25rem;
 
-   @media (max-width:768px){
-   width:250px;
-   font-size:2rem;
+  @media (max-width: 768px) {
+    width: 250px;
+    font-size: 2rem;
   }
 `;
 
@@ -137,22 +136,40 @@ export const Text = styled.p`
   color: #555;
   line-height: 1.35;
   width: 350px;
-
-  @media (max-width:768px){
-    width:220px;
+  margin-bottom: 30px;
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
 export const Container = styled.section`
   padding: 3rem 6rem;
-  widh: 100%;
+  width: 100%;
   height: 450px;
 
-  @media (min-width:480px) and (max-width:768px){
-    padding:2rem 1.5rem;
+  @media (min-width: 480px) and (max-width: 768px) {
+    padding: 2rem 1.5rem;
   }
 
-  @media (max-width:480px){
-    padding:2rem 1rem;
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
+  }
+`;
+
+export const FullWidth = styled.section`
+  padding: 3rem 6rem;
+  width: 100%;
+  min-height: 450px;
+  background:linear-gradient(60deg, #D0021B, #970214);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+
+  @media (min-width: 480px) and (max-width: 768px) {
+    padding: 2rem 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
   }
 `;
