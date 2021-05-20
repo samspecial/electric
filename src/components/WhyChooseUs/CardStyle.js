@@ -11,7 +11,8 @@ export const Panel = styled.div`
   width: 100%;
   height: fit-content;
   display: flex;
-  justify-content: space-between;
+  flex-flow:row wrap;
+  justify-content: space-around;
   align-items: flex-start;
   line-height: 1.5;
 `;
@@ -25,6 +26,17 @@ export const PanelHorizontal = styled.div`
   align-items: flex-start;
   line-height: 1.5;
   background: #dcd;
+
+  @media only screen and (min-width:480px) and (max-width:768px){
+    width:46%;
+    margin-bottom:1.2rem;
+    padding: 2rem 1.5rem;
+  }
+  @media only screen and (max-width:480px){
+    width:100%;
+    padding: 2rem 1.5rem;;
+    margin-bottom:0.85rem;
+  }
   //#ddc
 `;
 
