@@ -9,7 +9,7 @@ const TimeLineItem = ({ timeline }) => {
       <div>
         <img src={timeline.illustration} alt={timeline.illustration} />
       </div>
-      <aside>
+      <div>
         <div>
           <h2>{timeline.heading}</h2>
           <h2>0{timeline.id}</h2>
@@ -17,7 +17,7 @@ const TimeLineItem = ({ timeline }) => {
           <InternalLink to="/products">{timeline.illustration}</InternalLink>
         </div>
         <span></span>
-      </aside>
+      </div>
     </TimeLine>
   );
 };
@@ -38,10 +38,10 @@ const TimeLine = styled.div`
   width:100%;
 
 
-  aside {
-    width: 35%;
+  div:nth-child(2) {
+    width: 40%;
     height: 100%;
-    padding:3rem 1.5rem;
+    padding:5rem 1.5rem;
     border-radius:10px;
     background:#88021219;
     div{
@@ -56,20 +56,26 @@ const TimeLine = styled.div`
             font-size:4.5rem;
             color:#FC0221;
             left:65%;
-            top:-20%;
+            top:-50%;
             font-weight:400;
-            mrgin-bottom:0;
+            margin-bottom:0;
         }
     }
   }
-
+  div{
+    width: 30%;
   img {
-    width: 65%;
+    width:80%;
+    display:block;
     height: 100%;
-    margin: 0 auto;
   }
 
-  aside:nth-child(2) {
+}
+
+img:nth-child(2){
+    margin-left:100%;
+  }
+  div:nth-child(2) {
     order: 2;
   }
  
@@ -99,8 +105,9 @@ const TimeLine = styled.div`
       top:230px;
     }
 
-    span:last-child{
-      display:none;
+    span:last-child::after{
+      width:0;
+      height:0;
     }
     
   }
@@ -108,12 +115,13 @@ const TimeLine = styled.div`
   @media (max-width:480px){
     flex-direction:column;
     padding: 1rem;
+    div{
     img{
       display:none;
       width:0px;
     }
-
-    aside{
+  }
+    div{
       width:100%;
       div{
         padding:2rem 0;

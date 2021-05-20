@@ -33,17 +33,7 @@ const Div = styled.div`
   }
 
   @media (max-width:480px){
-   div:nth-child(2) {
-    div:nth-child(1) {
-      order: 1;
-      width:100%;
-    }
-
-    div:nth-child(2) {
-      order: 2;
-      width:100%;
-    }
-  }
+  
   
   }
 `;
