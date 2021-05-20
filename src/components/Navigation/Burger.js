@@ -11,15 +11,6 @@ const Burger = () => {
     { id: 2, name: "Register", path: "/register", type: "color" },
   ];
 
-  const linkStyles = {
-    height: "100%",
-
-    display: "flex",
-    justifyContent: "flex-end",
-    margin: { marginRight: "1rem", marginTop: "0px", height: "40px" },
-    width: "60%",
-    marginLeft: "auto",
-  };
   return (
     <Div>
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
@@ -28,18 +19,13 @@ const Burger = () => {
         <div></div>
       </StyledBurger>
       <MenuList open={open}>
-        <span style={linkStyles}>
+        <Span>
           {navButtonLinks.map((link) => (
-            <LinkStyle
-              style={linkStyles.margin}
-              cta={link.type}
-              key={link.id}
-              to={link.path}
-            >
+            <LinkStyle cta={link.type} key={link.id} to={link.path}>
               {link.name}
             </LinkStyle>
           ))}
-        </span>
+        </Span>
       </MenuList>
     </Div>
   );
@@ -51,6 +37,26 @@ const Div = styled.div`
     width: 95%;
     display: flex;
     align-items: center;
+  }
+  }
+`;
+
+const Span = styled.span`
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 60%;
+  margin-left: auto;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding-top: 0;
+
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 1rem;
   }
 `;
 const StyledBurger = styled.div`

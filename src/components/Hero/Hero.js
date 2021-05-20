@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { LinkStyle, Text, Heading } from "../Styles";
+import { Img } from "../WhyChooseUs/CardStyle";
 
 const Hero = () => {
   return (
@@ -15,6 +16,7 @@ const Hero = () => {
           Get Started
         </LinkStyle>
       </TextContent>
+      <img />
     </HeroContainer>
   );
 };
@@ -26,13 +28,25 @@ const HeroContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  @media screen only and (max-width:768px){
-    flex-flow:column wrap;
+  @media screen only and (max-width: 768px) {
+    flex-direction: column;
+    
+  }
+
+  img{
+    width:45%;
+  }
+
+  @media screen only and (max-width: 480px) {
+   display:none;
   }
 `;
 
 const TextContent = styled.div`
-  width: 45%;
+  width: 55%;
+  @media (max-width: 480px) {
+    width:100%;
+  }
 `;
 
 export default Hero;
