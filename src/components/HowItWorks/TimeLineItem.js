@@ -112,6 +112,9 @@ img:nth-child(2){
     
   }
 
+  @media (min-width:481px) and (max-width:768px){
+    padding:4rem 3rem;
+  }
   @media (max-width:480px){
     flex-direction:column;
     padding: 1rem;
@@ -121,7 +124,7 @@ img:nth-child(2){
       width:0px;
     }
   }
-    div{
+    div:nth-child(2){
       width:100%;
       div{
         padding:2rem 0;

@@ -145,7 +145,7 @@ export const Text = styled.p`
 export const Container = styled.section`
   padding: 3rem 6rem;
   width: 100%;
-  height: 450px;
+  min-height: 450px;
 
   @media (min-width: 480px) and (max-width: 768px) {
     padding: 2rem 1.5rem;
@@ -173,3 +173,18 @@ export const FullWidth = styled.section`
     padding: 2rem 1rem;
   }
 `;
+
+export const BackgroundLight = styled.section`
+background:#EEECEC;
+padding: 3rem 6rem;
+  width: 100%;
+  min-height: 450px;
+   @media (min-width: 480px) and (max-width: 768px) {
+    padding:2rem 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
+  }
+`;
+
