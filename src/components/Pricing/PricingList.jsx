@@ -2,12 +2,12 @@ import React from "react";
 import Pricing from "./Pricing"
 import pricingData from "../../data/pricingData";
 import { Panel } from "../WhyChooseUs/CardStyle";
-import { BackgroundLight } from "../Styles";
+import { BackgroundLight, SectionHeading } from "../Styles";
 
 
 const PricingList = () => {
     return (<BackgroundLight>
-        <h2>Our Pricing </h2>
+        <SectionHeading>Our Pricing</SectionHeading>
         <Panel>
         {pricingData.map((prices, index) => {
         return (<Pricing key={index} {...prices}/>)

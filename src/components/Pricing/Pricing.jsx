@@ -12,7 +12,7 @@ const Pricing = ({ planType, description, amount, benefits, buttonText  }) => {
         <UnorderedList>{benefits.map((benefit, i) => {
             return (<li key={i}><i className="fa fa-check"></i>{" "}{benefit}</li>)
         })}</UnorderedList>
-        <UtilityLink to="/">{buttonText}</UtilityLink>
+        <UtilityLink to="/register">{buttonText}</UtilityLink>
     </PriceCard>)
 }
 
