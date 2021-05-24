@@ -9,7 +9,9 @@ const Card = ({ title, icon, text }) => {
       <Img src={icon} alt="" />
       <TextContainer>
         <Title>{title}</Title>
-        <Text style={{ width: "auto", fontSize: "0.9rem", color: "black" }}>{text}</Text>
+        <Text style={{ width: "auto", fontSize: "0.9rem", color: "black" }}>
+          {text}
+        </Text>
       </TextContainer>
     </PanelHorizontal>
   );
