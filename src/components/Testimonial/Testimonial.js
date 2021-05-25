@@ -1,5 +1,4 @@
 import React from "react";
-// import testimonials from "../../data/testimonial";
 import PropTypes from "prop-types";
 import Avatar from "./Avatar";
 import CustomerDetails from "./CustomerDetails";
@@ -39,4 +38,10 @@ Testimonial.propTypes = {
 
 const TestimonyCard = styled.div`
 flex:180px;
+padding:10px;
+
+div{
+  display:flex;
+  font-size:0.85rem;
+}
 `;
