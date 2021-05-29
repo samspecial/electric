@@ -2,7 +2,7 @@ import React from "react";
 import PricingList from "../Pricing/PricingList";
 
 const PricePanel = () => {
-    return (<PricingList />);
+  return <PricingList />;
 };
 
 export default PricePanel;

@@ -5,6 +5,7 @@ import NavBar from "../Navigation/NavBar";
 import CardPanel from "../sections/CardPanel";
 import TimeLineContainer from "../HowItWorks/TimeLineContainer";
 import PricePanel from "../sections/PricingPanel";
+import TestimonialGroup from "../Testimonial/TestimonialGroup";
 
 const Home = () => {
   return (
@@ -14,7 +15,7 @@ const Home = () => {
       <CardPanel />
       <TimeLineContainer />
       <PricePanel />
-
+      <TestimonialGroup />
     </div>
   );
 };
