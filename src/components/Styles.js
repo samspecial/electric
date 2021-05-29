@@ -106,7 +106,7 @@ export const LinkStyle = styled(Link)`
     color: ${(props) => (props.cta === "color" ? "#880212" : "white")};
     background: ${(props) => (props.cta === "color" ? "white" : "#880212")};
     border: ${(props) =>
-      props.cta === "color" ? "0.05rem solid #880212" : "none"};
+    props.cta === "color" ? "0.05rem solid #880212" : "none"};
   }
   @media (max-width: 768px) {
     width: fit-content;
@@ -211,13 +211,16 @@ export const BackgroundLight = styled.section`
 
 export const AvatarImage = styled.img`
   display: block;
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  margin-right:30px;
 `;
 
 export const ClientInfo = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  justify-content: flex-start;
+  justify-content: space-around;
+  align-items:flex-end;
+  font-size:0.85rem;
 `;
