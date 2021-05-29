@@ -105,7 +105,8 @@ export const LinkStyle = styled(Link)`
   &:hover {
     color: ${(props) => (props.cta === "color" ? "#880212" : "white")};
     background: ${(props) => (props.cta === "color" ? "white" : "#880212")};
-    border: ${(props) => props.cta === "color" ? "0.05rem solid #880212" : "none"};
+    border: ${(props) =>
+    props.cta === "color" ? "0.05rem solid #880212" : "none"};
   }
   @media (max-width: 768px) {
     width: fit-content;
@@ -122,7 +123,7 @@ export const Heading = styled.h2`
   font-weight: 900;
   color: #880212;
   text-align: left;
-  line-height:1.2;
+  line-height: 1.2;
   margin-bottom: 1.25rem;
 
   @media (max-width: 768px) {
@@ -145,7 +146,9 @@ export const Text = styled.p`
 export const Container = styled.section`
   padding: 3rem 6rem;
   width: 100%;
-  height: 450px;
+  min-height: 450px;
+  background: ${(props) =>
+    props.background === "white" ? "white" : "#F5F7FA"};
 
   @media (min-width: 480px) and (max-width: 768px) {
     padding: 2rem 1.5rem;
@@ -156,14 +159,30 @@ export const Container = styled.section`
   }
 `;
 
+export const SectionHeading = styled.h3`
+  width: 100%;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.2;
+  margin: 3.5rem 0;
+  font-size: 1.75rem;
+  color: ${(props) => (props.color === "white" ? "white" : "#d0021b")};
+  text-transform: capitalize;
+
+  @media (max-width: 768px) {
+    font-size: 1.15rem;
+    margin-bottom: 1.15rem;
+  }
+`;
+
 export const FullWidth = styled.section`
-  padding: 3rem 6rem;
+  padding: 3rem 6rem 6rem 6rem;
   width: 100%;
   min-height: 450px;
-  background:linear-gradient(60deg, #D0021B, #970214);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  background: linear-gradient(60deg, #d0021b, #970214);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   @media (min-width: 480px) and (max-width: 768px) {
     padding: 2rem 1.5rem;
@@ -172,4 +191,36 @@ export const FullWidth = styled.section`
   @media (max-width: 480px) {
     padding: 2rem 1rem;
   }
+`;
+
+export const BackgroundLight = styled.section`
+  background: #eeecec;
+  padding: 3rem 6rem;
+  width: 100%;
+  min-height: 450px;
+  @media (min-width: 480px) and (max-width: 768px) {
+    padding: 2rem 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
+  }
+`;
+
+//Avatar Image - Testimonial
+
+export const AvatarImage = styled.img`
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right:30px;
+`;
+
+export const ClientInfo = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items:flex-end;
+  font-size:0.85rem;
 `;
