@@ -145,7 +145,8 @@ export const Text = styled.p`
 export const Container = styled.section`
   padding: 3rem 6rem;
   width: 100%;
-  height: 450px;
+  min-height: 450px;
+  background: ${(props) => (props.background === "white" ? "white" : "#F5F7FA")};
 
   @media (min-width: 480px) and (max-width: 768px) {
     padding: 2rem 1.5rem;
@@ -156,8 +157,24 @@ export const Container = styled.section`
   }
 `;
 
+export const SectionHeading = styled.h3`
+  width: 100%;
+  font-weight: 900;
+  text-align: center;
+  line-height:1.2;
+  margin: 3.5rem 0;
+  font-size: 1.75rem;
+  color:${(props) => (props.color === "white" ? "white" : "#d0021b")};
+  text-transform: capitalize;
+
+  @media (max-width: 768px) {
+    font-size: 1.15rem;
+    margin-bottom:1.15rem;
+  }
+`;
+
 export const FullWidth = styled.section`
-  padding: 3rem 6rem;
+  padding: 3rem 6rem 6rem 6rem;
   width: 100%;
   min-height: 450px;
   background:linear-gradient(60deg, #D0021B, #970214);
@@ -173,3 +190,18 @@ export const FullWidth = styled.section`
     padding: 2rem 1rem;
   }
 `;
+
+export const BackgroundLight = styled.section`
+background:#EEECEC;
+padding: 3rem 6rem;
+  width: 100%;
+  min-height: 450px;
+   @media (min-width: 480px) and (max-width: 768px) {
+    padding:2rem 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
+  }
+`;
+
