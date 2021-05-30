@@ -1,10 +1,10 @@
 import React from "react";
-import NavBar from "../Navigation/NavBar";
+import Dashboard from "../Dashboard/Dashboard";
 
 function Services() {
   return (
     <div>
-      <NavBar />
+      <Dashboard />
       <h3>We offer the following services to our clients</h3>
     </div>
   );
