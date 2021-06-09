@@ -4,7 +4,7 @@ import HeroSection from "../sections/HeroSection";
 import NavBar from "../Navigation/NavBar";
 import CardPanel from "../sections/CardPanel";
 import TimeLineContainer from "../HowItWorks/TimeLineContainer";
-import Signup from "../Form/Signup";
+import Signup from "../Form/Signup/Signup";
 
 const Home = () => {
   return (
