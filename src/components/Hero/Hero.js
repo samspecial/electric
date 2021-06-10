@@ -30,22 +30,21 @@ const HeroContainer = styled.div`
 
   @media screen only and (max-width: 768px) {
     flex-direction: column;
-    
   }
 
-  img{
-    width:45%;
+  img {
+    width: 45%;
   }
 
   @media screen only and (max-width: 480px) {
-   display:none;
+    display: none;
   }
 `;
 
 const TextContent = styled.div`
   width: 55%;
   @media (max-width: 480px) {
-    width:100%;
+    width: 100%;
   }
 `;
 

@@ -7,12 +7,12 @@ export const Title = styled.h2`
   text-transform: capitalize;
 `;
 
-export const Panel = styled.div`
+export const Panel = styled.section`
   width: 100%;
   height: fit-content;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: flex-start;
   line-height: 1.5;
 `;

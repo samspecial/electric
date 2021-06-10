@@ -2,7 +2,7 @@ import React from "react";
 import TimeLineItem from "./TimeLineItem";
 import data from "../../data/howItWorks";
 import styled from "styled-components";
-import { SectionHeading, Container } from "../Styles";
+import { Container, SectionHeading } from "../Styles";
 
 const TimeLineContainer = () => (
   <Container background="white">
@@ -23,6 +23,7 @@ const Div = styled.div`
   flex-direction: column;
   position: relative;
   margin: 15px 0;
+  width: 100%;
 
   div:nth-child(2) {
     div:nth-child(1) {
@@ -34,5 +35,8 @@ const Div = styled.div`
       order: 1;
       align-self: center;
     }
+  }
+
+  @media (max-width: 480px) {
   }
 `;
