@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 
 const CustomerDetails = ({ firstname, lastname, occupation }) => {
   return (
-    <>
+    <div>
       <p>
         {firstname} {lastname}
       </p>
       <p>{occupation}</p>
-    </>
+    </div>
   );
 };
 

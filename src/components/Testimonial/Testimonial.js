@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Avatar from "./Avatar";
 import CustomerDetails from "./CustomerDetails";
 import styled from "styled-components";
+import { ClientInfo } from "../Styles";
 
 const Testimonial = ({
   testimony,
@@ -14,14 +15,14 @@ const Testimonial = ({
   return (
     <TestimonyCard>
       <p>{testimony}</p>
-      <div>
+      <ClientInfo>
         <Avatar src={imageUrl} />
         <CustomerDetails
           firstname={firstName}
           lastname={lastName}
           occupation={occupation}
         />
-      </div>
+      </ClientInfo>
     </TestimonyCard>
   );
 };
@@ -37,11 +38,13 @@ Testimonial.propTypes = {
 };
 
 const TestimonyCard = styled.div`
-flex:180px;
+display:flex;
+flex-flow:column nowrap;
 padding:10px;
-
-div{
-  display:flex;
+justify-content:space-between;
+height:230px;
+align-items:flex-start;
+p{
   font-size:0.85rem;
 }
 `;

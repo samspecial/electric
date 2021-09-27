@@ -106,7 +106,7 @@ export const LinkStyle = styled(Link)`
     color: ${(props) => (props.cta === "color" ? "#880212" : "white")};
     background: ${(props) => (props.cta === "color" ? "white" : "#880212")};
     border: ${(props) =>
-      props.cta === "color" ? "0.05rem solid #880212" : "none"};
+    props.cta === "color" ? "0.05rem solid #880212" : "none"};
   }
   @media (max-width: 768px) {
     width: fit-content;
@@ -131,6 +131,31 @@ export const Heading = styled.h2`
     font-size: 2rem;
   }
 `;
+export const SectionHeading = styled.h3`
+  width: 100%;
+  font-weight: 900;
+  text-align: left;
+  line-height:1.2;
+  margin-bottom: 1.50rem;
+  font-size: 1.75rem;
+  color:${(props) => (props.color === "white" ? "white" : "#d0021b")};
+  text-transform: capitalize;
+
+  &::after{
+    content:"";
+    position:relative;
+    display:block;
+    width:10%;
+    height:3px;
+    background: green;
+    top:10px;
+    margin-bottom:25px;
+  }
+  @media (max-width: 768px) {
+    font-size: 1.15rem;
+    margin-bottom:1.15rem;
+  }
+`;
 
 export const Text = styled.p`
   font-size: 1.2rem;
@@ -144,12 +169,11 @@ export const Text = styled.p`
 `;
 
 export const Container = styled.section`
-  padding: 3rem 6rem;
+  padding: 3rem 10rem;
   width: 100%;
   min-height: 450px;
   background: ${(props) =>
     props.background === "white" ? "white" : "#F5F7FA"};
-
   @media (min-width: 480px) and (max-width: 768px) {
     padding: 2rem 1.5rem;
   }
@@ -159,21 +183,21 @@ export const Container = styled.section`
   }
 `;
 
-export const SectionHeading = styled.h3`
-  width: 100%;
-  font-weight: 900;
-  text-align: center;
-  line-height: 1.2;
-  margin: 3.5rem 0;
-  font-size: 1.75rem;
-  color: ${(props) => (props.color === "white" ? "white" : "#d0021b")};
-  text-transform: capitalize;
+// export const SectionHeading = styled.h3`
+//   width: 100%;
+//   font-weight: 900;
+//   text-align: center;
+//   line-height: 1.2;
+//   margin: 3.5rem 0;
+//   font-size: 1.75rem;
+//   color: ${(props) => (props.color === "white" ? "white" : "#d0021b")};
+//   text-transform: capitalize;
 
-  @media (max-width: 768px) {
-    font-size: 1.15rem;
-    margin-bottom: 1.15rem;
-  }
-`;
+//   @media (max-width: 768px) {
+//     font-size: 1.15rem;
+//     margin-bottom: 1.15rem;
+//   }
+// `;
 
 export const FullWidth = styled.section`
   padding: 3rem 6rem 6rem 6rem;
@@ -211,13 +235,16 @@ export const BackgroundLight = styled.section`
 
 export const AvatarImage = styled.img`
   display: block;
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  margin-right:30px;
 `;
 
 export const ClientInfo = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  justify-content: flex-start;
+  justify-content: space-around;
+  align-items:flex-end;
+  font-size:0.85rem;
 `;

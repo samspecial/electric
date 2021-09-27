@@ -30,13 +30,11 @@ TimeLineItem.propTypes = {
 
 const TimeLine = styled.div`
   display: flex;
-  padding: 4rem 10rem;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
   position: relative;
   width: 100%;
-
   div:nth-child(2) {
     width: 40%;
     height: 100%;
@@ -100,7 +98,7 @@ const TimeLine = styled.div`
       left: -182px;
       // top:;
       transform: rotate(270deg);
-      // transform:translateX(20%);
+     
     }
   }
 
