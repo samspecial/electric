@@ -9,7 +9,7 @@ const FaqList = () => {
   return (
     <Container background="white">
       <SectionHeading>FAQ</SectionHeading>
-      <React.Fragment>
+      <>
         {faqs.map((faq) => {
           return (
             <Accordion key={faq.id} {...faq}>
@@ -17,7 +17,7 @@ const FaqList = () => {
             </Accordion>
           );
         })}
-      </React.Fragment>
+      </>
     </Container>
   );
 };
