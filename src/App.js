@@ -7,6 +7,7 @@ import About from "./components/pages/About";
 import Services from "./components/pages/Services";
 import Contact from "./components/pages/Contact";
 import NotFound from "./components/pages/NotFound";
+import Dashboard from "./components/pages/Dashboard";
 
 export default function App({ hideLoader }) {
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function App({ hideLoader }) {
         <Route path="/services" component={Services} />
         <Route path="/contact" component={Contact} />
         <Route path="*" component={NotFound} />
+        <Route path="/dashboard" component={Dashboard} />
       </Switch>
     </div>
   );
