@@ -20,8 +20,8 @@ export default function App({ hideLoader }) {
         <Route path="/about" component={About} />
         <Route path="/services" component={Services} />
         <Route path="/contact" component={Contact} />
-        <Route path="*" component={NotFound} />
         <Route path="/dashboard" component={Dashboard} />
+        <Route path="*" component={NotFound} />
       </Switch>
     </div>
   );

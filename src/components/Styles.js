@@ -106,7 +106,7 @@ export const LinkStyle = styled(Link)`
     color: ${(props) => (props.cta === "color" ? "#880212" : "white")};
     background: ${(props) => (props.cta === "color" ? "white" : "#880212")};
     border: ${(props) =>
-    props.cta === "color" ? "0.05rem solid #880212" : "none"};
+      props.cta === "color" ? "0.05rem solid #880212" : "none"};
   }
   @media (max-width: 768px) {
     width: fit-content;
@@ -135,25 +135,25 @@ export const SectionHeading = styled.h3`
   width: 100%;
   font-weight: 900;
   text-align: left;
-  line-height:1.2;
-  margin-bottom: 1.50rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
   font-size: 1.75rem;
-  color:${(props) => (props.color === "white" ? "white" : "#d0021b")};
+  color: ${(props) => (props.color === "white" ? "white" : "#d0021b")};
   text-transform: capitalize;
 
-  &::after{
-    content:"";
-    position:relative;
-    display:block;
-    width:10%;
-    height:3px;
+  &::after {
+    content: "";
+    position: relative;
+    display: block;
+    width: 10%;
+    height: 3px;
     background: green;
-    top:10px;
-    margin-bottom:25px;
+    top: 10px;
+    margin-bottom: 25px;
   }
   @media (max-width: 768px) {
     font-size: 1.15rem;
-    margin-bottom:1.15rem;
+    margin-bottom: 1.15rem;
   }
 `;
 
@@ -200,7 +200,7 @@ export const Container = styled.section`
 // `;
 
 export const FullWidth = styled.section`
-  padding: 3rem 6rem 6rem 6rem;
+  padding: 3rem 10rem;
   width: 100%;
   min-height: 450px;
   background: linear-gradient(60deg, #d0021b, #970214);
@@ -219,7 +219,7 @@ export const FullWidth = styled.section`
 
 export const BackgroundLight = styled.section`
   background: #eeecec;
-  padding: 3rem 6rem;
+  padding: 3rem 10rem;
   width: 100%;
   min-height: 450px;
   @media (min-width: 480px) and (max-width: 768px) {
@@ -238,13 +238,13 @@ export const AvatarImage = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-right:30px;
+  margin-right: 30px;
 `;
 
 export const ClientInfo = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
-  align-items:flex-end;
-  font-size:0.85rem;
+  align-items: flex-end;
+  font-size: 0.85rem;
 `;
