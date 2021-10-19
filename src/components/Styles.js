@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Button = styled.button`
@@ -95,17 +95,27 @@ export const LinkStyle = styled(Link)`
   align-items: center;
   padding: 0.5rem 1.4rem;
   border-radius: 8px;
-  color: ${(props) => (props.cta === "color" ? "white" : "#880212")};
+  ${(props) =>
+    props.cta === "color"
+      ? css`
+          color: white;
+          margin-right: 0;
+          background: #880212;
+        `
+      : css`
+          color: #880212;
+          margin-right: 20px;
+          background: white;
+        `};
   font-size: 0.85rem;
   cursor: pointer;
   text-align: center;
   font-weight: bold;
-  background: ${(props) => (props.cta === "color" ? "#880212" : "white")};
 
   &:hover {
     color: ${(props) => (props.cta === "color" ? "#880212" : "white")};
     background: ${(props) => (props.cta === "color" ? "white" : "#880212")};
-    border: ${(props) =>
+    outline: ${(props) =>
       props.cta === "color" ? "0.05rem solid #880212" : "none"};
   }
   @media (max-width: 768px) {

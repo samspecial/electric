@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TopBar from "../Dashboard/TopBar";
 import SideBar from "../Dashboard/SideBar";
+import Home from "../Dashboard/DashboardHome/Home.jsx";
 
 const Dashboard = () => {
   return (
@@ -9,7 +10,9 @@ const Dashboard = () => {
       <TopBar />
       <DashboardBody>
         <SideBar />
-        <MainArea>Other pages</MainArea>
+        <MainArea>
+          <Home />
+        </MainArea>
       </DashboardBody>
     </div>
   );
@@ -23,5 +26,4 @@ const DashboardBody = styled.section`
 
 const MainArea = styled.section`
   flex: 4;
-  background: steelblue;
 `;
