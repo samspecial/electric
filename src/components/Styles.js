@@ -2,46 +2,32 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Button = styled.button`
-  width: 100px;
-  height: 30px;
+  width: 100%;
+  height: 40px;
   padding: 5px 7px;
-  background-color: #34628c;
+  background-color: #880212;
   color: white;
   font-size: 12px;
   border: none;
-  box-shadow: 4px 8px 8px grey, 2px 6px 6px #34628c;
+  // box-shadow: 4px 8px 8px grey, 2px 6px 6px #34628c;
   border-radius: 5px;
-  margin-top: 20px;
-  margin-right: 15px;
-  opacity: 0;
-  animation: fadeUp 0.2s ease-in-out 0.7s forwards;
+  margin-top: 8px;
+  cursor: pointer;
 
   :hover {
     background-color: white;
-    color: #34628c;
-  }
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    color: #880212;
+    outline: 1px solid #880212;
   }
 
   @media only screen and (min-width: 480px) and (max-width: 768px) {
-    width: 120px;
     font-size: 16px;
     height: 40px;
   }
 
   @media only screen and (min-width: 769px) {
-    width: auto;
     font-size: 12px;
     font-weight: 600;
-    height: 30px;
     padding: 7px 10px;
   }
 `;
@@ -257,4 +243,34 @@ export const ClientInfo = styled.div`
   justify-content: space-around;
   align-items: flex-end;
   font-size: 0.85rem;
+`;
+
+export const InputField = styled.input`
+  display: block;
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid #888;
+`;
+
+export const FormComponent = styled.form`
+  padding: 30px 15px;
+  border-radius: 5px;
+  background: white;
+  width: 350px;
+  height: auto;
+  h4 {
+    color: #880212;
+    margin-bottom: 12px;
+    font-size: 2rem;
+  }
+`;
+
+export const FormContainer = styled.section`
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background: #880212;
 `;

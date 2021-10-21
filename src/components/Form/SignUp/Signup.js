@@ -1,106 +1,95 @@
 import React, { useState } from "react";
-import SubmitNow from "../SignUp/SubmitNow";
-import CardDetails from "../SignUp/CardDetails";
-import UserDetails from "../SignUp/UserDetails";
+import { Button, FormComponent } from "../../Styles";
+import Input from "../Input";
+import { Link } from "react-router-dom";
 import useForm from "../useForm";
-import { validateInfo } from "../validateForm";
-// import { Formik, Form, Field } from "formik";
-
-// const Signup = () => {
-//     return (
-//         <div>
-//             <Formik initialVlues={{
-//                 fullname: "",
-//                 email: "",
-//                 address: "",
-//                 phoneNumber: "",
-//                 cardname: "",
-//                 cardDigit: "",
-//                 expiryDate: "",
-//                 cvv: ""
-//             }} onSubmit={() => { }}>
-//                 <Form autoComplete="off">
-//                     <div>
-//                     <Field name="fullname" type="text" label="Fullname" />
-//                     <Field name="fullname" type="email" label="Fullname" />
-//                     <Field name="fullname" type="text" label="Fullname" />
-//                         <Field name="fullname" label="Fullname" />
-//                     </div>
-//                     <div>
-//                     <Field name="fullname" label="Fullname" />
-//                     <Field name="fullname" label="Fullname" />
-//                     <Field name="fullname" label="Fullname" />
-//                         <Field name="fullname" label="Fullname" />
-//                     </div>
-//                 </Form>
-//             </Formik>
-//         </div>
-//     )
-// }
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import validateInfo from "../validateForm";
+import "../../../App.css";
 
 const Signup = () => {
-    const intialValues = {
-        fullname: "",
-        email: "",
-        address: "",
-        phoneNumber: "",
-        cardname: "",
-        cardDigit: "",
-        expiryDate: "",
-        cvv: ""
-    };
-    const [values, handleChange] = useForm(intialValues)
+  const initialState = {
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+  };
+  const { onChange, values, handleSubmit, errors } = useForm(
+    validateInfo,
+    initialState
+  );
+  // Form stages
+  //   const [errors, setErrors] = useState();
 
-    // Form stages
-    const [step, setStep] = useState(1);
-    const [errors, setErrors] = useState({});
+  //   const handleSubmit = (event) => {
+  //     event.preventDefault();
+  //     setErrors(validateInfo(values));
+  //   };
 
-    const nextStep = () => {
-        if (Object.entries(errors) === 0)
-            return setStep(step + 1)
-        setErrors(validateInfo(values));
-        console.log(errors)
-    }
-    const previousStep = () => {
-        setStep(step - 1);
-    }
+  const [showPassword, setShowPassword] = useState(false);
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        setErrors(validateInfo(values));
+  return (
+    <FormComponent onSubmit={handleSubmit}>
+      <h4>Get started</h4>
+      <small>
+        Already have an account? <Link to="/login">Sign in</Link>
+      </small>
+      <div className="form-label">
+        <Input
+          type="text"
+          placeholder="Firstname"
+          name="firstname"
+          value={values.firstname}
+          onChange={onChange}
+        />
+        {errors && <small className="error-small">{errors.firstname}</small>}
+      </div>
+      <div className="form-label">
+        <Input
+          type="text"
+          placeholder="Lastname"
+          name="lastname"
+          value={values.lastname}
+          onChange={onChange}
+        />
+        {errors && <small className="error-small">{errors.lastname}</small>}
+      </div>
+      <div className="form-label">
+        <Input
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={values.email}
+          onChange={onChange}
+        />
+        {errors && <small className="error-small">{errors.email}</small>}
+      </div>
+      <div className="form-label">
+        <Input
+          id="password"
+          type={showPassword ? "password" : "text"}
+          placeholder="Password"
+          name="password"
+          value={values.password}
+          onChange={onChange}
+        />
+        <span
+          className="password-toggle"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? <FiEye /> : <FiEyeOff />}
+        </span>
+        {errors && <small className="error-small">{errors.password}</small>}
+      </div>
+      <Button type="submit">Register</Button>
 
-    }
-
-    switch (step) {
-        case 1:
-            return (<UserDetails
-                values={values}
-                errors={errors}
-                handleChange={handleChange}
-                nextStep={nextStep}
-            />)
-        case 2:
-            return (
-                <CardDetails
-                    {...values}
-                    errors={errors}
-                    nextStep={nextStep}
-                    previousStep={previousStep}
-                    handleChange={handleChange}
-                />
-            )
-        case 3:
-            return (
-                <>
-                    <SubmitNow
-                        previousStep={previousStep}
-                        onClick={handleSubmit}
-                    />
-                </>
-            )
-        default:
-            break;
-    }
-}
+      <small>
+        By signing up, I agree to the{" "}
+        <Link to="/terms-of-service">Terms of Service</Link> and{" "}
+        <Link to="/privacy-policy">Privacy Policy</Link>
+      </small>
+    </FormComponent>
+  );
+};
 
 export default Signup;
