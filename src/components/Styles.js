@@ -254,23 +254,53 @@ export const InputField = styled.input`
 `;
 
 export const FormComponent = styled.form`
-  padding: 30px 15px;
+  padding: 1.5rem 2.5rem;
   border-radius: 5px;
   background: white;
-  width: 350px;
-  height: auto;
+  width: 40%;
+  height: fit-content;
   h4 {
     color: #880212;
     margin-bottom: 12px;
     font-size: 2rem;
   }
+
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    order: 2;
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 480px) {
+    h4 {
+      margin-bottom: 18px;
+      font-size: 1.2rem;
+    }
+    order: 2;
+    width: 100%;
+    padding: 0;
+  }
 `;
 
 export const FormContainer = styled.section`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   display: flex;
-  background: #880212;
+  background: white;
+  padding: 2rem 7rem;
+
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    flex-direction: column;
+    padding: 3rem 1.5rem;
+
+    height: fit-content;
+  }
+
+  @media only screen and (max-width: 480px) {
+    flex-direction: column;
+    padding: 3rem 1.5rem;
+    width: 100%;
+    height: fit-content;
+  }
 `;

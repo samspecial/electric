@@ -4,9 +4,8 @@ import PropTypes from "prop-types";
 const SignupItem = ({ id, image, text }) => {
   return (
     <div>
-      <div>
-        <img src={image} alt={image} />
-      </div>
+      <img src={image} alt={image} />
+
       <p>{text}</p>
     </div>
   );
