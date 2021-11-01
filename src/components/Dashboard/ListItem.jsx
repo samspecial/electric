@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 
 const ListItem = ({ icon, label }) => {
   return (
-    <>
+    <React.Fragment>
       <li>
         <NavLink to="/">
           {icon}
           {label}
         </NavLink>
       </li>
-    </>
+    </React.Fragment>
   );
 };
 

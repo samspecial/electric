@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Button, FormComponent } from "../../Styles";
 import Input from "../Input";
 import { Link } from "react-router-dom";
@@ -14,18 +15,44 @@ const Signup = () => {
     email: "",
     password: "",
   };
-  const { onChange, values, handleSubmit, errors } = useForm(
-    validateInfo,
-    initialState
-  );
-  // Form stages
-  //   const [errors, setErrors] = useState();
+  const { onChange, values, setValues } = useForm(initialState);
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [isError, setIsError] = useState(false);
+  const [isSubmitting, setIsSubmiting] = useState(false);
 
-  //   const handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     setErrors(validateInfo(values));
-  //   };
+  const BASE_URL = "http://localhost:4000/api/auth";
+  const options = {
+    firstname: values.firstname,
+    lastname: values.lastname,
+    email: values.email,
+    password: values.password,
+    role: "customer",
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      setErrors(validateInfo(values));
+      setIsSubmiting(true);
+      console.log(options);
+      let response = await axios.post(`${BASE_URL}/signup`, options);
+      setValues(initialState);
+      console.log(response);
+      setLoading(false);
+    } catch (error) {
+      setLoading(true);
+      setIsError(true);
+      console.log(error);
+      setIsSubmiting(false);
+    }
+  };
 
+  //   useEffect(() => {
+  //     if (Object.keys(errors).length === 0 && isSubmitting) {
+  //       callback();
+  //     }
+  //   }, [errors]);
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -42,7 +69,9 @@ const Signup = () => {
           value={values.firstname}
           onChange={onChange}
         />
-        {errors && <small className="error-small">{errors.firstname}</small>}
+        {errors.firstname && (
+          <small className="error-small">{errors.firstname}</small>
+        )}
       </div>
       <div className="form-label">
         <Input
@@ -52,7 +81,9 @@ const Signup = () => {
           value={values.lastname}
           onChange={onChange}
         />
-        {errors && <small className="error-small">{errors.lastname}</small>}
+        {errors.lastname && (
+          <small className="error-small">{errors.lastname}</small>
+        )}
       </div>
       <div className="form-label">
         <Input
@@ -62,7 +93,7 @@ const Signup = () => {
           value={values.email}
           onChange={onChange}
         />
-        {errors && <small className="error-small">{errors.email}</small>}
+        {errors.email && <small className="error-small">{errors.email}</small>}
       </div>
       <div className="form-label">
         <Input
@@ -79,9 +110,11 @@ const Signup = () => {
         >
           {showPassword ? <FiEye /> : <FiEyeOff />}
         </span>
-        {errors && <small className="error-small">{errors.password}</small>}
+        {errors.password && (
+          <small className="error-small">{errors.password}</small>
+        )}
       </div>
-      <Button type="submit">Register</Button>
+      <Button type="submit">{!loading ? "Register" : "Loading..."}</Button>
 
       <small>
         By signing up, I agree to the{" "}
