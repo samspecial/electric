@@ -5,7 +5,7 @@ import Input from "../Input";
 import { Link } from "react-router-dom";
 import useForm from "../useForm";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import validateInfo from "../validateForm";
+import { validateSignupInfo } from "../validateForm";
 import "../../../App.css";
 
 const Signup = () => {
@@ -33,7 +33,7 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      setErrors(validateInfo(values));
+      setErrors(validateSignupInfo(values));
       setIsSubmiting(true);
       console.log(options);
       let response = await axios.post(`${BASE_URL}/signup`, options);
@@ -41,18 +41,13 @@ const Signup = () => {
       console.log(response);
       setLoading(false);
     } catch (error) {
-      setLoading(true);
+      setLoading(false);
       setIsError(true);
       console.log(error);
       setIsSubmiting(false);
     }
   };
 
-  //   useEffect(() => {
-  //     if (Object.keys(errors).length === 0 && isSubmitting) {
-  //       callback();
-  //     }
-  //   }, [errors]);
   const [showPassword, setShowPassword] = useState(false);
 
   return (
