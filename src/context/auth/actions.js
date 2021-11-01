@@ -1,22 +1,14 @@
-import { useReducer } from "react";
 import axios from "axios";
-import authReducer from "./authReducer";
+
 import * as types from "../actionTypes";
 
-const initialState = {
-  loading: false,
-  isAuthenticated: null,
-  user: null,
-  statusMessage: {},
-};
-const [state, dispatch] = useReducer(authReducer, initialState);
 let BASE_URL;
 process.env.NODE_ENV === "production"
   ? (BASE_URL = "")
   : (BASE_URL = "http://localhost:4000/api/auth");
 
 // Function to register user. (Will sign the user up for the application and get a token for the user.)
-export const register = async (formData) => {
+export const registerUser = async (dispatch, formData) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -25,8 +17,9 @@ export const register = async (formData) => {
 
   try {
     dispatch({ type: types.SIGN_UP });
-    const response = await axios.post("/signup", formData, config);
+    const response = await axios.post(`${BASE_URL}/signup`, formData, config);
     const { status } = response;
+    console.log(status);
 
     dispatch({
       type: types.SIGN_UP_SUCCESS,
@@ -40,7 +33,7 @@ export const register = async (formData) => {
   }
 };
 
-export const login = async (formData) => {
+export const loginUser = async (dispatch, formData) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -50,12 +43,20 @@ export const login = async (formData) => {
 
   try {
     dispatch({ type: types.SIGN_IN });
-    const response = await axios.post("/signin", formData, config);
+    const response = await axios.post(`${BASE_URL}/signin`, formData, config);
+    const { user } = response.data;
+    console.log(user);
+    if (user) {
+      dispatch({
+        type: types.SIGN_IN_SUCCESS,
+        payload: user,
+      });
+      return response;
+    }
 
-    dispatch({
-      type: types.SIGN_IN_SUCCESS,
-      payload: response.data,
-    });
+    dispatch({ type: types.SIGN_IN_FAIL, error: data.errors });
+    console.log(data.errors[0]);
+    return;
   } catch (err) {
     dispatch({
       type: types.SIGN_IN_FAIL,
@@ -64,13 +65,6 @@ export const login = async (formData) => {
   }
 };
 
-export const logout = () => {
+export const logoutUser = () => {
   dispatch({ type: types.LOGOUT });
-};
-
-export const authState = {
-  loading: state.loading,
-  isAuthenticated: state.isAuthenticated,
-  user: state.user,
-  statusMessage: state.statusMessage,
 };

@@ -1,9 +1,10 @@
 import React from "react";
 import { render } from "react-dom";
-// import PropTypes from "prop-types";
+
 import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
+// import { AuthProvider } from "./context/auth/AuthProvider";
 
 import "./preloader.css";
 

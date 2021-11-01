@@ -1,29 +1,29 @@
 import * as types from "../actionTypes";
 
-const initialState = {
+export const initialState = {
   loading: false,
   isAuthenticated: null,
-  user: null,
+  user: {},
   statusMessage: {},
 };
 
-export default (state, action) => {
+export const AuthReducer = (initialState, action) => {
   switch (action.type) {
     case types.SIGN_IN:
     case types.SIGN_UP:
       return {
-        ...state,
+        ...initialState,
         loading: true,
       };
     case types.SIGN_UP_SUCCESS:
       return {
-        ...state,
+        ...initialState,
         user: action.payload,
         loading: false,
       };
     case types.SIGN_UP_FAIL:
       return {
-        ...state,
+        ...initialState,
         loading: false,
         user: null,
         statusMessage: action.payload,
@@ -31,7 +31,7 @@ export default (state, action) => {
 
     case types.SIGN_IN_SUCCESS:
       return {
-        ...state,
+        ...initialState,
         user: action.payload,
         loading: false,
         isAuthenticated: true,
@@ -39,23 +39,23 @@ export default (state, action) => {
 
     case types.SIGN_UP_FAIL:
       return {
-        ...state,
+        ...initialState,
         isAuthenticated: false,
         statusMessage: action.payload,
       };
 
     case types.LOGOUT:
       return {
-        ...state,
+        ...initialState,
         loading: true,
       };
-    case LOGOUT_SUCCESS:
+    case types.LOGOUT_SUCCESS:
       return {
-        ...state,
+        ...initialState,
         user: null,
         isAuthenticated: false,
       };
     default:
-      return state;
+      return initialState;
   }
 };

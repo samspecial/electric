@@ -1,43 +1,45 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useState } from "react";
+import {
+  useAuthDispatch,
+  loginUser,
+  useAuthState,
+} from "../../../context/auth";
+import { useHistory } from "react-router";
 import { Button } from "../../Styles";
 import Input from "../Input";
 import useForm from "../useForm";
 import { validateLoginInfo } from "../validateForm";
 
-const Signin = () => {
+const Signin = (props) => {
   const initialState = {
     email: "",
     password: "",
   };
   const { onChange, values, setValues } = useForm(initialState);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useAuthDispatch();
+  const { loading, errorMessage } = useAuthState();
+  // const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const BASE_URL = "http://localhost:4000/api/auth";
-  const options = {
-    email: values.email,
-    password: values.password,
-  };
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    // withCredentials: true,
-  };
+  const history = useHistory();
+
   const loginSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     try {
-      console.log(options);
       setErrors(validateLoginInfo(values));
-      let response = await axios.post(`${BASE_URL}/signin`, options, config);
-      console.log(response);
-      console.log(req.headers);
+      const response = await loginUser(dispatch, {
+        email: values.email,
+        password: values.password,
+      });
+      console.log(response.data);
+      // if (!response) return;
+      history.push("/dashboard");
       setValues(initialState);
     } catch (error) {
       console.log(error);
-      setLoading(false);
+      // setLoading(false);
       setErrors(true);
     }
   };

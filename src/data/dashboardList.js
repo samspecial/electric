@@ -58,12 +58,12 @@ exports.notifications = [
     label: "Mail",
   },
   {
-    id: 1,
+    id: 2,
     icon: MdComment,
     label: "Feedback",
   },
   {
-    id: 1,
+    id: 3,
     icon: FiMessageCircle,
     label: "Message",
   },
