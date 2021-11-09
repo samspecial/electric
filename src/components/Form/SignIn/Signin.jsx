@@ -33,8 +33,8 @@ const Signin = (props) => {
         email: values.email,
         password: values.password,
       });
-      console.log(response.data);
-      // if (!response) return;
+
+      if (!response.data) return;
       history.push("/dashboard");
       setValues(initialState);
     } catch (error) {
