@@ -4,7 +4,7 @@ export const initialState = {
   loading: false,
   isAuthenticated: null,
   user: {},
-  statusMessage: {},
+  errorMessage: {},
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -26,7 +26,7 @@ export const AuthReducer = (initialState, action) => {
         ...initialState,
         loading: false,
         user: null,
-        statusMessage: action.payload,
+        errorMessage: action.payload,
       };
 
     case types.SIGN_IN_SUCCESS:
@@ -37,11 +37,12 @@ export const AuthReducer = (initialState, action) => {
         isAuthenticated: true,
       };
 
-    case types.SIGN_UP_FAIL:
+    case types.SIGN_IN_FAIL:
       return {
         ...initialState,
         isAuthenticated: false,
-        statusMessage: action.payload,
+        errorMessage: action.payload,
+        user: null,
       };
 
     case types.LOGOUT:

@@ -4,6 +4,7 @@ import { render } from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
+import AlertState from "./context/alert/AlertState";
 import { AuthProvider } from "./context/auth/AuthProvider";
 
 import "./preloader.css";
@@ -15,9 +16,11 @@ const hideLoader = () => loader.classList.add("loader--hide");
 render(
   <React.StrictMode>
     <AuthProvider>
-      <Router>
-        <App hideLoader={hideLoader} showLoader={showLoader} />
-      </Router>
+      <AlertState>
+        <Router>
+          <App hideLoader={hideLoader} showLoader={showLoader} />
+        </Router>
+      </AlertState>
     </AuthProvider>
   </React.StrictMode>,
   document.querySelector("#root")

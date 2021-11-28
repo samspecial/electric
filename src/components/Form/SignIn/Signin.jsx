@@ -1,5 +1,5 @@
 // import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   useAuthDispatch,
   loginUser,
@@ -10,8 +10,9 @@ import { Button } from "../../Styles";
 import Input from "../Input";
 import useForm from "../useForm";
 import { validateLoginInfo } from "../validateForm";
+import AlertContext from "../../../context/alert/alertContext";
 
-const Signin = (props) => {
+const Signin = () => {
   const initialState = {
     email: "",
     password: "",
@@ -19,6 +20,8 @@ const Signin = (props) => {
   const { onChange, values, setValues } = useForm(initialState);
   const dispatch = useAuthDispatch();
   const { loading, errorMessage } = useAuthState();
+  const { setAlert } = useContext(AlertContext);
+
   // const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -27,20 +30,20 @@ const Signin = (props) => {
   const loginSubmit = async (e) => {
     e.preventDefault();
     // setLoading(true);
-    try {
-      setErrors(validateLoginInfo(values));
-      const response = await loginUser(dispatch, {
-        email: values.email,
-        password: values.password,
-      });
 
-      if (!response.data) return;
-      history.push("/dashboard");
+    setErrors(validateLoginInfo(values));
+
+    const response = await loginUser(dispatch, {
+      email: values.email,
+      password: values.password,
+    });
+    if (response.data) {
+      console.log(response.data);
       setValues(initialState);
-    } catch (error) {
-      console.log(error);
-      // setLoading(false);
-      setErrors(true);
+      history.push("/dashboard");
+    } else {
+      const { message, status } = errorMessage;
+      setAlert(message, "danger");
     }
   };
 
