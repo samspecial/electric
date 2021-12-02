@@ -22,14 +22,12 @@ const Signin = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAuthDispatch();
   const { loading, errorMessage } = useAuthState();
-  // const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
 
   const loginSubmit = async (e) => {
     e.preventDefault();
-    // setLoading(true);
     try {
       setErrors(validateLoginInfo(values));
       const response = await loginUser(dispatch, {
@@ -41,8 +39,6 @@ const Signin = (props) => {
       history.push("/dashboard");
       setValues(initialState);
     } catch (error) {
-      console.log(error);
-      // setLoading(false);
       setErrors(true);
     }
   };
@@ -88,7 +84,9 @@ const Signin = (props) => {
       <Link display="block" to="/forgot-password">
         Forgot password
       </Link>
-      <Button type="submit">{loading ? "Loading..." : "Login"}</Button>
+      <Button type="submit">
+        {!loading && Object.keys(errors).length !== 0 ? "Loading..." : "Login"}
+      </Button>
       <small>
         Don't have an account yet? <Link to="/register">Register</Link>
       </small>

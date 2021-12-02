@@ -15,9 +15,7 @@ const Signup = () => {
   };
   const { onChange, values, setValues } = useForm(initialState);
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState(initialState);
-  const [isError, setIsError] = useState(false);
-  const [isSubmitting, setIsSubmiting] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const BASE_URL = "http://localhost:4000/api/auth";
   const options = {
@@ -29,20 +27,14 @@ const Signup = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     try {
       setErrors(validateSignupInfo(values));
-      setIsSubmiting(true);
-      console.log(options);
       let response = await axios.post(`${BASE_URL}/signup`, options);
+      setLoading(true);
       setValues(initialState);
-      console.log(response);
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      setIsError(true);
-      console.log(error);
-      setIsSubmiting(false);
     }
   };
 
@@ -109,7 +101,8 @@ const Signup = () => {
       </label>
       <Button type="submit">
         {" "}
-        {!loading && Object.keys(errors).length > 0 ? "Register" : "Loading..."}
+        {loading && Object.keys(errors).length !== 0 ? "Loading" : "Register"}
+        {console.log(loading)}
       </Button>
 
       <small>
