@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Button, FormComponent } from "../../Styles";
-import Input from "../Input";
-import { Link } from "react-router-dom";
+import { Button, FormComponent, InputField, Link } from "../../Styles";
 import useForm from "../useForm";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { validateSignupInfo } from "../validateForm";
@@ -17,7 +15,7 @@ const Signup = () => {
   };
   const { onChange, values, setValues } = useForm(initialState);
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(initialState);
   const [isError, setIsError] = useState(false);
   const [isSubmitting, setIsSubmiting] = useState(false);
 
@@ -53,45 +51,43 @@ const Signup = () => {
   return (
     <FormComponent onSubmit={handleSubmit}>
       <h4>Get started</h4>
-      <small>
-        Already have an account? <Link to="/login">Sign in</Link>
-      </small>
-      <div className="form-label">
-        <Input
+      <h5>
+        Already have an account? <Link to="/login">Login</Link>
+      </h5>
+      <label htmlFor="firstname">
+        <InputField
+          className={errors.firstname ? "error-input" : ""}
           type="text"
           placeholder="Firstname"
           name="firstname"
           value={values.firstname}
           onChange={onChange}
         />
-        {errors.firstname && (
-          <small className="error-small">{errors.firstname}</small>
-        )}
-      </div>
-      <div className="form-label">
-        <Input
+      </label>
+      <label htmlFor="lastname">
+        <InputField
+          id="lastname"
+          className={errors.lastname ? "error-input" : ""}
           type="text"
           placeholder="Lastname"
           name="lastname"
           value={values.lastname}
           onChange={onChange}
         />
-        {errors.lastname && (
-          <small className="error-small">{errors.lastname}</small>
-        )}
-      </div>
-      <div className="form-label">
-        <Input
+      </label>
+      <label htmlFor="email">
+        <InputField
+          id="email"
+          className={errors.email ? "error-input" : ""}
           type="email"
           placeholder="Email"
           name="email"
           value={values.email}
           onChange={onChange}
         />
-        {errors.email && <small className="error-small">{errors.email}</small>}
-      </div>
-      <div className="form-label">
-        <Input
+      </label>
+      <label htmlFor="password" className="l-password">
+        <InputField
           id="password"
           type={showPassword ? "password" : "text"}
           placeholder="Password"
@@ -100,7 +96,9 @@ const Signup = () => {
           onChange={onChange}
         />
         <span
-          className="password-toggle"
+          className={
+            !errors.password ? "password-toggle" : "password-toggle-error"
+          }
           onClick={() => setShowPassword(!showPassword)}
         >
           {showPassword ? <FiEye /> : <FiEyeOff />}
@@ -108,8 +106,11 @@ const Signup = () => {
         {errors.password && (
           <small className="error-small">{errors.password}</small>
         )}
-      </div>
-      <Button type="submit">{!loading ? "Register" : "Loading..."}</Button>
+      </label>
+      <Button type="submit">
+        {" "}
+        {!loading && Object.keys(errors).length > 0 ? "Register" : "Loading..."}
+      </Button>
 
       <small>
         By signing up, I agree to the{" "}

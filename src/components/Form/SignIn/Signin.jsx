@@ -6,8 +6,10 @@ import {
   useAuthState,
 } from "../../../context/auth";
 import { useHistory } from "react-router";
-import { Button } from "../../Styles";
-import Input from "../Input";
+
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import { Button, InputField, FormComponent, Link } from "../../Styles";
+import "../../../App.css";
 import useForm from "../useForm";
 import { validateLoginInfo } from "../validateForm";
 
@@ -17,6 +19,7 @@ const Signin = (props) => {
     password: "",
   };
   const { onChange, values, setValues } = useForm(initialState);
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAuthDispatch();
   const { loading, errorMessage } = useAuthState();
   // const [loading, setLoading] = useState(false);
@@ -45,10 +48,12 @@ const Signin = (props) => {
   };
 
   return (
-    <form noValidate onSubmit={loginSubmit}>
-      <div>
-        <label htmlFor="email">Email Address</label>
-        <Input
+    <FormComponent noValidate onSubmit={loginSubmit}>
+      <h4>Welcome Back</h4>
+
+      <label htmlFor="email">
+        <InputField
+          className={errors.email ? "error-input" : ""}
           type="email"
           placeholder="email@example.com"
           name="email"
@@ -57,21 +62,37 @@ const Signin = (props) => {
           onChange={onChange}
         />
         {errors.emall && <p>{errors.email}</p>}
-      </div>
-      <div>
-        <label htmlFor="password">Email</label>
-        <input
-          type="password"
-          placeholder="enter your secret"
+      </label>
+
+      <label htmlFor="password" className="l-password">
+        <InputField
+          type={showPassword ? "password" : "text"}
+          placeholder="password"
           name="password"
           id="password"
           value={values.password}
           onChange={onChange}
         />
-        {errors.password && <p>{errors.password}</p>}
-      </div>
+        <span
+          className={
+            !errors.password ? "password-toggle" : "password-toggle-error"
+          }
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? <FiEye /> : <FiEyeOff />}
+        </span>
+        {errors.password && (
+          <small className="error-small">{errors.password}</small>
+        )}
+      </label>
+      <Link display="block" to="/forgot-password">
+        Forgot password
+      </Link>
       <Button type="submit">{loading ? "Loading..." : "Login"}</Button>
-    </form>
+      <small>
+        Don't have an account yet? <Link to="/register">Register</Link>
+      </small>
+    </FormComponent>
   );
 };
 
