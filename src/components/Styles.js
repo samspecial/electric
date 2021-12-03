@@ -261,7 +261,17 @@ export const FormComponent = styled.form`
   min-height: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
+
+  ${(props) =>
+    props.form === "signin"
+      ? css`
+          border: 1px solid #880212;
+          margin: 3.5rem 0;
+        `
+      : css`
+          border: 0 solid white;
+        `}
 
   h4 {
     color: #880212;
@@ -279,13 +289,23 @@ export const FormComponent = styled.form`
   }
 
   @media only screen and (max-width: 480px) {
+    ${(props) =>
+      props.form === "signin"
+        ? css`
+            margin: 1.5rem 0;
+            padding: 0 1rem;
+            min-height: 350px;
+          `
+        : css`
+            border: 0 solid white;
+            padding: 0;
+          `}
     h4 {
       margin-bottom: 18px;
       font-size: 1.2rem;
     }
     order: 2;
     width: 100%;
-    padding: 0;
   }
 `;
 
