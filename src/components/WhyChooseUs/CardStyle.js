@@ -12,14 +12,14 @@ export const Panel = styled.section`
   height: fit-content;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: flex-start;
   line-height: 1.5;
 `;
 
 export const PanelHorizontal = styled.div`
   display: flex;
-  width: 23%;
+  width: 24%;
   padding: 1rem 1.5rem;
   border-radius: 8px;
   justify-content: flex-start;

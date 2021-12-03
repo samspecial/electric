@@ -1,48 +1,34 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Button = styled.button`
-  width: 100px;
-  height: 30px;
+  width: 100%;
+  height: 40px;
   padding: 5px 7px;
-  background-color: #34628c;
+  background-color: #880212;
   color: white;
   font-size: 12px;
   border: none;
-  box-shadow: 4px 8px 8px grey, 2px 6px 6px #34628c;
   border-radius: 5px;
-  margin-top: 20px;
-  margin-right: 15px;
-  opacity: 0;
-  animation: fadeUp 0.2s ease-in-out 0.7s forwards;
+  margin: 16px 0;
+  cursor: pointer;
 
   :hover {
     background-color: white;
-    color: #34628c;
-  }
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    color: #880212;
+    outline: 1px solid #880212;
   }
 
   @media only screen and (min-width: 480px) and (max-width: 768px) {
-    width: 120px;
     font-size: 16px;
     height: 40px;
   }
 
   @media only screen and (min-width: 769px) {
-    width: auto;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
-    height: 30px;
-    padding: 7px 10px;
+    padding: 7px 0;
+    height: 50px;
   }
 `;
 
@@ -95,18 +81,28 @@ export const LinkStyle = styled(Link)`
   align-items: center;
   padding: 0.5rem 1.4rem;
   border-radius: 8px;
-  color: ${(props) => (props.cta === "color" ? "white" : "#880212")};
+  ${(props) =>
+    props.cta === "color"
+      ? css`
+          color: white;
+          margin-right: 0;
+          background: #880212;
+        `
+      : css`
+          color: #880212;
+          margin-right: 20px;
+          background: white;
+        `};
   font-size: 0.85rem;
   cursor: pointer;
   text-align: center;
   font-weight: bold;
-  background: ${(props) => (props.cta === "color" ? "#880212" : "white")};
 
   &:hover {
     color: ${(props) => (props.cta === "color" ? "#880212" : "white")};
     background: ${(props) => (props.cta === "color" ? "white" : "#880212")};
-    border: ${(props) =>
-    props.cta === "color" ? "0.05rem solid #880212" : "none"};
+    outline: ${(props) =>
+      props.cta === "color" ? "0.05rem solid #880212" : "none"};
   }
   @media (max-width: 768px) {
     width: fit-content;
@@ -135,25 +131,25 @@ export const SectionHeading = styled.h3`
   width: 100%;
   font-weight: 900;
   text-align: left;
-  line-height:1.2;
-  margin-bottom: 1.50rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
   font-size: 1.75rem;
-  color:${(props) => (props.color === "white" ? "white" : "#d0021b")};
+  color: ${(props) => (props.color === "white" ? "white" : "#d0021b")};
   text-transform: capitalize;
 
-  &::after{
-    content:"";
-    position:relative;
-    display:block;
-    width:10%;
-    height:3px;
+  &::after {
+    content: "";
+    position: relative;
+    display: block;
+    width: 10%;
+    height: 3px;
     background: green;
-    top:10px;
-    margin-bottom:25px;
+    top: 10px;
+    margin-bottom: 25px;
   }
   @media (max-width: 768px) {
     font-size: 1.15rem;
-    margin-bottom:1.15rem;
+    margin-bottom: 1.15rem;
   }
 `;
 
@@ -200,7 +196,7 @@ export const Container = styled.section`
 // `;
 
 export const FullWidth = styled.section`
-  padding: 3rem 6rem 6rem 6rem;
+  padding: 3rem 10rem;
   width: 100%;
   min-height: 450px;
   background: linear-gradient(60deg, #d0021b, #970214);
@@ -219,7 +215,7 @@ export const FullWidth = styled.section`
 
 export const BackgroundLight = styled.section`
   background: #eeecec;
-  padding: 3rem 6rem;
+  padding: 3rem 10rem;
   width: 100%;
   min-height: 450px;
   @media (min-width: 480px) and (max-width: 768px) {
@@ -238,13 +234,114 @@ export const AvatarImage = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-right:30px;
+  margin-right: 30px;
 `;
 
 export const ClientInfo = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
-  align-items:flex-end;
-  font-size:0.85rem;
+  align-items: flex-end;
+  font-size: 0.85rem;
+`;
+
+export const InputField = styled.input`
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #888;
+`;
+
+export const FormComponent = styled.form`
+  padding: 1.5rem 2.5rem;
+  border-radius: 5px;
+  background: white;
+  width: 40%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  ${(props) =>
+    props.form === "signin"
+      ? css`
+          border: 1px solid #880212;
+          margin: 3.5rem 0;
+        `
+      : css`
+          border: 0 solid white;
+        `}
+
+  h4 {
+    color: #880212;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+
+  h5 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    order: 2;
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 480px) {
+    ${(props) =>
+      props.form === "signin"
+        ? css`
+            margin: 1.5rem 0;
+            padding: 0 1rem;
+            min-height: 350px;
+          `
+        : css`
+            border: 0 solid white;
+            padding: 0;
+          `}
+    h4 {
+      margin-bottom: 18px;
+      font-size: 1.2rem;
+    }
+    order: 2;
+    width: 100%;
+  }
+`;
+
+export const FormContainer = styled.section`
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  background: white;
+  padding: 2rem 7rem;
+
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    flex-direction: column;
+    padding: 3rem 1.5rem;
+
+    height: 100%;
+  }
+
+  @media only screen and (max-width: 480px) {
+    flex-direction: column;
+    padding: 3rem 1.5rem;
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const Link = styled(Link)`
+  text-decoration: none;
+  font-size: 12px;
+  ${(props) =>
+    props.display === "block"
+      ? css`
+          display: block;
+        `
+      : css`
+          display: inline;
+        `};
 `;

@@ -1,0 +1,36 @@
+.error-input {
+  outline: 1px solid red !important;
+}
+
+.error-small {
+  color: red;
+  font-size: 12px;
+}
+.l-password {
+  position: relative;
+}
+.password-toggle {
+  position: absolute;
+  right: 5%;
+  top: 25%;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+}
+.small {
+  margin-bottom: 15px;
+}
+.password-toggle-error {
+  position: absolute;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  top: 15%;
+  right: 5%;
+}
+
+@media screen and (max-width: 480px) {
+  .password-toggle-error {
+    right: 5%;
+  }
+}
