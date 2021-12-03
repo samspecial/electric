@@ -9,9 +9,8 @@ export const Button = styled.button`
   color: white;
   font-size: 12px;
   border: none;
-  // box-shadow: 4px 8px 8px grey, 2px 6px 6px #34628c;
   border-radius: 5px;
-  margin-top: 8px;
+  margin: 16px 0;
   cursor: pointer;
 
   :hover {
@@ -26,9 +25,10 @@ export const Button = styled.button`
   }
 
   @media only screen and (min-width: 769px) {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
-    padding: 7px 10px;
+    padding: 7px 0;
+    height: 50px;
   }
 `;
 
@@ -246,9 +246,9 @@ export const ClientInfo = styled.div`
 `;
 
 export const InputField = styled.input`
-  display: block;
   width: 100%;
-  padding: 6px 8px;
+  padding: 8px;
+  margin-bottom: 10px;
   border-radius: 4px;
   border: 1px solid #888;
 `;
@@ -258,26 +258,54 @@ export const FormComponent = styled.form`
   border-radius: 5px;
   background: white;
   width: 40%;
-  height: fit-content;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  ${(props) =>
+    props.form === "signin"
+      ? css`
+          border: 1px solid #880212;
+          margin: 3.5rem 0;
+        `
+      : css`
+          border: 0 solid white;
+        `}
+
   h4 {
     color: #880212;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
     font-size: 2rem;
   }
 
+  h5 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
   @media only screen and (min-width: 480px) and (max-width: 768px) {
     order: 2;
     width: 100%;
   }
 
   @media only screen and (max-width: 480px) {
+    ${(props) =>
+      props.form === "signin"
+        ? css`
+            margin: 1.5rem 0;
+            padding: 0 1rem;
+            min-height: 350px;
+          `
+        : css`
+            border: 0 solid white;
+            padding: 0;
+          `}
     h4 {
       margin-bottom: 18px;
       font-size: 1.2rem;
     }
     order: 2;
     width: 100%;
-    padding: 0;
   }
 `;
 
@@ -294,13 +322,26 @@ export const FormContainer = styled.section`
     flex-direction: column;
     padding: 3rem 1.5rem;
 
-    height: fit-content;
+    height: 100%;
   }
 
   @media only screen and (max-width: 480px) {
     flex-direction: column;
     padding: 3rem 1.5rem;
     width: 100%;
-    height: fit-content;
+    height: 100%;
   }
+`;
+
+export const Link = styled(Link)`
+  text-decoration: none;
+  font-size: 12px;
+  ${(props) =>
+    props.display === "block"
+      ? css`
+          display: block;
+        `
+      : css`
+          display: inline;
+        `};
 `;
