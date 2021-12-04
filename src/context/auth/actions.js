@@ -45,7 +45,7 @@ export const loginUser = async (dispatch, formData) => {
     dispatch({ type: types.SIGN_IN });
     const response = await axios.post(`${BASE_URL}/signin`, formData, config);
     const { user } = response.data;
-    console.log(user);
+
     if (user) {
       dispatch({
         type: types.SIGN_IN_SUCCESS,
@@ -54,14 +54,14 @@ export const loginUser = async (dispatch, formData) => {
       return response;
     }
 
-    dispatch({ type: types.SIGN_IN_FAIL, error: data.errors });
-    console.log(data.errors[0]);
+    dispatch({ type: types.SIGN_IN_FAIL, payload: response.data });
     return;
   } catch (err) {
     dispatch({
       type: types.SIGN_IN_FAIL,
-      payload: err.error,
+      payload: err.response.data,
     });
+    return err;
   }
 };
 

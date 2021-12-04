@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Button, FormComponent, InputField, Link } from "../../Styles";
 import useForm from "../useForm";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { validateSignupInfo } from "../validateForm";
+import AlertContext from "../../../context/alert/alertContext";
 import "../../../App.css";
 
 const Signup = () => {
@@ -16,6 +17,7 @@ const Signup = () => {
   const { onChange, values, setValues } = useForm(initialState);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const { setAlert } = useContext(AlertContext);
 
   const BASE_URL = "http://localhost:4000/api/auth";
   const options = {
@@ -35,6 +37,8 @@ const Signup = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
+      console.log(error.response.data.error);
+      setAlert("Error", error.response.data.error, "danger");
     }
   };
 
@@ -102,7 +106,6 @@ const Signup = () => {
       <Button type="submit">
         {" "}
         {loading && Object.keys(errors).length !== 0 ? "Loading" : "Register"}
-        {console.log(loading)}
       </Button>
 
       <small>

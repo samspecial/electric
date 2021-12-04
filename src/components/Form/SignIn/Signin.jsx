@@ -1,5 +1,5 @@
 // import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   useAuthDispatch,
   loginUser,
@@ -12,8 +12,9 @@ import { Button, InputField, FormComponent, Link } from "../../Styles";
 import "../../../App.css";
 import useForm from "../useForm";
 import { validateLoginInfo } from "../validateForm";
+import AlertContext from "../../../context/alert/alertContext";
 
-const Signin = (props) => {
+const Signin = () => {
   const initialState = {
     email: "",
     password: "",
@@ -22,6 +23,9 @@ const Signin = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAuthDispatch();
   const { loading, errorMessage } = useAuthState();
+  const { setAlert } = useContext(AlertContext);
+
+  // const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
@@ -34,12 +38,17 @@ const Signin = (props) => {
         email: values.email,
         password: values.password,
       });
-
-      if (!response.data) return;
-      history.push("/dashboard");
-      setValues(initialState);
+      if (response.data) {
+        setValues(initialState);
+        history.push("/dashboard");
+      } else {
+        const { message, status } = errorMessage;
+        setAlert("Failed", message, "warning");
+      }
     } catch (error) {
       setErrors(true);
+      const { message, status } = errorMessage;
+      setAlert("Error", message, "danger");
     }
   };
 
