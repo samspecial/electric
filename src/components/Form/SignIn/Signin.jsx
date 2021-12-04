@@ -43,11 +43,12 @@ const Signin = () => {
         history.push("/dashboard");
       } else {
         const { message, status } = errorMessage;
-        setAlert(message, "danger");
+        setAlert("Failed", message, "warning");
       }
     } catch (error) {
       setErrors(true);
-      setAlert(message, "danger");
+      const { message, status } = errorMessage;
+      setAlert("Error", message, "danger");
     }
   };
 

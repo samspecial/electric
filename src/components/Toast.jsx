@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, withTheme } from "styled-components";
 import {
   FaInfoCircle,
   FaExclamationCircle,
@@ -10,17 +10,17 @@ import AlertContext from "../context/alert/alertContext";
 
 const Toast = () => {
   const alertContext = useContext(AlertContext);
-
+  const styles = { color: "white" };
   const getIcon = (type) => {
     switch (type) {
       case "INFO".toLowerCase():
-        return <FaInfoCircle />;
+        return <FaInfoCircle style={styles} />;
       case "WARNING".toLowerCase():
-        return <FaExclamationTriangle />;
+        return <FaExclamationTriangle style={styles} />;
       case "DANGER".toLowerCase():
-        return <FaExclamationCircle />;
+        return <FaExclamationCircle style={styles} />;
       case "SUCCESS".toLowerCase():
-        return <FaCheck />;
+        return <FaCheck style={styles} />;
       default:
         return;
     }
@@ -32,7 +32,7 @@ const Toast = () => {
       <Div type={alert.type} key={alert.id}>
         <span>{getIcon(alert.type)} </span>
         <div>
-          <h4>{alert.type}</h4>
+          <h4>{alert.subtext}</h4>
           <p>{alert.msg}</p>
         </div>
       </Div>
@@ -44,27 +44,46 @@ export default Toast;
 
 const Div = styled.div`
   width: 250px;
-  height: 60px;
+  min-height: 80px;
   position: fixed;
-  transition: 0.3s ease;
+  bottom: 5%;
+  z-index: 99;
+  // transition: 0.3s ease;
   pointer-events: auto;
   padding: 1rem;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  animation: 7.5s infinite alternate slidein;
+
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+    }
+    80% {
+      margin-left: 0%;
+    }
+    to {
+      margin-left: 150%;
+    }
+  }
+
   ${(props) =>
     props.type === "info"
       ? css`
-          background: #880212;
+          background: #17a2b8;
+          color: #b82c17;
         `
       : props.type === "warning"
       ? css`
-          background: yellow;
+          background: #f5a422;
+          color: #38302d;
         `
       : props.type === "danger"
       ? css`
-          background: red;
+          background: #55040d;
+          color: #a7a098;
         `
       : css`
           background: green;
@@ -80,8 +99,12 @@ const Div = styled.div`
     margin-left: 10px;
     h4,
     p {
-      color: white;
       font-size: 0.85rem;
+    }
+
+    p::first-letter,
+    h4::first-letter {
+      text-transform: capitalize;
     }
   }
 `;
