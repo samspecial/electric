@@ -10,10 +10,14 @@ export const initialState = {
 export const AuthReducer = (initialState, action) => {
   switch (action.type) {
     case types.SIGN_IN:
+      return {
+        ...initialState,
+        loading: action.payload,
+      };
     case types.SIGN_UP:
       return {
         ...initialState,
-        loading: true,
+        loading: action.payload,
       };
     case types.SIGN_UP_SUCCESS:
       return {

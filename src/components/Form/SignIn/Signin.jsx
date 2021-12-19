@@ -32,23 +32,32 @@ const Signin = () => {
 
   const loginSubmit = async (e) => {
     e.preventDefault();
-    try {
-      setErrors(validateLoginInfo(values));
-      const response = await loginUser(dispatch, {
-        email: values.email,
-        password: values.password,
-      });
-      if (response.data) {
-        setValues(initialState);
-        history.push("/dashboard");
-      } else {
-        const { message, status } = errorMessage;
-        setAlert("Failed", message, "warning");
-      }
-    } catch (error) {
-      setErrors(true);
+    setErrors(validateLoginInfo(values));
+    const response = await loginUser(dispatch, {
+      email: values.email,
+      password: values.password,
+    });
+
+    console.log(loading);
+    if (response.user) {
+      setValues(initialState);
+      history.push("/dashboard");
+    }
+    if (response.err) {
+      console.log(loading);
+      console.log(response.err);
+    }
+    // } else {
+    //   console.log(response.user);
+    //   const { message, status } = errorMessage;
+    //   setAlert("Failed", message, "warning");
+    // }
+    // } catch (error) {
+    else {
+      console.log(loading);
+      // setErrors(true);
       const { message, status } = errorMessage;
-      setAlert("Error", message, "danger");
+      setAlert(status, message, "danger");
     }
   };
 

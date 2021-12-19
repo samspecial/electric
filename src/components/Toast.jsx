@@ -26,18 +26,15 @@ const Toast = () => {
     }
   };
 
-  return (
-    alertContext.alerts.length > 0 &&
-    alertContext.alerts.map((alert) => (
-      <Div type={alert.type} key={alert.id}>
-        <span>{getIcon(alert.type)} </span>
-        <div>
-          <h4>{alert.subtext}</h4>
-          <p>{alert.msg}</p>
-        </div>
-      </Div>
-    ))
-  );
+  return alertContext.alerts.map((alert) => (
+    <Div type={alert.type} key={alert.id}>
+      <span>{getIcon(alert.type)} </span>
+      <div>
+        <h4>{alert.subtext}</h4>
+        <p>{alert.msg}</p>
+      </div>
+    </Div>
+  ));
 };
 
 export default Toast;

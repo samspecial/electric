@@ -1,13 +1,19 @@
 import React from "react";
+import { useAuthState } from "../../context/auth";
 import Signin from "../Form/SignIn/Signin";
 
 import { FormContainer } from "../Styles";
 import Toast from "../Toast";
 
 const Login = () => {
+  const {
+    loading,
+    errorMessage: { status, message },
+  } = useAuthState();
+
   return (
     <FormContainer>
-      <Toast />
+      {loading && <Toast />}
       <Signin />
     </FormContainer>
   );
