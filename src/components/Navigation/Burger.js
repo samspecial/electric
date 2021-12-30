@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { useAuthState } from "../../context/auth/AuthProvider";
 import { LinkStyle } from "../Styles";
 import MenuList from "./MenuList";
 
 const Burger = () => {
   const [open, setOpen] = useState(false);
+  const { isAuthenticated } = useAuthState();
 
   const navButtonLinks = [
     { id: 1, name: "Sign In", path: "/login", type: "clear" },
     { id: 2, name: "Register", path: "/register", type: "color" },
+  ];
+  const loggedInMenu = [
+    { id: 1, name: "Logout", path: "/", type: "clear" },
+    { id: 2, name: "Dashboard", path: "/dashboard", type: "color" },
   ];
 
   return (
@@ -20,11 +26,17 @@ const Burger = () => {
       </StyledBurger>
       <MenuList open={open}>
         <Span>
-          {navButtonLinks.map((link) => (
-            <LinkStyle cta={link.type} key={link.id} to={link.path}>
-              {link.name}
-            </LinkStyle>
-          ))}
+          {isAuthenticated
+            ? loggedInMenu.map((link) => (
+                <LinkStyle cta={link.type} key={link.id} to={link.path}>
+                  {link.name}
+                </LinkStyle>
+              ))
+            : navButtonLinks.map((link) => (
+                <LinkStyle cta={link.type} key={link.id} to={link.path}>
+                  {link.name}
+                </LinkStyle>
+              ))}
         </Span>
       </MenuList>
     </Div>

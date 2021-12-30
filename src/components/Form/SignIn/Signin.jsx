@@ -37,14 +37,16 @@ const Signin = () => {
       email: values.email,
       password: values.password,
     });
-
-    console.log(loading);
     if (response.user) {
+      const credentials = {
+        connId: response.user.connId,
+        isAuthenticated: true,
+      };
+      localStorage.setItem("connId", JSON.stringify(credentials));
       setValues(initialState);
       history.push("/dashboard");
     }
     if (response.err) {
-      console.log(loading);
       console.log(response.err);
     }
     // } else {
@@ -54,8 +56,6 @@ const Signin = () => {
     // }
     // } catch (error) {
     else {
-      console.log(loading);
-      // setErrors(true);
       const { message, status } = errorMessage;
       setAlert(status, message, "danger");
     }

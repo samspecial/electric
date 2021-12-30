@@ -50,9 +50,13 @@ export const AuthReducer = (initialState, action) => {
       };
 
     case types.LOGOUT:
+      localStorage.removeItem("connId");
       return {
         ...initialState,
+        isAuthenticated: false,
+        user: null,
         loading: true,
+        errorMessage: action.payload,
       };
     case types.LOGOUT_SUCCESS:
       return {

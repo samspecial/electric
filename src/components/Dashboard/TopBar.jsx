@@ -3,13 +3,16 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { FiBell, FiGlobe, FiSettings } from "react-icons/fi";
 import Avatar from "../Testimonial/Avatar";
+import { Link } from "../Styles";
 
 const TopBar = (props) => {
   return (
     <Topbar>
       <TopbarContainer>
         <Logo>
-          <span>Electric Admin</span>
+          <span>
+            <Link to="/">Electric Admin</Link>
+          </span>
         </Logo>
         <div>
           <TopBarIcon>
