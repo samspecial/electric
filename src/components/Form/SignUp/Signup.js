@@ -7,7 +7,7 @@ import { validateSignupInfo } from "../validateForm";
 import AlertContext from "../../../context/alert/alertContext";
 import "../../../App.css";
 
-const Signup = () => {
+const Signup = ({ setConfirmationToken }) => {
   const initialState = {
     firstname: "",
     lastname: "",
@@ -15,6 +15,7 @@ const Signup = () => {
     password: "",
   };
   const { onChange, values, setValues } = useForm(initialState);
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const { setAlert } = useContext(AlertContext);
@@ -33,6 +34,7 @@ const Signup = () => {
       setErrors(validateSignupInfo(values));
       let response = await axios.post(`${BASE_URL}/signup`, options);
       setLoading(true);
+      setConfirmationToken(response.data.token);
       setValues(initialState);
       setLoading(false);
     } catch (error) {
@@ -41,8 +43,6 @@ const Signup = () => {
       setAlert("Error", error.response.data.error, "danger");
     }
   };
-
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <FormComponent onSubmit={handleSubmit}>

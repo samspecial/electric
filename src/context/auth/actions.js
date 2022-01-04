@@ -42,7 +42,7 @@ export const loginUser = async (dispatch, formData) => {
   };
 
   try {
-    dispatch({ type: types.SIGN_IN });
+    dispatch({ type: types.SIGN_IN, payload: true });
     const response = await axios.post(`${BASE_URL}/signin`, formData, config);
     const { user } = response.data;
 
@@ -51,20 +51,17 @@ export const loginUser = async (dispatch, formData) => {
         type: types.SIGN_IN_SUCCESS,
         payload: user,
       });
-      return response;
+      return response.data;
     }
-
-    dispatch({ type: types.SIGN_IN_FAIL, payload: response.data });
-    return;
   } catch (err) {
     dispatch({
       type: types.SIGN_IN_FAIL,
       payload: err.response.data,
     });
-    return err;
+    return err.response.data;
   }
 };
 
-export const logoutUser = () => {
+export const logoutUser = (dispatch) => {
   dispatch({ type: types.LOGOUT });
 };

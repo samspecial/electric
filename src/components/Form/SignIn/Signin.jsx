@@ -25,30 +25,31 @@ const Signin = () => {
   const { loading, errorMessage } = useAuthState();
   const { setAlert } = useContext(AlertContext);
 
-  // const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
 
   const loginSubmit = async (e) => {
     e.preventDefault();
-    try {
-      setErrors(validateLoginInfo(values));
-      const response = await loginUser(dispatch, {
-        email: values.email,
-        password: values.password,
-      });
-      if (response.data) {
-        setValues(initialState);
-        history.push("/dashboard");
-      } else {
-        const { message, status } = errorMessage;
-        setAlert("Failed", message, "warning");
-      }
-    } catch (error) {
-      setErrors(true);
-      const { message, status } = errorMessage;
-      setAlert("Error", message, "danger");
+    setErrors(validateLoginInfo(values));
+    const response = await loginUser(dispatch, {
+      email: values.email,
+      password: values.password,
+    });
+    if (response.user) {
+      const credentials = {
+        connId: response.user.connId,
+        isAuthenticated: true,
+      };
+      localStorage.setItem("connId", JSON.stringify(credentials));
+      setValues(initialState);
+      history.push("/dashboard");
+    }
+    if (response.err) {
+      console.log(response.err);
+    } else {
+      const { message } = errorMessage;
+      setAlert("Failed", message, "danger");
     }
   };
 
@@ -71,7 +72,7 @@ const Signin = () => {
 
       <label htmlFor="password" className="l-password">
         <InputField
-          type={showPassword ? "password" : "text"}
+          type={showPassword ? "text" : "password"}
           placeholder="password"
           name="password"
           id="password"
@@ -84,7 +85,7 @@ const Signin = () => {
           }
           onClick={() => setShowPassword(!showPassword)}
         >
-          {showPassword ? <FiEye /> : <FiEyeOff />}
+          {showPassword ? <FiEyeOff /> : <FiEye />}
         </span>
         {errors.password && (
           <small className="error-small">{errors.password}</small>

@@ -4,16 +4,20 @@ export const initialState = {
   loading: false,
   isAuthenticated: null,
   user: {},
-  errorMessage: {},
+  errorMessage: { status: "failed", message: "Try again" },
 };
 
 export const AuthReducer = (initialState, action) => {
   switch (action.type) {
     case types.SIGN_IN:
+      return {
+        ...initialState,
+        loading: action.payload,
+      };
     case types.SIGN_UP:
       return {
         ...initialState,
-        loading: true,
+        loading: action.payload,
       };
     case types.SIGN_UP_SUCCESS:
       return {
@@ -46,16 +50,15 @@ export const AuthReducer = (initialState, action) => {
       };
 
     case types.LOGOUT:
+      localStorage.removeItem("connId");
       return {
         ...initialState,
-        loading: true,
-      };
-    case types.LOGOUT_SUCCESS:
-      return {
-        ...initialState,
-        user: null,
         isAuthenticated: false,
+        user: null,
+        loading: false,
+        errorMessage: action.payload,
       };
+
     default:
       return initialState;
   }
