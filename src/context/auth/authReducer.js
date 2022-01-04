@@ -4,7 +4,7 @@ export const initialState = {
   loading: false,
   isAuthenticated: null,
   user: {},
-  errorMessage: {},
+  errorMessage: { status: "failed", message: "Try again" },
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -55,15 +55,10 @@ export const AuthReducer = (initialState, action) => {
         ...initialState,
         isAuthenticated: false,
         user: null,
-        loading: true,
+        loading: false,
         errorMessage: action.payload,
       };
-    case types.LOGOUT_SUCCESS:
-      return {
-        ...initialState,
-        user: null,
-        isAuthenticated: false,
-      };
+
     default:
       return initialState;
   }

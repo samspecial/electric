@@ -25,7 +25,6 @@ const Signin = () => {
   const { loading, errorMessage } = useAuthState();
   const { setAlert } = useContext(AlertContext);
 
-  // const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
@@ -48,16 +47,9 @@ const Signin = () => {
     }
     if (response.err) {
       console.log(response.err);
-    }
-    // } else {
-    //   console.log(response.user);
-    //   const { message, status } = errorMessage;
-    //   setAlert("Failed", message, "warning");
-    // }
-    // } catch (error) {
-    else {
-      const { message, status } = errorMessage;
-      setAlert(status, message, "danger");
+    } else {
+      const { message } = errorMessage;
+      setAlert("Failed", message, "danger");
     }
   };
 
@@ -80,7 +72,7 @@ const Signin = () => {
 
       <label htmlFor="password" className="l-password">
         <InputField
-          type={showPassword ? "password" : "text"}
+          type={showPassword ? "text" : "password"}
           placeholder="password"
           name="password"
           id="password"
@@ -93,7 +85,7 @@ const Signin = () => {
           }
           onClick={() => setShowPassword(!showPassword)}
         >
-          {showPassword ? <FiEye /> : <FiEyeOff />}
+          {showPassword ? <FiEyeOff /> : <FiEye />}
         </span>
         {errors.password && (
           <small className="error-small">{errors.password}</small>

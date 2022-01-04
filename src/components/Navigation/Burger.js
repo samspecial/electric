@@ -1,22 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useAuthState } from "../../context/auth/AuthProvider";
+import { useAuthState, useAuthDispatch } from "../../context/auth/AuthProvider";
 import { LinkStyle } from "../Styles";
 import MenuList from "./MenuList";
 
 const Burger = () => {
   const [open, setOpen] = useState(false);
-  const { isAuthenticated } = useAuthState();
+  const { isAuthenticated, logoutUser } = useAuthState();
+  const dispatch = useAuthDispatch();
 
-  const navButtonLinks = [
-    { id: 1, name: "Sign In", path: "/login", type: "clear" },
-    { id: 2, name: "Register", path: "/register", type: "color" },
-  ];
-  const loggedInMenu = [
-    { id: 1, name: "Logout", path: "/", type: "clear" },
-    { id: 2, name: "Dashboard", path: "/dashboard", type: "color" },
-  ];
-
+  const logout = () => {
+    logoutUser(dispatch);
+  };
   return (
     <Div>
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
@@ -26,17 +21,27 @@ const Burger = () => {
       </StyledBurger>
       <MenuList open={open}>
         <Span>
-          {isAuthenticated
-            ? loggedInMenu.map((link) => (
-                <LinkStyle cta={link.type} key={link.id} to={link.path}>
-                  {link.name}
-                </LinkStyle>
-              ))
-            : navButtonLinks.map((link) => (
-                <LinkStyle cta={link.type} key={link.id} to={link.path}>
-                  {link.name}
-                </LinkStyle>
-              ))}
+          {isAuthenticated ? (
+            <>
+              {" "}
+              <LinkStyle cta="clear" onClick={logout} to="/">
+                Logout
+              </LinkStyle>
+              <LinkStyle cta="color" to="/dashboard">
+                Dashboard
+              </LinkStyle>
+            </>
+          ) : (
+            <>
+              {" "}
+              <LinkStyle cta="clear" to="/login">
+                Sign In
+              </LinkStyle>
+              <LinkStyle cta="color" to="/register">
+                Register
+              </LinkStyle>
+            </>
+          )}
         </Span>
       </MenuList>
     </Div>

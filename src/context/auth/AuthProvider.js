@@ -1,5 +1,5 @@
 import React, { useContext, useReducer, createContext } from "react";
-import { loginUser, registerUser } from "./actions";
+import { loginUser, registerUser, logoutUser } from "./actions";
 
 import { initialState, AuthReducer } from "./authReducer";
 
@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }) => {
         errorMessage: state.errorMessage,
         loginUser,
         registerUser,
+        logoutUser,
       }}
     >
       <AuthDispatchContext.Provider value={dispatch}>

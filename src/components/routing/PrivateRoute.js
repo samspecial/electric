@@ -4,14 +4,14 @@ import { useAuthState } from "../../context/auth/AuthProvider";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { loading, errorMessage, isAuthenticated } = useAuthState();
-  const connId = localStorage.getItem("connId");
-  const [connString, setConnectionString] = useState(JSON.parse(connId));
+  const [connString, setConnectionString] = useState(null);
 
-  const getUserCredentials = () => {
+  useEffect(() => {
+    const connId = localStorage.getItem("connId");
     if (connString === null) setConnectionString(JSON.parse(connId));
     return connString;
-  };
-  getUserCredentials();
+  }, [connString]);
+
   console.log(connString);
   return (
     <Route
@@ -19,8 +19,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       render={(props) =>
         loading ? (
           "Now Loading"
-        ) : connString?.isAuthenticated === true &&
-          connString?.connId.length > 0 ? (
+        ) : isAuthenticated === true ? (
           <Component {...props} />
         ) : (
           <Redirect to="/login" />

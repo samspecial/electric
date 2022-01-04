@@ -6,10 +6,7 @@ import { FormContainer } from "../Styles";
 import Toast from "../Toast";
 
 const Login = () => {
-  const {
-    loading,
-    errorMessage: { status, message },
-  } = useAuthState();
+  const { loading } = useAuthState();
 
   return (
     <FormContainer>
