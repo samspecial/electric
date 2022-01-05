@@ -7,7 +7,6 @@ import TimeLineContainer from "../HowItWorks/TimeLineContainer";
 import PricePanel from "../sections/PricingPanel";
 import TestimonialGroup from "../Testimonial/TestimonialGroup";
 import FaqList from "../FAQ/FaqList";
-import { Link } from "../Styles";
 
 const Home = () => {
   return (

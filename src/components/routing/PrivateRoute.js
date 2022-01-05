@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { useAuthState } from "../../context/auth/AuthProvider";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { loading, errorMessage, isAuthenticated } = useAuthState();
+  const { isAuthenticated } = useAuthState();
   const [connString, setConnectionString] = useState(null);
 
   useEffect(() => {
@@ -13,20 +13,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   }, [connString]);
 
   console.log(connString);
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        loading ? (
-          "Now Loading"
-        ) : isAuthenticated === true ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
-    />
-  );
+  return isAuthenticated === true ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

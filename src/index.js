@@ -25,7 +25,3 @@ render(
   </React.StrictMode>,
   document.querySelector("#root")
 );
-
-// App.propTypes = {
-//     hideLoader: PropTypes.func.isRequired
-// }
