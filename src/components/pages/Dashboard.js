@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TopBar from "../Dashboard/TopBar";
 import SideBar from "../Dashboard/SideBar";
-import Home from "../Dashboard/DashboardHome/Home.jsx";
+import MainMenu from "../Dashboard/DashboardHome/Index.jsx";
 
 const Dashboard = () => {
   return (
@@ -11,7 +11,7 @@ const Dashboard = () => {
       <DashboardBody>
         <SideBar />
         <MainArea>
-          <Home />
+          <MainMenu />
         </MainArea>
       </DashboardBody>
     </div>

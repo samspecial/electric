@@ -8,6 +8,7 @@ import Services from "./components/pages/Services";
 import Contact from "./components/pages/Contact";
 import NotFound from "./components/pages/NotFound";
 import Dashboard from "./components/pages/Dashboard";
+import MainMenu from "./components/Dashboard/DashboardHome/Index";
 import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
 import PrivateRoute from "./components/routing/PrivateRoute";
@@ -24,7 +25,9 @@ export default function App({ hideLoader }) {
       <Route path="/services" element={<Services />} />
       <Route path="/contact" element={<Contact />} />
       <Route element={<PrivateRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path=":submenu" element={<MainMenu />} />
+        </Route>
       </Route>
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
