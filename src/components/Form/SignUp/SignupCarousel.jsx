@@ -22,7 +22,6 @@ const SignupCarousel = () => {
   return (
     <CarouselWrapper>
       <Slider {...settings}>
-        {console.log(carousels)}
         {carousels.map((carousel) => (
           <SignupItem key={carousel.id} {...carousel} />
         ))}

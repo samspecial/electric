@@ -17,9 +17,7 @@ const MenuList = ({ children, open }) => {
       {links.map((link) => (
         <li key={link.id}>
           {" "}
-          <NavLink exact to={link.path}>
-            {link.name}
-          </NavLink>
+          <NavLink to={link.path}>{link.name}</NavLink>
         </li>
       ))}
       {children}

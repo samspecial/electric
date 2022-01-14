@@ -23,35 +23,23 @@ exports.dashboard = [
     label: "Analytics",
     url: "analytics",
   },
-  {
-    id: 3,
-    icon: FiTrendingUp,
-    label: "Sales",
-    url: "sales",
-  },
 ];
 
 exports.quickMenu = [
   {
     id: 1,
-    icon: FiUser,
-    label: "Users",
-    url: "users",
+    icon: FiGift,
+    label: "Tickets",
+    url: "tickets",
   },
   {
     id: 2,
-    icon: FiGift,
-    label: "Products",
-    url: "products",
-  },
-  {
-    id: 3,
     icon: FiDollarSign,
     label: "Transactions",
     url: "transactions",
   },
   {
-    id: 4,
+    id: 3,
     icon: FiBarChart2,
     label: "Reports",
     url: "reports",

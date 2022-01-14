@@ -8,7 +8,7 @@ import Services from "./components/pages/Services";
 import Contact from "./components/pages/Contact";
 import NotFound from "./components/pages/NotFound";
 import Dashboard from "./components/pages/Dashboard";
-import MainMenu from "./components/Dashboard/DashboardHome/Index";
+import MainMenu from "./components/Dashboard/MainArea/Index";
 import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
 import PrivateRoute from "./components/routing/PrivateRoute";
