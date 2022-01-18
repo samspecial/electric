@@ -118,7 +118,7 @@ const TimeLine = styled.div`
       div {
         padding: 2rem 0;
         h2:nth-child(2) {
-          font-size: 2.3rem;
+          font-size: 1.3rem;
           left: 80%;
           top: -8%;
           font-weight: 400;
