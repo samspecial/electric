@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useAuthState } from "../../context/auth/AuthProvider";
 import {
   dashboard,
   quickMenu,
@@ -8,26 +9,47 @@ import {
 } from "../../data/dashboardList";
 import DashboardLink from "./DashboardLink";
 
+const menuItem = [
+  {
+    id: 1,
+    header: "Dashboard",
+    menuData: dashboard,
+    role: ["admin", "customer", "officer"],
+  },
+  {
+    id: 2,
+    header: "Quick Menu",
+    menuData: quickMenu,
+    role: ["admin", "customer"],
+  },
+  {
+    id: 3,
+    header: "Notification",
+    menuData: notifications,
+    role: ["admin", "customer", "officer"],
+  },
+  {
+    id: 4,
+    header: "Staff",
+    menuData: staff,
+    role: ["admin", "officer"],
+  },
+];
+
 const SideBar = () => {
+  const { user } = useAuthState();
   return (
     <Aside>
       <section>
-        <div>
-          <h3>Dashboard</h3>
-          <DashboardLink dashboard={dashboard} />
-        </div>
-        <div>
-          <h3>Quick Menu</h3>
-          <DashboardLink dashboard={quickMenu} />
-        </div>
-        <div>
-          <h3>Notification</h3>
-          <DashboardLink dashboard={notifications} />
-        </div>
-        <div>
-          <h3>Staff</h3>
-          <DashboardLink dashboard={staff} />
-        </div>
+        {menuItem.map(
+          (item) =>
+            item.role.includes(user.role) && (
+              <div key={item.id}>
+                <h3>{item.header}</h3>
+                <DashboardLink dashboard={item.menuData} />
+              </div>
+            )
+        )}
       </section>
     </Aside>
   );

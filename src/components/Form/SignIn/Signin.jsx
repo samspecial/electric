@@ -5,7 +5,7 @@ import {
   loginUser,
   useAuthState,
 } from "../../../context/auth";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Button, InputField, FormComponent, Link } from "../../Styles";
@@ -27,7 +27,7 @@ const Signin = () => {
 
   const [errors, setErrors] = useState({});
 
-  const history = useHistory();
+  const history = useNavigate();
 
   const loginSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +43,7 @@ const Signin = () => {
       };
       localStorage.setItem("connId", JSON.stringify(credentials));
       setValues(initialState);
-      history.push("/dashboard");
+      history("/dashboard");
     }
     if (response.err) {
       console.log(response.err);

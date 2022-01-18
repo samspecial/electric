@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 
-const ListItem = ({ icon, label }) => {
+const ListItem = ({ icon, label, url }) => {
+  // const { path, url } = useMatch();
+  // console.log(path, url);
   return (
     <React.Fragment>
       <li>
-        <NavLink to="/">
+        <NavLink to={url}>
           {icon}
           {label}
         </NavLink>

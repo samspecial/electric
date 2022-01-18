@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AlertContext from "../../context/alert/alertContext";
 import Signup from "../Form/SignUp/Signup";
 import SignupCarousel from "../Form/SignUp/SignupCarousel";
@@ -9,7 +9,7 @@ import Toast from "../Toast";
 
 const Register = () => {
   const [confirmationToken, setConfirmationToken] = useState("");
-  const history = useHistory();
+  const history = useNavigate();
   const { setAlert } = useContext(AlertContext);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Register = () => {
       let response = await axios.post(`${BASE_URL}/activate`, options);
       const { message, status } = response.data;
       if (message === "user created" && status === "success")
-        history.push("/dashboard");
+        history("/dashboard");
       //console.log(response.data);
     } catch (error) {
       setAlert("Error", error.response.data.error, "danger");
