@@ -2,7 +2,7 @@ import * as types from "../actionTypes";
 
 export const initialState = {
   loading: false,
-  isAuthenticated: null,
+  isAuthenticated: false,
   user: {},
   errorMessage: { status: "failed", message: "Try again" },
 };
@@ -34,6 +34,10 @@ export const AuthReducer = (initialState, action) => {
       };
 
     case types.SIGN_IN_SUCCESS:
+      localStorage.setItem(
+        "connId",
+        JSON.stringify({ user: action.payload, isAuthenticated: true })
+      );
       return {
         ...initialState,
         user: action.payload,

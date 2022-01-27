@@ -10,6 +10,8 @@ import Reports from "./Reports";
 import Mail from "./Mail";
 import Feedback from "./Feedback";
 import Message from "./Message";
+import Manage from "./Manage";
+import Ticket from "./Ticket";
 
 const Index = (props) => {
   const { submenu } = useParams();
@@ -45,6 +47,9 @@ const Index = (props) => {
       case "manage":
         return <Manage />;
         break;
+      case "tickets":
+        return <Ticket />;
+        break;
 
       default:
         return <h2>Dashboard Home</h2>;
@@ -52,7 +57,7 @@ const Index = (props) => {
     }
   };
 
-  return <div>{loadRoutePage()}</div>;
+  return <>{loadRoutePage()}</>;
 };
 
 Index.propTypes = {};

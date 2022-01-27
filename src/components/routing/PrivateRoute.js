@@ -2,18 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useAuthState } from "../../context/auth/AuthProvider";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuthenticated } = useAuthState();
-  const [connString, setConnectionString] = useState(null);
+const PrivateRoute = () => {
+  const connString = JSON.parse(localStorage.getItem("connId"));
 
-  useEffect(() => {
-    const connId = localStorage.getItem("connId");
-    if (connString === null) setConnectionString(JSON.parse(connId));
-    return connString;
-  }, [connString]);
-
-  console.log(connString);
-  return isAuthenticated === true ? <Outlet /> : <Navigate to="/login" />;
+  return connString?.isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

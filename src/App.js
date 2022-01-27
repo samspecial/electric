@@ -12,7 +12,6 @@ import MainMenu from "./components/Dashboard/MainArea/Index";
 import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
 import PrivateRoute from "./components/routing/PrivateRoute";
-// import { AuthProvider } from "./context/auth";
 
 export default function App({ hideLoader }) {
   useEffect(() => {
@@ -25,7 +24,7 @@ export default function App({ hideLoader }) {
       <Route path="/services" element={<Services />} />
       <Route path="/contact" element={<Contact />} />
       <Route element={<PrivateRoute />}>
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route path="/dashboard/*" element={<Dashboard />}>
           <Route path=":submenu" element={<MainMenu />} />
         </Route>
       </Route>

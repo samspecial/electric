@@ -11,7 +11,11 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Button, InputField, FormComponent, Link } from "../../Styles";
 import "../../../App.css";
 import useForm from "../useForm";
-import { validateLoginInfo } from "../validateForm";
+import {
+  validateLoginInfo,
+  logoutHandler,
+  calculateRemainingTime,
+} from "../validateForm";
 import AlertContext from "../../../context/alert/alertContext";
 
 const Signin = () => {
@@ -28,6 +32,10 @@ const Signin = () => {
   const [errors, setErrors] = useState({});
 
   const history = useNavigate();
+  const logoutHandler = () => {
+    localStorage.removeItem("connId");
+    history("/login");
+  };
 
   const loginSubmit = async (e) => {
     e.preventDefault();
@@ -37,13 +45,17 @@ const Signin = () => {
       password: values.password,
     });
     if (response.user) {
-      const credentials = {
-        connId: response.user.connId,
-        isAuthenticated: true,
-      };
-      localStorage.setItem("connId", JSON.stringify(credentials));
+      // const credentials = {
+      //   user: response.user,
+      //   isAuthenticated: true,
+      // };
+      // localStorage.setItem("connId", JSON.stringify(credentials));
+      const remainingTime = calculateRemainingTime();
+      const expired = new Date(new Date().getTime() + +remainingTime);
+      console.log(expired);
       setValues(initialState);
       history("/dashboard");
+      setTimeout(logoutHandler, expired);
     }
     if (response.err) {
       console.log(response.err);

@@ -6,7 +6,9 @@ import MenuList from "./MenuList";
 
 const Burger = () => {
   const [open, setOpen] = useState(false);
-  const { isAuthenticated, logoutUser } = useAuthState();
+  const connString = JSON.parse(localStorage.getItem("connId"));
+  // const { isAuthenticated } = connString;
+  const { logoutUser } = useAuthState();
   const dispatch = useAuthDispatch();
 
   const logout = () => {
@@ -21,7 +23,7 @@ const Burger = () => {
       </StyledBurger>
       <MenuList open={open}>
         <Span>
-          {isAuthenticated ? (
+          {connString?.isAuthenticated ? (
             <>
               {" "}
               <LinkStyle cta="clear" onClick={logout} to="/">

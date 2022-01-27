@@ -38,12 +38,13 @@ const menuItem = [
 
 const SideBar = () => {
   const { user } = useAuthState();
+  const connString = JSON.parse(localStorage.getItem("connId"));
   return (
     <Aside>
       <section>
         {menuItem.map(
           (item) =>
-            item.role.includes(user.role) && (
+            item.role.includes(connString?.user.role) && (
               <div key={item.id}>
                 <h3>{item.header}</h3>
                 <DashboardLink dashboard={item.menuData} />
