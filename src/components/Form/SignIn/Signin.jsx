@@ -1,4 +1,3 @@
-// import axios from "axios";
 import React, { useState, useContext } from "react";
 import {
   useAuthDispatch,
@@ -11,11 +10,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Button, InputField, FormComponent, Link } from "../../Styles";
 import "../../../App.css";
 import useForm from "../useForm";
-import {
-  validateLoginInfo,
-  logoutHandler,
-  calculateRemainingTime,
-} from "../validateForm";
+import { validateLoginInfo } from "../validateForm";
 import AlertContext from "../../../context/alert/alertContext";
 
 const Signin = () => {
@@ -45,23 +40,15 @@ const Signin = () => {
       password: values.password,
     });
     if (response.user) {
-      // const credentials = {
-      //   user: response.user,
-      //   isAuthenticated: true,
-      // };
-      // localStorage.setItem("connId", JSON.stringify(credentials));
-      const remainingTime = calculateRemainingTime();
-      const expired = new Date(new Date().getTime() + +remainingTime);
-      console.log(expired);
       setValues(initialState);
       history("/dashboard");
-      setTimeout(logoutHandler, expired);
+      setTimeout(logoutHandler, 200000);
+      //3599999
     }
     if (response.err) {
       console.log(response.err);
     } else {
-      const { message } = errorMessage;
-      setAlert("Failed", message, "danger");
+      setAlert("Failed", errorMessage?.message, "danger");
     }
   };
 

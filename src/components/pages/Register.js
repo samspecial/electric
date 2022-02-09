@@ -16,12 +16,12 @@ const Register = () => {
     setConfirmationToken(confirmationToken);
   }, [confirmationToken]);
 
-  const BASE_URL = "http://localhost:4000/api/auth";
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const options = { token: confirmationToken };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let response = await axios.post(`${BASE_URL}/activate`, options);
+      let response = await axios.post(`${BASE_URL}/auth/activate`, options);
       const { message, status } = response.data;
       if (message === "user created" && status === "success")
         history("/dashboard");

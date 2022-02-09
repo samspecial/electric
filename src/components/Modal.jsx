@@ -1,11 +1,24 @@
-import React, { useRef, useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState, useContext } from "react";
 import { useSpring, animated } from "react-spring";
+import axios from "axios";
 import styled from "styled-components";
 import { Button, InputField } from "./Styles";
+import { MdClose } from "react-icons/md";
+import AlertContext from "../context/alert/alertContext";
+import BenefitContext from "../context/benefit/benefitContext";
+import Toast from "./Toast";
+
+let BASE_URL;
+process.env.NODE_ENV === "production"
+  ? (BASE_URL = "")
+  : (BASE_URL = process.env.REACT_APP_BASE_URL);
 
 const Modal = ({ showModal, setShowModal }) => {
   const [benefit, setBenefit] = useState("");
   const [loading, setLoading] = useState(false);
+  const benefitContext = useContext(BenefitContext);
+  const { createBenefit, error } = benefitContext;
+  const { setAlert } = useContext(AlertContext);
 
   const animation = useSpring({
     config: {
@@ -19,16 +32,30 @@ const Modal = ({ showModal, setShowModal }) => {
     (e) => {
       if (e.key === "Escape" && showModal) {
         setShowModal(false);
-        console.log("I pressed");
       }
     },
     [setShowModal, showModal]
   );
 
+  const handleChange = (event) => {
+    setBenefit(event.target.value);
+  };
   const submitBenefit = async (e) => {
     e.preventDefault();
-    if (!benefit) return;
-    alert(`This is going well ${benefit}`);
+    if (!benefit) {
+      setAlert("Opps", "Field can not be empty", "danger");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = createBenefit({ name: benefit });
+      setBenefit("");
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      setAlert("Fail", error, "danger");
+    }
   };
 
   useEffect(() => {
@@ -38,29 +65,27 @@ const Modal = ({ showModal, setShowModal }) => {
 
   return (
     <>
+      {loading && <Toast />}
       <animated.div style={animation}>
         <ModalWrapper showModal={showModal}>
           <FormComponent noValidate onSubmit={submitBenefit}>
             <label htmlFor="benefits">
               <InputField
                 spellCheck="true"
-                // className={errors.benefit ? "error-input" : ""}
                 type="text"
                 placeholder="benefits goes in here"
                 name="benefits"
                 id="benefits"
                 value={benefit}
-                onChange={(e) => setBenefit(e.target.value)}
+                onChange={handleChange}
               />
-              {/* {errors.benefit && <p>{errors.benefit}</p>} */}
             </label>
-
-            <Button type="submit">{!loading ? "Loading..." : "Login"}</Button>
+            <CloseModalButton
+              aria-label="Close modal"
+              onClick={() => setShowModal((prev) => !prev)}
+            />
+            <Button type="submit">{loading ? "Loading..." : "Submit"}</Button>
           </FormComponent>
-          {/* <CloseModalButton
-                  aria-label="Close modal"
-                  onClick={() => setShowModal((prev) => !prev)}
-                /> */}
         </ModalWrapper>
       </animated.div>
     </>
@@ -70,44 +95,47 @@ const Modal = ({ showModal, setShowModal }) => {
 export default Modal;
 
 const ModalWrapper = styled.div`
-  width: 250px;
-  height: 200px;
+  width: 400px;
+  height: 250px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
-
-  //   position: relative;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, 40%);
   z-index: 10;
   border-radius: 10px;
+
+  @media screen and (max-device-width: 480px) {
+    width: 225px;
+    height: 150px;
+  }
 `;
 
 const FormComponent = styled.form`
   width: 100%;
   height: 100%;
-`;
-const ModalImg = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 10px 0 0 10px;
-  background: #000;
-`;
-
-const ModalContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  line-height: 1.8;
-  color: #141414;
-
-  p {
-    margin-bottom: 1rem;
+  padding: 2.5rem 3rem;
+  @media screen and (max-device-width: 480px) {
+    padding: 1.5rem 1rem;
   }
+`;
 
-  button {
-    padding: 10px 24px;
-    background: #141414;
-    color: #fff;
-    border: none;
+const CloseModalButton = styled(MdClose)`
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  z-index: 10;
+  color: #880212;
+  @media screen and (max-device-width: 480px) {
+    top: 5px;
+    right: 5px;
+    width: 14px;
+    height: 14px;
   }
 `;

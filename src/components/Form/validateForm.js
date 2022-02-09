@@ -55,11 +55,3 @@ export function validateLoginInfo(values) {
 
   return errors;
 }
-
-export const calculateRemainingTime = () => {
-  const currentTime = new Date().getTime();
-  const expiryTime = new Date(10000).getTime();
-
-  const loginDuration = expiryTime - currentTime;
-  return loginDuration;
-};

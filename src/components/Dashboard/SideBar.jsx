@@ -92,4 +92,10 @@ const Aside = styled.aside`
   li:active {
     background: rgb(228, 228, 250);
   }
+
+  @media screen and (max-device-width: 480px) {
+    section {
+      padding: 6px;
+    }
+  }
 `;

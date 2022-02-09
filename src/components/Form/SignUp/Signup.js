@@ -20,7 +20,7 @@ const Signup = ({ setConfirmationToken }) => {
   const [errors, setErrors] = useState({});
   const { setAlert } = useContext(AlertContext);
 
-  const BASE_URL = "http://localhost:4000/api/auth";
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const options = {
     firstname: values.firstname,
     lastname: values.lastname,
@@ -32,7 +32,7 @@ const Signup = ({ setConfirmationToken }) => {
     e.preventDefault();
     try {
       setErrors(validateSignupInfo(values));
-      let response = await axios.post(`${BASE_URL}/signup`, options);
+      let response = await axios.post(`${BASE_URL}/auth/signup`, options);
       setLoading(true);
       setConfirmationToken(response.data.token);
       setValues(initialState);

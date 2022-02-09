@@ -9,10 +9,14 @@ const ListItem = ({ icon, label, url }) => {
   return (
     <React.Fragment>
       <li>
-        <NavLink to={url}>
-          {icon}
-          {label}
-        </NavLink>
+        {window.matchMedia("(max-width:480px)").matches ? (
+          <NavLink to={url}>{icon}</NavLink>
+        ) : (
+          <NavLink to={url}>
+            {icon}
+            {label}
+          </NavLink>
+        )}
       </li>
     </React.Fragment>
   );
