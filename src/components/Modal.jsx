@@ -69,7 +69,7 @@ const Modal = ({ showModal, setShowModal }) => {
       {loading && <Toast />}
       <animated.div style={animation}>
         <ModalWrapper showModal={showModal}>
-          <ModalComponent noValidate onSubmit={submitBenefit}>
+          <ModalComponent modalName="add" noValidate onSubmit={submitBenefit}>
             <label htmlFor="benefits">
               <InputField
                 spellCheck="true"

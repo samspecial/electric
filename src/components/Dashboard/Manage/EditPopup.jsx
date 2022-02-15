@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {
   Button,
   CloseModalButton,
+  ModalBackground,
   InputField,
   ModalComponent,
 } from "../../Styles";
@@ -17,7 +18,7 @@ export const EditPopup = ({ benefit, editBenefit, showEditBenefit }) => {
 
   const handleChange = (event) => setValue(event.target.value);
   return (
-    <div>
+    <ModalBackground>
       <ModalComponent noValidate>
         <h2>Edit benefit</h2>
         <label htmlFor="benefits">
@@ -37,7 +38,7 @@ export const EditPopup = ({ benefit, editBenefit, showEditBenefit }) => {
         />
         <Button type="submit">{loading ? "Loading..." : "Update"}</Button>
       </ModalComponent>
-    </div>
+    </ModalBackground>
   );
 };
 

@@ -42,7 +42,7 @@ const Signin = () => {
     if (response.user) {
       setValues(initialState);
       history("/dashboard");
-      setTimeout(logoutHandler, 200000);
+      setTimeout(logoutHandler, 200000000);
       //3599999
     }
     if (response.err) {
