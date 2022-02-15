@@ -1,41 +1,80 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import styled from "styled-components";
+import BenefitContext from "../context/benefit/benefitContext";
+import { EditPopup } from "./Dashboard/Manage/EditPopup";
+import { Pagination } from "./Pagination";
 
-export const DataTable = ({ benefits, loading }) => {
+export const DataTable = ({
+  currentBenefits,
+  removeBenefit,
+  benefitPerPage,
+  totalBenefits,
+  paginate,
+}) => {
+  const [editBenefit, showEditBenefit] = useState(false);
+
+  const benefitContext = useContext(BenefitContext);
+  const { benefits, updateBenefit } = benefitContext;
+
+  const [item, setItem] = useState("");
+  const handleEditPopup = (benefit) => {
+    setItem(benefit);
+    showEditBenefit(true);
+  };
   return (
     <>
-      {benefits?.length > 0 ? (
-        <Table>
-          <thead>
-            <tr>
-              <th>S/N</th>
-              <th>Benefit</th>
-              <th colSpan="2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {benefits?.map((benefit, index) => (
-              <tr key={benefit?.id}>
-                <td>{++index}</td>
-                <td>{benefit?.name}</td>
-                <td>
-                  <FaEdit title="Edit benefit" className="app-icons" />
-                </td>
-                <td>
-                  {" "}
-                  <FaTrash
-                    key={benefit?.id}
-                    onClick={() => deleteBenefit(benefit?.id)}
-                    title="Delete benefit"
-                    className="app-icons"
-                    color="red"
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+      {currentBenefits?.length > 0 ? (
+        editBenefit === true ? (
+          <EditPopup
+            benefit={item}
+            showEditBenefit={showEditBenefit}
+            editBenefit={editBenefit}
+          />
+        ) : (
+          <div>
+            <Table>
+              <thead>
+                <tr>
+                  <th>S/N</th>
+                  <th>Benefit</th>
+                  <th colSpan="2">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentBenefits?.map((benefit, index) => (
+                  <tr key={benefit?.id}>
+                    <td>{++index}</td>
+                    <td>{benefit?.name}</td>
+                    <td className="edit-icon">
+                      <FaEdit
+                        title="Edit benefit"
+                        onClick={() => handleEditPopup({ ...benefit })}
+                        className="app-icons"
+                      />
+                    </td>
+                    <td className="delete-icon">
+                      {" "}
+                      <FaTrash
+                        key={benefit?.id}
+                        onClick={() => removeBenefit(benefit?.id)}
+                        title="Delete benefit"
+                        className="app-icons"
+                        color="red"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+            {console.log(paginate)}
+            <Pagination
+              benefitPerPage={benefitPerPage}
+              totalBenefits={benefits.length}
+              paginate={paginate}
+            />
+          </div>
+        )
       ) : (
         <p>
           You currently don't have any benefit. Click the + icon to add now.
@@ -45,15 +84,8 @@ export const DataTable = ({ benefits, loading }) => {
   );
 };
 
-// .container {
-// 	position: absolute;
-// 	top: 50%;
-// 	left: 50%;
-// 	transform: translate(-50%, -50%);
-// }
-
 const Table = styled.table`
-  width: 800px;
+  min-width: 800px;
   border-collapse: collapse;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -99,5 +131,10 @@ const Table = styled.table`
         }
       }
     }
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 75%;
+    margin: 0 auto;
   }
 `;

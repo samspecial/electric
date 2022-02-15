@@ -8,12 +8,16 @@ import {
   DELETE_BENEFIT,
   UPDATE_BENEFIT,
   BENEFIT_ERROR,
+  BENEFIT_FAIL,
+  BENEFIT_SUCCESS,
+  LOADING,
 } from "../actionTypes";
 
 const BenefitState = (props) => {
   const initialState = {
-    benefits: null,
-    error: null,
+    benefits: [],
+    message: "",
+    error: "",
     loading: false,
   };
   let BASE_URL;
@@ -31,12 +35,15 @@ const BenefitState = (props) => {
       },
       withCredentials: true,
     };
+    dispatch({ type: LOADING, payload: !initialState.loading });
     try {
       dispatch({ type: GET_BENEFITS });
       const res = await axios.get(`${BASE_URL}/auth/benefits`, config);
 
       dispatch({ type: GET_BENEFITS, payload: res.data.data });
+      dispatch({ type: BENEFIT_SUCCESS, payload: res.data.status });
     } catch (err) {
+      //  dispatch({ type: LOADING, payload: initialState.loading });
       dispatch({
         type: BENEFIT_ERROR,
         payload: err.response.message,
@@ -60,15 +67,17 @@ const BenefitState = (props) => {
         formData,
         config
       );
-      console.log("data: ", res.data);
+
       dispatch({
-        payload: res.data,
+        type: BENEFIT_SUCCESS,
+        payload: res.data.message,
       });
+
+      dispatch({ type: LOADING, payload: initialState.loading });
     } catch (err) {
-      console.log(err.response.data);
       dispatch({
         type: BENEFIT_ERROR,
-        payload: err.response.data.error,
+        payload: err.response.data,
       });
     }
   };
@@ -81,13 +90,17 @@ const BenefitState = (props) => {
       },
       withCredentials: true,
     };
-    try {
-      await axios.delete(`${BASE_URL}/auth/benefit/${id}`, config);
 
+    try {
       dispatch({
         type: DELETE_BENEFIT,
         payload: id,
       });
+      const res = await axios.delete(`${BASE_URL}/auth/benefit/${id}`, config);
+      // dispatch({
+      //   type: DELETE_BENEFIT,
+      //   payload: id,
+      // });
     } catch (err) {
       dispatch({
         type: BENEFIT_ERROR,
@@ -96,7 +109,7 @@ const BenefitState = (props) => {
     }
   };
 
-  // Function to update the current contact.
+  // Function to update the current benefit.
   const updateBenefit = async (benefit) => {
     const config = {
       headers: {
@@ -124,14 +137,15 @@ const BenefitState = (props) => {
     }
   };
 
-  // Function to clear all contacts from the
+  // Function to clear all benefit from the
 
   return (
     <BenefitContext.Provider
       value={{
         benefits: state.benefits,
-        error: state.error,
+        message: state.message,
         loading: state.loading,
+        error: state.error,
         createBenefit,
         removeBenefit,
 

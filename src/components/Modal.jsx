@@ -1,9 +1,8 @@
 import React, { useEffect, useCallback, useState, useContext } from "react";
 import { useSpring, animated } from "react-spring";
-import axios from "axios";
 import styled from "styled-components";
-import { Button, InputField } from "./Styles";
-import { MdClose } from "react-icons/md";
+import { Button, CloseModalButton, InputField, ModalComponent } from "./Styles";
+
 import AlertContext from "../context/alert/alertContext";
 import BenefitContext from "../context/benefit/benefitContext";
 import Toast from "./Toast";
@@ -17,7 +16,7 @@ const Modal = ({ showModal, setShowModal }) => {
   const [benefit, setBenefit] = useState("");
   const [loading, setLoading] = useState(false);
   const benefitContext = useContext(BenefitContext);
-  const { createBenefit, error } = benefitContext;
+  const { createBenefit, message, error } = benefitContext;
   const { setAlert } = useContext(AlertContext);
 
   const animation = useSpring({
@@ -48,13 +47,15 @@ const Modal = ({ showModal, setShowModal }) => {
     }
 
     setLoading(true);
-    try {
-      const result = createBenefit({ name: benefit });
-      setBenefit("");
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      setAlert("Fail", error, "danger");
+
+    createBenefit({ name: benefit });
+    setBenefit("");
+    setLoading(false);
+    if (message.length > 0) {
+      setShowModal((prev) => !prev);
+      setAlert("Benefit created", message, "success");
+    } else {
+      setAlert("Error", error, "danger");
     }
   };
 
@@ -68,7 +69,7 @@ const Modal = ({ showModal, setShowModal }) => {
       {loading && <Toast />}
       <animated.div style={animation}>
         <ModalWrapper showModal={showModal}>
-          <FormComponent noValidate onSubmit={submitBenefit}>
+          <ModalComponent noValidate onSubmit={submitBenefit}>
             <label htmlFor="benefits">
               <InputField
                 spellCheck="true"
@@ -85,7 +86,7 @@ const Modal = ({ showModal, setShowModal }) => {
               onClick={() => setShowModal((prev) => !prev)}
             />
             <Button type="submit">{loading ? "Loading..." : "Submit"}</Button>
-          </FormComponent>
+          </ModalComponent>
         </ModalWrapper>
       </animated.div>
     </>
@@ -110,32 +111,5 @@ const ModalWrapper = styled.div`
   @media screen and (max-device-width: 480px) {
     width: 225px;
     height: 150px;
-  }
-`;
-
-const FormComponent = styled.form`
-  width: 100%;
-  height: 100%;
-  padding: 2.5rem 3rem;
-  @media screen and (max-device-width: 480px) {
-    padding: 1.5rem 1rem;
-  }
-`;
-
-const CloseModalButton = styled(MdClose)`
-  cursor: pointer;
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  z-index: 10;
-  color: #880212;
-  @media screen and (max-device-width: 480px) {
-    top: 5px;
-    right: 5px;
-    width: 14px;
-    height: 14px;
   }
 `;

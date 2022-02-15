@@ -4,6 +4,9 @@ import {
   DELETE_BENEFIT,
   UPDATE_BENEFIT,
   BENEFIT_ERROR,
+  BENEFIT_FAIL,
+  BENEFIT_SUCCESS,
+  LOADING,
 } from "../actionTypes";
 
 export default (state, action) => {
@@ -32,7 +35,7 @@ export default (state, action) => {
       return {
         ...state,
         benefits: state.benefits.filter(
-          (benefit) => benefit.id !== action.payload
+          (benefit) => benefit?.id !== action.payload
         ),
         loading: false,
       };
@@ -40,6 +43,16 @@ export default (state, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    case BENEFIT_SUCCESS:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case LOADING:
+      return {
+        ...state,
+        loading: action.payload,
       };
     default:
       return state;

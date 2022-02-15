@@ -23,7 +23,6 @@ export const registerUser = async (dispatch, formData) => {
       config
     );
     const { status } = response;
-    console.log(status);
 
     dispatch({
       type: types.SIGN_UP_SUCCESS,

@@ -20,3 +20,6 @@ export const DELETE_BENEFIT = "DELETE_BENEFIT";
 export const SET_CURRENT = "SET_CURRENT";
 export const CLEAR_CURRENT = "CLEAR_CURRENT";
 export const UPDATE_BENEFIT = "UPDATE_BENEFIT";
+export const BENEFIT_SUCCESS = "BENEFIT_SUCCESS";
+export const BENEFIT_FAIL = "BENEFIT_FAIL";
+export const LOADING = "LOADING";

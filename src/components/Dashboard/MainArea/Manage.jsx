@@ -1,16 +1,14 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import Modal from "../../Modal";
 import styled from "styled-components";
-import axios from "axios";
 import NotFound from "../../pages/NotFound";
 
-import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import BenefitContext from "../../../context/benefit/benefitContext";
 
 import "../../../App.css";
 import Toast from "../../Toast";
 import { DataTable } from "../../DataTable";
-import { Pagination } from "../../Pagination";
 
 const Manage = () => {
   const connString = JSON.parse(localStorage.getItem("connId"));
@@ -26,14 +24,14 @@ const Manage = () => {
     createBenefit,
     removeBenefit,
     updateBenefit,
-    loading,
     error,
+    loading,
+    message,
     benefits,
   } = benefitContext;
 
   const modalRef = useRef();
 
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
@@ -47,27 +45,6 @@ const Manage = () => {
     console.log("Running useEffect to setBenefit");
     fetchBenefits();
   }, [showModal]);
-
-  const deleteBenefit = async (id) => {
-    console.log(id);
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
-
-    try {
-      const response = await axios.delete(
-        `${BASE_URL}/auth/benefit/${id}`,
-        config
-      );
-
-      console.log(benefit);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const indexOfLastBenefit = currentPage * benefitPerPage;
   const indexOfFirstBenefit = indexOfLastBenefit - benefitPerPage;
@@ -93,35 +70,18 @@ const Manage = () => {
               onClick={openModal}
             />
           </FirstSection>
-          <section>
-            {/* {benefits?.map((b) => {
-              return (
-                <h3 key={b?.id}>
-                  {b?.name}{" "}
-                  <FaEdit title="Edit benefit" className="app-icons" />
-                  <FaTrash
-                    key={b?.id}
-                    onClick={() => deleteBenefit(b?.id)}
-                    title="Delete benefit"
-                    className="app-icons"
-                    color="red"
-                  />
-                </h3>
-              );
-            })} */}
-            <DataTable benefits={currentBenefits} loading={loading} />
-            <Pagination
-              benefitPerPage={benefitPerPage}
-              totalBenefits={benefits?.length}
-              paginate={paginate}
-            />
-          </section>
-          <section>
-            <p onClick={openModal}>Add New</p>
-          </section>
+
+          <DataTable
+            currentBenefits={currentBenefits}
+            removeBenefit={removeBenefit}
+            benefitPerPage={benefitPerPage}
+            totalBenefits={benefits?.length}
+            paginate={paginate}
+          />
         </section>
       )}
-      {error && <Toast />}
+
+      {showModal && <Toast />}
     </Background>
   ) : (
     <NotFound />
@@ -138,13 +98,6 @@ const Background = styled.section`
   z-index: 1;
 `;
 
-const IconLink = styled.span`
-  width: 120px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 40px;
-`;
 const FirstSection = styled.span`
   width: 100%;
   display: flex;

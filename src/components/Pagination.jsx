@@ -10,10 +10,12 @@ export const Pagination = ({ benefitPerPage, totalBenefits, paginate }) => {
   ) {
     pageNumbers.push(index);
   }
+
   return (
     <div>
       <PaginationNav>
         <ul>
+          {console.log(benefitPerPage)}
           {pageNumbers?.map((number) => (
             <li key={number}>
               <a onClick={() => paginate(number)} to="!#">
@@ -38,16 +40,28 @@ const PaginationNav = styled.nav`
   }
 
   li {
-    margin: 1rem;
+    margin: 0.4rem;
   }
   a {
-    padding: 1.25rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
     color: #55608f;
+    justify-content: center;
+    align-items: center;
     outline: 1px solid #55608f;
     cursor: pointer;
+    border-radius: 50%;
+    font-size: 0.85rem;
     &:hover {
       color: white;
       background-color: #55608f;
     }
+  }
+
+  @media only screen and (max-width: 768px) {
+    // a {
+    //   padding: 0.5rem;
+    // }
   }
 `;

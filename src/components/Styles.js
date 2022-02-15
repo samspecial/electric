@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import { MdClose } from "react-icons/md";
 
 export const Button = styled.button`
   width: 100%;
@@ -328,4 +329,33 @@ export const Link = styled(Link)`
       : css`
           display: inline;
         `};
+`;
+
+export const ModalComponent = styled.form`
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem 3rem;
+  @media screen and (max-device-width: 480px) {
+    padding: 1.5rem 1rem;
+  }
+`;
+
+export const ModalBackground = styled.section``;
+
+export const CloseModalButton = styled(MdClose)`
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  z-index: 10;
+  color: #880212;
+  @media screen and (max-device-width: 480px) {
+    top: 5px;
+    right: 5px;
+    width: 14px;
+    height: 14px;
+  }
 `;

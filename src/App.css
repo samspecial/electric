@@ -39,3 +39,14 @@
   cursor: pointer;
   font-size: 16px;
 }
+
+.edit-icon,
+.delete-icon {
+  text-align: center;
+}
+.edit-icon:hover {
+  background: #bbc4ce;
+}
+.delete-icon:hover {
+  background: rgb(233, 145, 145);
+}
