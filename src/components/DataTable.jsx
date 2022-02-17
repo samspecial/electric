@@ -9,13 +9,12 @@ export const DataTable = ({
   currentBenefits,
   removeBenefit,
   benefitPerPage,
-  totalBenefits,
   paginate,
 }) => {
   const [editBenefit, showEditBenefit] = useState(false);
 
   const benefitContext = useContext(BenefitContext);
-  const { benefits, updateBenefit } = benefitContext;
+  const { benefits, updateBenefit, message, error } = benefitContext;
 
   const [item, setItem] = useState("");
   const handleEditPopup = (benefit) => {
@@ -24,61 +23,58 @@ export const DataTable = ({
   };
   return (
     <>
-      {currentBenefits?.length > 0 ? (
-        editBenefit === true ? (
-          <EditPopup
-            benefit={item}
-            showEditBenefit={showEditBenefit}
-            editBenefit={editBenefit}
-          />
-        ) : (
-          <div>
-            <Table>
-              <thead>
-                <tr>
-                  <th>S/N</th>
-                  <th>Benefit</th>
-                  <th colSpan="2">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentBenefits?.map((benefit, index) => (
-                  <tr key={benefit?.id}>
-                    <td>{++index}</td>
-                    <td>{benefit?.name}</td>
-                    <td className="edit-icon">
-                      <FaEdit
-                        title="Edit benefit"
-                        onClick={() => handleEditPopup({ ...benefit })}
-                        className="app-icons"
-                      />
-                    </td>
-                    <td className="delete-icon">
-                      {" "}
-                      <FaTrash
-                        key={benefit?.id}
-                        onClick={() => removeBenefit(benefit?.id)}
-                        title="Delete benefit"
-                        className="app-icons"
-                        color="red"
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-            {console.log(paginate)}
-            <Pagination
-              benefitPerPage={benefitPerPage}
-              totalBenefits={benefits.length}
-              paginate={paginate}
-            />
-          </div>
-        )
+      {editBenefit === true ? (
+        <EditPopup
+          benefit={item}
+          showEditBenefit={showEditBenefit}
+          editBenefit={editBenefit}
+          updateBenefit={updateBenefit}
+          message={message}
+          error={error}
+        />
       ) : (
-        <p>
-          You currently don't have any benefit. Click the + icon to add now.
-        </p>
+        <div>
+          <Table>
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Benefit</th>
+                <th colSpan="2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentBenefits?.map((benefit, index) => (
+                <tr key={benefit?.id}>
+                  <td>{++index}</td>
+                  <td>{benefit?.name}</td>
+                  <td className="edit-icon">
+                    <FaEdit
+                      title="Edit benefit"
+                      onClick={() => handleEditPopup(benefit)}
+                      className="app-icons"
+                    />
+                  </td>
+                  <td className="delete-icon">
+                    {" "}
+                    <FaTrash
+                      key={benefit?.id}
+                      onClick={() => removeBenefit(benefit?.id)}
+                      title="Delete benefit"
+                      className="app-icons"
+                      color="red"
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+
+          <Pagination
+            benefitPerPage={benefitPerPage}
+            totalBenefits={benefits.length}
+            paginate={paginate}
+          />
+        </div>
       )}
     </>
   );

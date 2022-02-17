@@ -70,14 +70,19 @@ const Manage = () => {
               onClick={openModal}
             />
           </FirstSection>
-
-          <DataTable
-            currentBenefits={currentBenefits}
-            removeBenefit={removeBenefit}
-            benefitPerPage={benefitPerPage}
-            totalBenefits={benefits?.length}
-            paginate={paginate}
-          />
+          {benefits?.length > 0 ? (
+            <DataTable
+              currentBenefits={currentBenefits}
+              removeBenefit={removeBenefit}
+              benefitPerPage={benefitPerPage}
+              totalBenefits={benefits?.length}
+              paginate={paginate}
+            />
+          ) : (
+            <p>
+              You currently don't have any benefit. Click the + icon to add now.
+            </p>
+          )}
         </section>
       )}
 

@@ -7,11 +7,6 @@ import AlertContext from "../context/alert/alertContext";
 import BenefitContext from "../context/benefit/benefitContext";
 import Toast from "./Toast";
 
-let BASE_URL;
-process.env.NODE_ENV === "production"
-  ? (BASE_URL = "")
-  : (BASE_URL = process.env.REACT_APP_BASE_URL);
-
 const Modal = ({ showModal, setShowModal }) => {
   const [benefit, setBenefit] = useState("");
   const [loading, setLoading] = useState(false);
@@ -41,6 +36,7 @@ const Modal = ({ showModal, setShowModal }) => {
   };
   const submitBenefit = async (e) => {
     e.preventDefault();
+    benefit.trim();
     if (!benefit) {
       setAlert("Opps", "Field can not be empty", "danger");
       return;
@@ -70,6 +66,7 @@ const Modal = ({ showModal, setShowModal }) => {
       <animated.div style={animation}>
         <ModalWrapper showModal={showModal}>
           <ModalComponent modalName="add" noValidate onSubmit={submitBenefit}>
+            <h2>Add benefit</h2>
             <label htmlFor="benefits">
               <InputField
                 spellCheck="true"
@@ -98,7 +95,7 @@ export default Modal;
 const ModalWrapper = styled.div`
   width: 400px;
   height: 250px;
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 16px -3px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
   left: 50%;
@@ -109,7 +106,7 @@ const ModalWrapper = styled.div`
   border-radius: 10px;
 
   @media screen and (max-device-width: 480px) {
-    width: 225px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
   }
 `;

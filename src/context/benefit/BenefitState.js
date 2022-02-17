@@ -61,20 +61,19 @@ const BenefitState = (props) => {
     };
 
     try {
-      dispatch({ type: ADD_BENEFIT });
       const res = await axios.post(
         `${BASE_URL}/auth/benefit`,
         formData,
         config
       );
+      dispatch({ type: ADD_BENEFIT, payload: res.data.benefit });
 
       dispatch({
         type: BENEFIT_SUCCESS,
         payload: res.data.message,
       });
-
-      dispatch({ type: LOADING, payload: initialState.loading });
     } catch (err) {
+      console.log(err.response.data);
       dispatch({
         type: BENEFIT_ERROR,
         payload: err.response.data,
@@ -97,10 +96,6 @@ const BenefitState = (props) => {
         payload: id,
       });
       const res = await axios.delete(`${BASE_URL}/auth/benefit/${id}`, config);
-      // dispatch({
-      //   type: DELETE_BENEFIT,
-      //   payload: id,
-      // });
     } catch (err) {
       dispatch({
         type: BENEFIT_ERROR,
@@ -115,13 +110,13 @@ const BenefitState = (props) => {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredential: true,
+      withCredentials: true,
     };
 
     try {
       const res = await axios.put(
         `${BASE_URL}/auth/benefit/${benefit.id}`,
-        { name: benefit },
+        { name: benefit.name },
         config
       );
 

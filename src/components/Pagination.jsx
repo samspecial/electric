@@ -15,7 +15,6 @@ export const Pagination = ({ benefitPerPage, totalBenefits, paginate }) => {
     <div>
       <PaginationNav>
         <ul>
-          {console.log(benefitPerPage)}
           {pageNumbers?.map((number) => (
             <li key={number}>
               <a onClick={() => paginate(number)} to="!#">

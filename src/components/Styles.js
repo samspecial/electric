@@ -340,7 +340,7 @@ export const ModalComponent = styled.form`
           height: 100%;
         `
       : css`
-          width: 40%;
+          width: 45%;
           height: 45%;
         `};
   box-shadow: 0px 3px 15px -3px rgba(0, 0, 0, 0.2);
@@ -354,10 +354,48 @@ export const ModalComponent = styled.form`
   padding: 2.5rem 3rem;
   position: absolute;
   transform: translate(-50%, -50%);
+
+  @media screen and (min-device-width: 481px) and (max-device-width: 768px) {
+    ${(props) =>
+      props.modalName === "add"
+        ? css`
+            padding: 1.5rem 1rem;
+            width: 100%;
+            height: 100%;
+          `
+        : css`
+            padding: 1.5rem 1rem;
+            width: 65%;
+            height: 60%;
+          `};
+
+    h {
+      font-size: 1rem;
+    }
+  }
+
   @media screen and (max-device-width: 480px) {
-    padding: 1.5rem 1rem;
-    width: 85%;
-    height: 60%;
+    ${(props) =>
+      props.modalName === "add"
+        ? css`
+            padding: 1.5rem 1rem;
+            width: 100%;
+            height: 100%;
+          `
+        : css`
+            padding: 1.5rem 1rem;
+            width: 85%;
+            height: 60%;
+          `};
+    h {
+      font-size: 1rem;
+      margin-bottom: 1.1rem;
+    }
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 `;
 
@@ -383,9 +421,10 @@ export const CloseModalButton = styled(MdClose)`
   z-index: 10;
   color: #880212;
   @media screen and (max-device-width: 480px) {
-    top: 5px;
-    right: 5px;
-    width: 14px;
-    height: 14px;
+    top: 10px;
+    right: 10px;
+    padding: 3px;
+    width: 20px;
+    height: 20px;
   }
 `;

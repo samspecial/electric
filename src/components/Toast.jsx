@@ -83,6 +83,7 @@ const Div = styled.div`
         `
       : css`
           background: green;
+          color: white;
         `};
 
   img {
