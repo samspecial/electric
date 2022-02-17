@@ -232,11 +232,10 @@ export const ClientInfo = styled.div`
 
 export const InputField = styled.input`
   width: 100%;
-  height: 40px;
   padding: 8px;
   margin-bottom: 10px;
   border-radius: 4px;
-  border: 1px solid #880212;
+  border: 1px solid #888;
 `;
 
 export const FormComponent = styled.form`
@@ -333,91 +332,24 @@ export const Link = styled(Link)`
 `;
 
 export const ModalComponent = styled.form`
-  ${(props) =>
-    props.modalName === "add"
-      ? css`
-          width: 100%;
-          height: 100%;
-        `
-      : css`
-          width: 45%;
-          height: 45%;
-        `};
-  box-shadow: 0px 3px 15px -3px rgba(0, 0, 0, 0.2);
-  top: 50%;
-  left: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  background: #fff;
-  padding: 2.5rem 3rem;
-  position: absolute;
-  transform: translate(-50%, -50%);
-
-  @media screen and (min-device-width: 481px) and (max-device-width: 768px) {
-    ${(props) =>
-      props.modalName === "add"
-        ? css`
-            padding: 1.5rem 1rem;
-            width: 100%;
-            height: 100%;
-          `
-        : css`
-            padding: 1.5rem 1rem;
-            width: 65%;
-            height: 60%;
-          `};
-
-    h {
-      font-size: 1rem;
-    }
-  }
-
-  @media screen and (max-device-width: 480px) {
-    ${(props) =>
-      props.modalName === "add"
-        ? css`
-            padding: 1.5rem 1rem;
-            width: 100%;
-            height: 100%;
-          `
-        : css`
-            padding: 1.5rem 1rem;
-            width: 85%;
-            height: 60%;
-          `};
-    h {
-      font-size: 1rem;
-      margin-bottom: 1.1rem;
-    }
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-`;
-
-export const ModalBackground = styled.section`
-  background: #999;
   width: 100%;
-  height: calc(100vh - 50px);
-  position: absolute;
-  top: 0;
-  left: 0;
+  height: 100%;
+  padding: 2.5rem 3rem;
+  @media screen and (max-device-width: 480px) {
+    padding: 1.5rem 1rem;
+  }
 `;
+
+export const ModalBackground = styled.section``;
 
 export const CloseModalButton = styled(MdClose)`
   cursor: pointer;
   position: absolute;
   top: 15px;
   right: 15px;
-  width: 30px;
-  height: 30px;
-  background: #f2f2f2;
-  border-radius: 50%;
-  padding: 7px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
   z-index: 10;
   color: #880212;
   @media screen and (max-device-width: 480px) {
