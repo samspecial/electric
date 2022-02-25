@@ -4,19 +4,22 @@ import TopBar from "../Dashboard/TopBar";
 import SideBar from "../Dashboard/SideBar";
 import MainMenu from "../Dashboard/MainArea/Index.jsx";
 import BenefitState from "../../context/benefit/BenefitState";
+import PackageState from "../../context/package/PackageState";
 
 const Dashboard = () => {
   return (
     <BenefitState>
-      <div>
-        <TopBar />
-        <DashboardBody>
-          <SideBarArea />
-          <MainArea>
-            <MainMenu />
-          </MainArea>
-        </DashboardBody>
-      </div>
+      <PackageState>
+        <div>
+          <TopBar />
+          <DashboardBody>
+            <SideBarArea />
+            <MainArea>
+              <MainMenu />
+            </MainArea>
+          </DashboardBody>
+        </div>
+      </PackageState>
     </BenefitState>
   );
 };

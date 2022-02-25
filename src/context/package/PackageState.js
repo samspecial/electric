@@ -1,21 +1,21 @@
 import React, { useReducer } from "react";
 import axios from "axios";
-import BenefitContext from "./benefitContext";
-import benefitReducer from "./benefitReducer";
+import PackageContext from "./PackageContext";
+import PackageReducer from "./PackageReducer";
 import {
-  GET_BENEFITS,
-  ADD_BENEFIT,
-  DELETE_BENEFIT,
-  UPDATE_BENEFIT,
-  BENEFIT_ERROR,
-  BENEFIT_FAIL,
-  BENEFIT_SUCCESS,
+  GET_PACKAGES,
+  ADD_PACKAGE,
+  DELETE_PACKAGE,
+  UPDATE_PACKAGE,
+  PACKAGE_ERROR,
+  PACKAGE_FAIL,
+  PACKAGE_SUCCESS,
   LOADING,
 } from "../actionTypes";
 
-const BenefitState = (props) => {
+const PackageState = (props) => {
   const initialState = {
-    benefits: [],
+    packages: [],
     message: "",
     error: "",
     loading: false,
@@ -25,10 +25,10 @@ const BenefitState = (props) => {
     ? (BASE_URL = "")
     : (BASE_URL = process.env.REACT_APP_BASE_URL);
 
-  const [state, dispatch] = useReducer(benefitReducer, initialState);
+  const [state, dispatch] = useReducer(PackageReducer, initialState);
 
   // Function to get all contacts for the user.
-  const fetchBenefits = async () => {
+  const fetchPackages = async () => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -37,22 +37,20 @@ const BenefitState = (props) => {
     };
     dispatch({ type: LOADING, payload: !initialState.loading });
     try {
-      // dispatch({ type: GET_BENEFITS });
-      const res = await axios.get(`${BASE_URL}/auth/benefits`, config);
+      const res = await axios.get(`${BASE_URL}/auth/plans`, config);
 
-      dispatch({ type: GET_BENEFITS, payload: res.data.data });
-      dispatch({ type: BENEFIT_SUCCESS, payload: res.data.status });
+      dispatch({ type: GET_PACKAGES, payload: res.data.data });
+      dispatch({ type: PACKAGE_SUCCESS, payload: res.data.status });
     } catch (err) {
-      //  dispatch({ type: LOADING, payload: initialState.loading });
       dispatch({
-        type: BENEFIT_ERROR,
+        type: PACKAGE_ERROR,
         payload: err.response.message,
       });
     }
   };
 
-  // Function to add a contact.
-  const createBenefit = async (formData) => {
+  // Function to add a package.
+  const createPackage = async (formData) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -61,28 +59,23 @@ const BenefitState = (props) => {
     };
 
     try {
-      const res = await axios.post(
-        `${BASE_URL}/auth/benefit`,
-        formData,
-        config
-      );
-      dispatch({ type: ADD_BENEFIT, payload: res.data.benefit });
+      const res = await axios.post(`${BASE_URL}/auth/plan`, formData, config);
+      dispatch({ type: ADD_PACKAGE, payload: res.data.package });
 
       dispatch({
-        type: BENEFIT_SUCCESS,
+        type: PACKAGE_SUCCESS,
         payload: res.data.message,
       });
     } catch (err) {
-      console.log(err.response.data);
       dispatch({
-        type: BENEFIT_ERROR,
+        type: PACKAGE_ERROR,
         payload: err.response.data,
       });
     }
   };
 
-  // Function to delete a contact.
-  const removeBenefit = async (id) => {
+  // Function to delete a package.
+  const removePackage = async (id) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -92,20 +85,20 @@ const BenefitState = (props) => {
 
     try {
       dispatch({
-        type: DELETE_BENEFIT,
+        type: DELETE_PACKAGE,
         payload: id,
       });
-      const res = await axios.delete(`${BASE_URL}/auth/benefit/${id}`, config);
+      const res = await axios.delete(`${BASE_URL}/auth/package/${id}`, config);
     } catch (err) {
       dispatch({
-        type: BENEFIT_ERROR,
+        type: PACKAGE_ERROR,
         payload: err.response.msg,
       });
     }
   };
 
-  // Function to update the current benefit.
-  const updateBenefit = async (benefit) => {
+  // Function to update the current package.
+  const updatePackage = async (benefit) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -115,43 +108,39 @@ const BenefitState = (props) => {
 
     try {
       const res = await axios.put(
-        `${BASE_URL}/auth/benefit/${benefit.id}`,
+        `${BASE_URL}/auth/package/${benefit.id}`,
         { name: benefit.name },
         config
       );
 
       dispatch({
-        type: UPDATE_BENEFIT,
+        type: UPDATE_PACKAGE,
         payload: res.data,
       });
     } catch (err) {
       dispatch({
-        type: BENEFIT_ERROR,
+        type: PACKAGE_ERROR,
         payload: err.response.msg,
       });
     }
   };
 
-  // Function to clear all benefit from the
-
   return (
-    <BenefitContext.Provider
+    <PackageContext.Provider
       value={{
-        benefits: state.benefits,
+        packages: state.packages,
         message: state.message,
         loading: state.loading,
         error: state.error,
-        createBenefit,
-        removeBenefit,
-
-        updateBenefit,
-
-        fetchBenefits,
+        createPackage,
+        removePackage,
+        updatePackage,
+        fetchPackages,
       }}
     >
       {props.children}
-    </BenefitContext.Provider>
+    </PackageContext.Provider>
   );
 };
 
-export default BenefitState;
+export default PackageState;

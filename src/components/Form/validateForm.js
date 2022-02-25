@@ -55,3 +55,33 @@ export function validateLoginInfo(values) {
 
   return errors;
 }
+
+export function validatePackage(values) {
+  let errors = {};
+  if (!isNaN(values.duration) === false)
+    errors.duration = "Duration must be a number";
+  else if (!values.duration) {
+    errors.duration = "Duration is required";
+  }
+  console.log(values.price);
+  if (values.price < 0) {
+    errors.price = "Price must be a number greater or equal to zero";
+  } else if (values.price === false) {
+    errors.price = "Price is required";
+  }
+  if (!values.description) {
+    errors.description = "Description is required";
+  }
+  if (!values.planName) {
+    errors.planName = "Plan name is required";
+  }
+
+  if (values.benefits.length <= 0) {
+    errors.benefits = "Benefits can not be empty";
+  }
+  if (!values.calltoAction) {
+    errors.calltoAction = "Call to action required";
+  }
+
+  return errors;
+}

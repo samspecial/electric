@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
+import { useSpring, animated } from "react-spring";
 import Modal from "../../Modal";
 import styled from "styled-components";
 import NotFound from "../../pages/NotFound";
@@ -9,6 +10,8 @@ import BenefitContext from "../../../context/benefit/benefitContext";
 import "../../../App.css";
 import Toast from "../../Toast";
 import { DataTable } from "../../DataTable";
+import PackageForm from "../Manage/PackageForm";
+import { PackageTable } from "../Manage/PackageTable";
 
 const Manage = () => {
   const connString = JSON.parse(localStorage.getItem("connId"));
@@ -55,6 +58,22 @@ const Manage = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const styles = useSpring({
+    loop: { reverse: true },
+    from: { scaleX: 1.2, scaleY: 1.2 },
+    to: { scaleX: 1.5, scaleY: 1.5 },
+    delay: 2000,
+  });
+
+  const plusIconStyle = {
+    color: "green",
+    padding: "8px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f1f2f3",
+    borderRadius: "50%",
+  };
   return connString?.user.role === "admin" ? (
     <Background onClick={closeModal} ref={modalRef}>
       {showModal ? (
@@ -63,12 +82,18 @@ const Manage = () => {
         <section>
           <FirstSection>
             <h2>Manage benefit</h2>{" "}
-            <FaPlus
-              className="app-icons"
-              title="Create benefit"
-              color="green"
-              onClick={openModal}
-            />
+            <animated.div
+              style={{
+                ...plusIconStyle,
+                ...styles,
+              }}
+            >
+              <FaPlus
+                className="app-icons"
+                title="Create benefit"
+                onClick={openModal}
+              />
+            </animated.div>
           </FirstSection>
           {benefits?.length > 0 ? (
             <DataTable
@@ -83,6 +108,9 @@ const Manage = () => {
               You currently don't have any benefit. Click the + icon to add now.
             </p>
           )}
+
+          <PackageForm benefits={benefits} />
+          <PackageTable />
         </section>
       )}
 

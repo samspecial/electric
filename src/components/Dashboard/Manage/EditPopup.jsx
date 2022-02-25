@@ -4,6 +4,7 @@ import {
   Button,
   CloseModalButton,
   InputField,
+  ModalBackground,
   ModalComponent,
 } from "../../Styles";
 import BenefitContext from "../../../context/benefit/BenefitContext";
@@ -44,8 +45,8 @@ export const EditPopup = ({
   };
 
   return (
-    <div>
-      <ModalComponent noValidate>
+    <ModalBackground>
+      <ModalComponent onSubmit={updateSubmitBenefit} noValidate>
         <h2>Edit benefit</h2>
         <label htmlFor="benefits">
           <InputField
@@ -64,7 +65,7 @@ export const EditPopup = ({
         />
         <Button type="submit">{loading ? "Loading..." : "Update"}</Button>
       </ModalComponent>
-    </div>
+    </ModalBackground>
   );
 };
 
