@@ -33,6 +33,7 @@ const Signup = ({ setConfirmationToken }) => {
     try {
       setErrors(validateSignupInfo(values));
       let response = await axios.post(`${BASE_URL}/auth/signup`, options);
+      console.log(response);
       setLoading(true);
       setConfirmationToken(response.data.token);
       setValues(initialState);

@@ -41,8 +41,8 @@ export const Button = styled.button`
           `
         : props.accent === "primary"
         ? css`
-            color: #55608f;
-            outline: 1px solid #55608f;
+            color: #655dff;
+            outline: 1px solid #655dff;
           `
         : props.accent === "success"
         ? css`
@@ -267,7 +267,15 @@ export const ClientInfo = styled.div`
 
 export const InputField = styled.input`
   width: 100%;
-  padding: 8px;
+
+  ${(props) =>
+    props.row === "padding"
+      ? css`
+          padding: 8px 0 8px 30px;
+        `
+      : css`
+          padding: 8px;
+        `}
   display: block;
   margin-bottom: 10px;
   border-radius: 4px;
@@ -276,6 +284,25 @@ export const InputField = styled.input`
 
 export const Label = styled.label`
   font-size: 0.9rem;
+
+  ${(props) =>
+    props.row === "double"
+      ? css`
+          width: 47%;
+        `
+      : css`
+          width: 100%;
+        `}
+
+  span {
+    display: flex;
+    position: relative;
+  }
+`;
+
+export const Select = styled.select`
+  padding: 8px 14px;
+  cursor: pointer;
 `;
 
 export const FormComponent = styled.form`

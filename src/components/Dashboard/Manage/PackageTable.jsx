@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import PackageContext from "../../../context/package/PackageContext";
+import CreditCard from "../../Form/CReditCard";
 import { Table } from "../../Styles";
 
 export const PackageTable = () => {
   const packageContext = useContext(PackageContext);
-  const { packages, removePackage, fetchPackages, message, error } =
-    packageContext;
+  const { packages, removePackage, fetchPackages } = packageContext;
 
   const [item, setItem] = useState("");
   const handleEditPopup = (benefit) => {
@@ -33,7 +33,7 @@ export const PackageTable = () => {
           </thead>
           <tbody>
             {packages?.map((p, index) => (
-              <tr key={p?.id}>
+              <tr key={index}>
                 <td>{++index}</td>
                 <td>{p?.plan_name}</td>
                 <td>{p?.duration}</td>

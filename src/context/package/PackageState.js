@@ -42,6 +42,7 @@ const PackageState = (props) => {
       dispatch({ type: GET_PACKAGES, payload: res.data.data });
       dispatch({ type: PACKAGE_SUCCESS, payload: res.data.status });
     } catch (err) {
+      console.log(err.response);
       dispatch({
         type: PACKAGE_ERROR,
         payload: err.response.message,

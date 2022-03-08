@@ -50,3 +50,10 @@
 .delete-icon:hover {
   background: rgb(233, 145, 145);
 }
+
+/* Credit card  */
+.cc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}

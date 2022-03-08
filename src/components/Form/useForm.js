@@ -19,7 +19,7 @@ const useForm = (initialState) => {
 
     setValues((prevValues) => ({
       ...prevValues,
-      [name]: type === "checkbox" ? list : value,
+      [name]: value,
     }));
   };
 
