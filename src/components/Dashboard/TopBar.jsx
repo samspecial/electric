@@ -1,34 +1,73 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { FiBell, FiGlobe, FiSettings } from "react-icons/fi";
-import Avatar from "../Testimonial/Avatar";
-import { Link } from "../Styles";
+import { FiBell, FiGlobe, FiSettings, FiKey, FiPower } from "react-icons/fi";
+import { FaUserCircle } from "react-icons/fa";
+import userContext from "../../context/user/userContext";
 
-const TopBar = (props) => {
+import { Link } from "../Styles";
+import SecondaryMenu from "./SecondaryMenu";
+
+const TopBar = () => {
+  const [showSecondaryMenu, setShowSecondaryMenu] = useState(false);
+  const { user } = useContext(userContext);
+
+  const secondaryMenu = () => {
+    setShowSecondaryMenu(!showSecondaryMenu);
+  };
+  const closeSecondaryMenu = () => {
+    setShowSecondaryMenu(!showSecondaryMenu);
+  };
+
+  const userProfile = [
+    { id: 1, name: "Update Profile", path: "/", icon: FaUserCircle },
+    { id: 2, name: "Change Password", path: "/about", icon: FiKey },
+    // { id: 3, name: "Services", path: "/services" },
+  ];
+  const logout = { id: 4, name: "Logout", path: "/", icon: FiPower };
+
   return (
     <Topbar>
-      <TopbarContainer>
-        <Logo>
-          <span>
-            <Link to="/">Electric Admin</Link>
-          </span>
-        </Logo>
-        <div>
-          <TopBarIcon>
-            <FiBell size="20" />
-            <span>2</span>
-          </TopBarIcon>
-          <TopBarIcon>
-            <FiGlobe size="20" />
-            <span>2</span>
-          </TopBarIcon>
-          <TopBarIcon>
-            <FiSettings size="20" />
-          </TopBarIcon>
-          <Avatar />
-        </div>
-      </TopbarContainer>
+      <Logo>
+        <span>
+          <Link to="/dashboard">Electric Admin</Link>
+        </span>
+      </Logo>
+      <TopBarNav>
+        <ul>
+          <li>
+            <Link padding="true" to="#!">
+              {" "}
+              <FiBell size="20" />
+            </Link>
+          </li>
+          <li>
+            <Link padding="true" to="#!">
+              {" "}
+              <FiGlobe size="20" />
+            </Link>
+          </li>
+          <li>
+            <Link padding="true" to="#!">
+              {" "}
+              <FiSettings size="20" />
+            </Link>
+          </li>
+          <li onMouseEnter={secondaryMenu} onMouseLeave={closeSecondaryMenu}>
+            <Link padding="true" to="#!">
+              {" "}
+              <FaUserCircle size="20" />
+            </Link>{" "}
+            {showSecondaryMenu && (
+              <SecondaryMenu
+                user={user}
+                userProfile={userProfile}
+                {...logout}
+              />
+            )}
+          </li>
+        </ul>
+      </TopBarNav>
     </Topbar>
   );
 };
@@ -37,49 +76,51 @@ TopBar.propTypes = {};
 
 export default TopBar;
 
-const Topbar = styled.div`
+const Topbar = styled.header`
   width: 100%;
   height: 50px;
   background-color: #fff;
   position: sticky;
   top: 0;
-  z-index: 999;
-`;
-const TopbarContainer = styled.div`
-  height: 100%;
+  z-index: 2;
   display: flex;
-  padding: 0px 20px;
-  justify-content: space-between;
+  padding: 0px 40px;
+  justify-content: flex-end;
   align-items: center;
-
-  div {
-    display: flex;
-  }
 `;
+
 const Logo = styled.div`
+  margin-right: auto;
   span {
     font-weight: bold;
     font-size: 25px;
     color: #880212;
   }
 `;
-const TopBarIcon = styled.div`
+const TopBarNav = styled.nav`
   position: relative;
-  margin-right: 10px;
+  margin: 0 15px;
   cursor: pointer;
 
-  span {
-    position: absolute;
-    top: -10px;
-    right: 4px;
-    font-size: 10px;
+  ul {
+    list-style: none;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 15px;
-    height: 15px;
-    background: #880212;
-    color: white;
-    border-radius: 50%;
+    li {
+      height: 100%;
+    }
   }
+  // span {
+  //   position: absolute;
+  //   top: -10px;
+  //   right: 4px;
+  //   font-size: 10px;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   width: 15px;
+  //   height: 15px;
+  //   background: #880212;
+  //   color: white;
+  //   border-radius: 50%;
+  // }
 `;

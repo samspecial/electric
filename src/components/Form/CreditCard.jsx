@@ -18,7 +18,6 @@ const CreditCard = ({ responseMessage }) => {
     expiryYear: 00,
     sixteenDigit: "",
     cvv: "",
-    phoneNumber: "",
     pin: "",
   };
   const { onChange, values, setValues } = useForm(initialState);
@@ -52,7 +51,7 @@ const CreditCard = ({ responseMessage }) => {
       expiryYear: values.expiryYear,
       sixteenDigit: values.sixteenDigit,
       cvv: values.cvv,
-      phoneNumber: values.phoneNumber,
+      phoneNumber: `${responseMessage.data.user.phoneNumber}`,
       pin: values.pin,
       full_name: `${responseMessage.data.user.firstname} ${responseMessage.data.user.lastname}`,
       email_address: `${responseMessage.data.user.email}`,
@@ -109,7 +108,7 @@ const CreditCard = ({ responseMessage }) => {
       </Label>
 
       <div className="cc-row">
-        <Label row="double" htmlFor="phoneNumber">
+        {/* <Label row="double" htmlFor="phoneNumber">
           Phone Number
           <span>
             <FaPhone style={{ ...styles, transform: "rotate(180deg)" }} />
@@ -119,6 +118,22 @@ const CreditCard = ({ responseMessage }) => {
               placeholder="Phone Number"
               name="phoneNumber"
               value={values.phoneNumber}
+              onChange={onChange}
+            />
+          </span>
+        </Label> */}
+
+        <Label htmlFor="cvv">
+          CVV
+          <span>
+            <FaLock style={{ ...styles }} />
+            <InputField
+              row="padding"
+              type="password"
+              placeholder="CVV"
+              name="cvv"
+              maxLength={3}
+              value={values.cvv}
               onChange={onChange}
             />
           </span>
@@ -169,22 +184,6 @@ const CreditCard = ({ responseMessage }) => {
                 </option>
               ))}
           </Select>
-        </Label>
-
-        <Label htmlFor="cvv">
-          CVV
-          <span>
-            <FaLock style={{ ...styles }} />
-            <InputField
-              row="padding"
-              type="password"
-              placeholder="CVV"
-              name="cvv"
-              maxLength={3}
-              value={values.cvv}
-              onChange={onChange}
-            />
-          </span>
         </Label>
       </div>
       <Button accent="success">Confirm</Button>

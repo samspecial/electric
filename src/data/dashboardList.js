@@ -1,6 +1,6 @@
 import {
   FiTrendingUp,
-  FiUser,
+  FiUsers,
   FiDollarSign,
   FiGift,
   FiBarChart2,
@@ -76,12 +76,18 @@ exports.staff = [
   },
   {
     id: 2,
+    icon: FiUsers,
+    label: "Users",
+    url: "users",
+  },
+  {
+    id: 3,
     icon: MdTimeline,
     label: "Analytics",
     url: "analytics",
   },
   {
-    id: 3,
+    id: 4,
     icon: FiInfo,
     label: "Reports",
     url: "reports",

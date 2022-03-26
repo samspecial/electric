@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import { useParams } from "react-router-dom";
 import Analytics from "./Analytics";
 import Sales from "./Sales";
@@ -12,8 +13,9 @@ import Feedback from "./Feedback";
 import Message from "./Message";
 import Manage from "./Manage";
 import Ticket from "./Ticket";
+import Home from "./Home";
 
-const Index = (props) => {
+const Index = () => {
   const { submenu } = useParams();
   const loadRoutePage = () => {
     switch (submenu) {
@@ -52,7 +54,7 @@ const Index = (props) => {
         break;
 
       default:
-        return <h2>Dashboard Home</h2>;
+        return <Home />;
         break;
     }
   };

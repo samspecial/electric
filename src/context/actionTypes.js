@@ -9,6 +9,13 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const AUTH_FAIL = "AUTH_FAIL";
 
+//LOAD USERS
+export const LOAD_USER = "LOAD_USER";
+export const LOAD_USERS = "LOAD_USERS";
+export const LOAD_USERS_FAIL = "LOAD_USERS_FAIL";
+export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
+export const LOAD_USERS_SUCCESS = "LOAD_USERS_SUCCESS";
+
 //ALERT ACTIONS
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";

@@ -22,16 +22,7 @@ const Manage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [benefitPerPage, setBenefitPerPage] = useState(5);
 
-  const {
-    fetchBenefits,
-    createBenefit,
-    removeBenefit,
-    updateBenefit,
-    error,
-    loading,
-    message,
-    benefits,
-  } = benefitContext;
+  const { fetchBenefits, removeBenefit, benefits } = benefitContext;
 
   const modalRef = useRef();
 
@@ -45,7 +36,6 @@ const Manage = () => {
   };
 
   useEffect(() => {
-    console.log("Running useEffect to setBenefit");
     fetchBenefits();
   }, [showModal]);
 

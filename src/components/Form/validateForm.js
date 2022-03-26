@@ -6,13 +6,17 @@ export function validateSignupInfo(values) {
   );
 
   //first name
-  if (!values.firstname.trim()) {
-    errors.firstname = "Firstname required";
+  if (!values.fullname.trim()) {
+    errors.fullname = "Full name required";
+  } else if (values.fullname.length < 5) {
+    errors.fullname = "Full name must be 5+ character long.";
   }
 
   //last name
-  if (!values.lastname.trim()) {
-    errors.lastname = "Lastname required";
+  if (!values.phoneNumber.trim()) {
+    errors.phoneNumber = "Lastname required";
+  } else if (values.phoneNumber.length < 11) {
+    errors.phoneNumber = "Phone number not valid";
   }
 
   // Email

@@ -68,6 +68,31 @@ export const Button = styled.button`
   }
 `;
 
+export const ButtonOutline = styled.button`
+  width: auto;
+  height: 40px;
+  border: 1px solid #ffffff;
+  padding: 0 0.75rem;
+  text-align: center;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  position: relative;
+`;
+
+export const InputText = styled.input`
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid #ffffff;
+  color: white;
+  height: 40px;
+  width: 80%;
+  margin-right: 40px;
+  &:focus {
+    outline: none;
+  }
+`;
+
 export const MenuListGroup = styled.ul`
   list-style: none;
   display: flex;
@@ -402,9 +427,27 @@ export const Link = styled(Link)`
       ? css`
           display: block;
         `
+      : props.padding === "true"
+      ? css`
+          padding: 0.8rem 1rem;
+        `
       : css`
           display: inline;
         `};
+`;
+
+export const NavLink = styled(Link)`
+  text-decoration: none;
+  color: #555;
+  display: flex;
+  align-items: center;
+  ${(props) =>
+    props.submenu === "secondary"
+      ? css`
+          font-size: 0.8rem;
+          padding: 0.5rem 0;
+        `
+      : css``};
 `;
 
 export const ModalComponent = styled.form`

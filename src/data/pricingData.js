@@ -32,7 +32,7 @@ export default [
     benefits: [
       "100% customizable",
       "Monthly routine check of electrical setup",
-      "",
+      "We get your covered all year",
       "Access to 24/7 support",
     ],
     buttonText: "Call us",

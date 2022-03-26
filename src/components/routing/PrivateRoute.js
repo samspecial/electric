@@ -4,6 +4,7 @@ import { useAuthState } from "../../context/auth/AuthProvider";
 
 const PrivateRoute = () => {
   const connString = JSON.parse(localStorage.getItem("connId"));
+  const { user } = useAuthState();
 
   return connString?.isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 };

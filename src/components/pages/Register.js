@@ -11,6 +11,7 @@ import Toast from "../Toast";
 const Register = () => {
   const [confirmationToken, setConfirmationToken] = useState("");
   const [responseMessage, setResponseMessage] = useState({});
+  const [otp, setOtp] = useState("");
   const history = useNavigate();
   const { setAlert } = useContext(AlertContext);
 
@@ -19,12 +20,18 @@ const Register = () => {
   }, [confirmationToken]);
 
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const options = { token: confirmationToken };
+
+  const handleChange = (event) => {
+    setOtp(event.target.value);
+  };
+
+  const options = { otpString: otp, ...confirmationToken };
+  console.log(options);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       let response = await axios.post(`${BASE_URL}/auth/activate`, options);
-      console.log(response);
+
       setResponseMessage(response.data);
       // const { message, status } = response.data;
       // if (message === "user created" && status === "success")
@@ -52,15 +59,15 @@ const Register = () => {
         <FormComponent onSubmit={handleSubmit}>
           <h2>We can't wait to have you in 🎉</h2>
           <p>
-            A confirmation mail has been sent to your email address. You can
+            An verification code has been sent to your email address. You can
             click the verify button below to have your email confirmed now.
           </p>
-          <label htmlFor="confirmationToken">
+          <label htmlFor="otpCode">
             <InputField
-              type="hidden"
-              hidden={true}
-              name="confimationToken"
-              readOnly
+              type="text"
+              name="otpCode"
+              value={otp}
+              onChange={handleChange}
             />
           </label>
           <Button accent="success">Verify</Button>
