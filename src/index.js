@@ -6,6 +6,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import AlertState from "./context/alert/AlertState";
 import { AuthProvider } from "./context/auth/AuthProvider";
+import PackageState from "./context/package/PackageState";
+import SubscriptionState from "./context/subscription/SubscriptionState";
 import UserState from "./context/user/UserState";
 
 import "./preloader.css";
@@ -18,11 +20,15 @@ render(
   <React.StrictMode>
     <AuthProvider>
       <UserState>
-        <AlertState>
-          <Router>
-            <App hideLoader={hideLoader} showLoader={showLoader} />
-          </Router>
-        </AlertState>
+        <PackageState>
+          <SubscriptionState>
+            <AlertState>
+              <Router>
+                <App hideLoader={hideLoader} showLoader={showLoader} />
+              </Router>
+            </AlertState>
+          </SubscriptionState>
+        </PackageState>
       </UserState>
     </AuthProvider>
   </React.StrictMode>,

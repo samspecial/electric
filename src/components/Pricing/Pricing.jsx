@@ -1,24 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
+import { Button, InputField } from "../Styles";
+import axios from "axios";
 
 const Pricing = ({
-  planType,
+  plan_name,
   description,
-  amount,
-  benefits,
-  buttonText,
-  url = "/register",
+  price,
+  plan_benefit,
+  uuid,
+  callToAction,
 }) => {
+  let BASE_URL;
+  process.env.NODE_ENV === "production"
+    ? (BASE_URL = "")
+    : (BASE_URL = process.env.REACT_APP_BASE_URL);
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(uuid);
+      const res = await axios.post(
+        `${BASE_URL}/auth/subscription`,
+        { planId: uuid },
+        config
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <PriceCard>
-      <Plan>{planType}</Plan>
+      <Plan>{plan_name}</Plan>
       <p>{description}</p>
-      <small>{amount}</small>
+      <small>${price}</small>
       <UnorderedList>
-        {benefits.map((benefit, i) => {
+        {plan_benefit.map((benefit, i) => {
           return (
             <li key={i}>
               <FaCheckCircle /> {benefit}
@@ -26,7 +55,13 @@ const Pricing = ({
           );
         })}
       </UnorderedList>
-      <UtilityLink to={url}>{buttonText}</UtilityLink>
+      <form onSubmit={handleSubmit}>
+        <InputField type="hidden" value={uuid} />
+
+        <Button accent="secondary" smallWidth="true" type="submit">
+          {callToAction}
+        </Button>
+      </form>
     </PriceCard>
   );
 };
@@ -34,11 +69,11 @@ const Pricing = ({
 export default Pricing;
 
 Pricing.propTypes = {
-  planType: PropTypes.string.isRequired,
+  plan_name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  amount: PropTypes.string.isRequired,
-  benefits: PropTypes.array.isRequired,
-  buttonText: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  plan_benefit: PropTypes.array.isRequired,
+  callToAction: PropTypes.string.isRequired,
 };
 
 export const UtilityLink = styled(Link)`

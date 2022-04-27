@@ -27,14 +27,15 @@ const PackageState = (props) => {
 
   const [state, dispatch] = useReducer(PackageReducer, initialState);
 
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  };
+
   // Function to get all contacts for the user.
   const fetchPackages = async () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
     dispatch({ type: LOADING, payload: !initialState.loading });
     try {
       const res = await axios.get(`${BASE_URL}/auth/plans`, config);
@@ -52,13 +53,6 @@ const PackageState = (props) => {
 
   // Function to add a package.
   const createPackage = async (formData) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
-
     try {
       const res = await axios.post(`${BASE_URL}/auth/plan`, formData, config);
       dispatch({ type: ADD_PACKAGE, payload: res.data.package });
@@ -77,19 +71,12 @@ const PackageState = (props) => {
 
   // Function to delete a package.
   const removePackage = async (id) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
-
     try {
       dispatch({
         type: DELETE_PACKAGE,
         payload: id,
       });
-      const res = await axios.delete(`${BASE_URL}/auth/package/${id}`, config);
+      const res = await axios.delete(`${BASE_URL}/auth/plan/${id}`, config);
     } catch (err) {
       dispatch({
         type: PACKAGE_ERROR,
@@ -99,18 +86,11 @@ const PackageState = (props) => {
   };
 
   // Function to update the current package.
-  const updatePackage = async (benefit) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
-
+  const updatePackage = async (plan) => {
     try {
       const res = await axios.put(
-        `${BASE_URL}/auth/package/${benefit.id}`,
-        { name: benefit.name },
+        `${BASE_URL}/auth/plan/${plan.id}`,
+        { name: plan.name },
         config
       );
 

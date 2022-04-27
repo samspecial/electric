@@ -5,23 +5,26 @@ import PricePanel from "../../sections/PricingPanel";
 import { Panel } from "../../WhyChooseUs/CardStyle";
 import pricingData from "../../../data/pricingData";
 import Pricing from "../../Pricing/Pricing";
-import UserContext from "../../../context/user/userContext";
+import userContext from "../../../context/user/userContext";
+import PackageContext from "../../../context/package/PackageContext";
+import SubscriptionContext from "../../../context/subscription/SubscriptionContext";
 
 const Home = () => {
-  // const connString = JSON.parse(localStorage.getItem("connId"));
-  // const [user, setUser] = useState(null);
-  const { user } = useContext(UserContext);
+  const packageContext = useContext(PackageContext);
+  const { packages, fetchPackages } = packageContext;
+  const subscriptionContext = useContext(SubscriptionContext);
+  const { subscriptions } = subscriptionContext;
+
+  const { user } = useContext(userContext);
   useEffect(() => {
-    // setUser(connString?.user);
+    fetchPackages();
   }, []);
   return user?.role === "customer" ? (
     <MainAreaWrapper>
-      <h3>Welcome {user?.fullname?.split(" ")[0]}</h3>
-
       <SectionRow>
         <RowItem>
           <h4>Current plan</h4>
-          <h5>Dynamic data</h5>
+          <h5>{subscriptions[0]?.plans?.plan_name}</h5>
         </RowItem>
         <RowItem background="red">
           <h4>Resolved conflict</h4>
@@ -29,15 +32,16 @@ const Home = () => {
         </RowItem>
         <RowItem background="yellow">
           <h4>Expiry date</h4>
-          <h5>Dynamic data</h5>
+          <h5>{subscriptions[0]?.expired_date}</h5>
         </RowItem>
       </SectionRow>
       <section>
-        {/* <div>
+        <div>
           <h4>Expiry date</h4>
-        </div> */}
+        </div>
+
         <Panel>
-          {pricingData.map((prices, index) => {
+          {packages?.map((prices, index) => {
             return <Pricing key={index} {...prices} />;
           })}
         </Panel>

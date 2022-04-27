@@ -27,14 +27,15 @@ const BenefitState = (props) => {
 
   const [state, dispatch] = useReducer(benefitReducer, initialState);
 
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  };
+
   // Function to get all contacts for the user.
   const fetchBenefits = async () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
     dispatch({ type: LOADING, payload: !initialState.loading });
     try {
       // dispatch({ type: GET_BENEFITS });
@@ -53,13 +54,6 @@ const BenefitState = (props) => {
 
   // Function to add a contact.
   const createBenefit = async (formData) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
-
     try {
       const res = await axios.post(
         `${BASE_URL}/auth/benefit`,
@@ -83,13 +77,6 @@ const BenefitState = (props) => {
 
   // Function to delete a contact.
   const removeBenefit = async (id) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
-
     try {
       dispatch({
         type: DELETE_BENEFIT,
@@ -106,13 +93,6 @@ const BenefitState = (props) => {
 
   // Function to update the current benefit.
   const updateBenefit = async (benefit) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
-
     try {
       const res = await axios.put(
         `${BASE_URL}/auth/benefit/${benefit.id}`,

@@ -4,32 +4,31 @@ import TopBar from "../Dashboard/TopBar";
 import SideBar from "../Dashboard/SideBar";
 import MainMenu from "../Dashboard/MainArea/Index.jsx";
 import BenefitState from "../../context/benefit/BenefitState";
-import PackageState from "../../context/package/PackageState";
 
-import UserContext from "../../context/user/userContext";
+import userContext from "../../context/user/userContext";
+import SubscriptionContext from "../../context/subscription/SubscriptionContext";
 
 const Dashboard = () => {
   const userDetails = JSON.parse(localStorage.getItem("connId"));
-  const { fetchUser } = useContext(UserContext);
+  const { fetchUser } = useContext(userContext);
+  const subscriptionContext = useContext(SubscriptionContext);
+  const { fetchSubscriptions } = subscriptionContext;
   useEffect(() => {
     fetchUser(userDetails?.user?.id);
+    fetchSubscriptions();
   }, []);
-
-  // const loggedInUser = users.filter((u) => u.uuid === user?.id);
 
   return (
     <BenefitState>
-      <PackageState>
-        <div>
-          <TopBar />
-          <DashboardBody>
-            <SideBarArea />
-            <MainArea>
-              <MainMenu />
-            </MainArea>
-          </DashboardBody>
-        </div>
-      </PackageState>
+      <div>
+        <TopBar />
+        <DashboardBody>
+          <SideBarArea />
+          <MainArea>
+            <MainMenu />
+          </MainArea>
+        </DashboardBody>
+      </div>
     </BenefitState>
   );
 };

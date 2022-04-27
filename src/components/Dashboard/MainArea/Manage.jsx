@@ -17,6 +17,8 @@ const Manage = () => {
   const connString = JSON.parse(localStorage.getItem("connId"));
 
   const [showModal, setShowModal] = useState(false);
+  const [isPlanSaved, setIsPlanSaved] = useState(false);
+
   const benefitContext = useContext(BenefitContext);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,6 +39,8 @@ const Manage = () => {
 
   useEffect(() => {
     fetchBenefits();
+    // setBenefitList(benefits);
+    console.log(showModal);
   }, [showModal]);
 
   const indexOfLastBenefit = currentPage * benefitPerPage;
@@ -99,12 +103,16 @@ const Manage = () => {
             </p>
           )}
 
-          <PackageForm benefits={benefits} />
-          <PackageTable />
+          <PackageForm
+            benefits={benefits}
+            isPlanSaved={isPlanSaved}
+            setIsPlanSaved={setIsPlanSaved}
+          />
+          <PackageTable isPlanSaved={isPlanSaved} />
         </section>
       )}
 
-      {showModal && <Toast />}
+      {/* {showModal && <Toast />} */}
     </Background>
   ) : (
     <NotFound />

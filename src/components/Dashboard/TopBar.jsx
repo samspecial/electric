@@ -47,7 +47,7 @@ const TopBar = () => {
               <FiGlobe size="20" />
             </Link>
           </li>
-          <li>
+          <li onMouseEnter={secondaryMenu} onMouseLeave={closeSecondaryMenu}>
             <Link padding="true" to="#!">
               {" "}
               <FiSettings size="20" />
@@ -87,6 +87,10 @@ const Topbar = styled.header`
   padding: 0px 40px;
   justify-content: flex-end;
   align-items: center;
+
+  @media only screen and (max-width: 480px) {
+    padding: 0px 10px;
+  }
 `;
 
 const Logo = styled.div`

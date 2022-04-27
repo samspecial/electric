@@ -6,7 +6,7 @@ import { validatePackage } from "../../Form/validateForm";
 import PackageContext from "../../../context/package/PackageContext";
 import "../../../App.css";
 
-const PackageForm = ({ benefits }) => {
+const PackageForm = ({ benefits, isPlanSaved, setIsPlanSaved }) => {
   const initialState = {
     planName: "",
     duration: 0,
@@ -19,6 +19,7 @@ const PackageForm = ({ benefits }) => {
   const { onChange, values, setValues } = useForm(initialState);
 
   const [loading, isLoading] = useState(false);
+
   const [errors, setErrors] = useState({});
   const [benefit, setBenefit] = useState([]);
   const packageContext = useContext(PackageContext);
@@ -50,6 +51,9 @@ const PackageForm = ({ benefits }) => {
     isLoading(true);
 
     createPackage(formData);
+    setIsPlanSaved(!isPlanSaved);
+    setValues(initialState);
+    setBenefit([]);
     // setBenefit("");
     // setLoading(false);
     // if (message.length > 0) {

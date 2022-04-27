@@ -15,7 +15,7 @@ const SecondaryMenu = ({ user, userProfile, name, path, icon }) => {
     <>
       <MenuWrapper>
         <li>{user.fullname}</li>
-        <li>{user.role}</li>
+        <li>{user.role.charAt(0).toUpperCase() + user.role.slice(1)}</li>
         {userProfile.map((u) => (
           <li key={u.id}>
             <NavLink submenu="secondary" to={u.path}>
@@ -41,7 +41,7 @@ const MenuWrapper = styled.ul`
 
     min-width: 60px;
     height: auto;
-    background: white;
+    background:  #fffff1;
     position: absolute;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -71,7 +71,7 @@ const MenuWrapper = styled.ul`
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-bottom: 12px solid red;
+    border-bottom: 12px solid #fffff1;
 
      li {
       background: #1888ff;

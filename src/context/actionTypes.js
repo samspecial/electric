@@ -39,3 +39,12 @@ export const UPDATE_PACKAGE = "UPDATE_PACKAGE";
 export const PACKAGE_ERROR = "PACKAGE_ERROR";
 export const PACKAGE_FAIL = "PACKAGE_FAIL";
 export const PACKAGE_SUCCESS = "PACKAGE_SUCCESS";
+
+//SUBSCRIPTIONS
+export const GET_ALL_SUBSCRIPTIONS = "GET_ALL_SUBSCRIPTIONS";
+export const GET_SUBSCRIPTIONS = "GET_SUBSCRIPTIONS";
+export const GET_ACTIVE_SUBSCRIPTION = "GET_ACTIVE_SUBSCRIPTION";
+export const DEACTIVATE_SUBSCRIPTION = "DEACTIVATE_SUBSCRIPTION";
+
+//Write cron job to deactivate and renew subscriptions for user -
+//For subscription renewal, a charge is carried out

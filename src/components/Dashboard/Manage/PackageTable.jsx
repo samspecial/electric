@@ -4,18 +4,18 @@ import PackageContext from "../../../context/package/PackageContext";
 import CreditCard from "../../Form/CReditCard";
 import { Table } from "../../Styles";
 
-export const PackageTable = () => {
+export const PackageTable = ({ isPlanSaved }) => {
   const packageContext = useContext(PackageContext);
+
   const { packages, removePackage, fetchPackages } = packageContext;
 
-  const [item, setItem] = useState("");
   const handleEditPopup = (benefit) => {
     setItem(benefit);
     showEditBenefit(true);
   };
   useEffect(() => {
     fetchPackages();
-  }, []);
+  }, [isPlanSaved]);
 
   return (
     <>
@@ -39,18 +39,12 @@ export const PackageTable = () => {
                 <td>{p?.duration}</td>
                 <td>{p?.price}</td>
                 <td>{p?.description}</td>
-                {/* <td className="edit-icon">
-                  <FaEdit
-                    title="Edit benefit"
-                    onClick={() => handleEditPopup(benefit)}
-                    className="app-icons"
-                  />
-                </td> */}
+
                 <td className="delete-icon">
                   {" "}
                   <FaTrash
-                    key={p?.id}
-                    onClick={() => removePackage(p?.id)}
+                    key={p?.uuid}
+                    onClick={() => removePackage(p?.uuid)}
                     title="Delete plan"
                     className="app-icons"
                     color="red"

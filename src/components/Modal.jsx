@@ -48,8 +48,7 @@ const Modal = ({ showModal, setShowModal }) => {
     setBenefit("");
     setLoading(false);
     if (message.length > 0) {
-      setShowModal((prev) => !prev);
-      setAlert("Benefit created", message, "success");
+      setShowModal(!showModal);
     } else {
       setAlert("Error", error, "danger");
     }

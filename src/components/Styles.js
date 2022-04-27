@@ -23,6 +23,15 @@ export const Button = styled.button`
       : css`
           background: #880212;
         `};
+
+  ${(props) =>
+    props.smallWidth === "true"
+      ? css`
+          width: auto;
+          padding: 6px 20px;
+        `
+      : css``};
+
   color: white;
   font-size: 12px;
   border: none;
@@ -65,6 +74,13 @@ export const Button = styled.button`
     font-weight: 600;
     padding: 7px 0;
     height: 50px;
+    ${(props) =>
+      props.smallWidth === "true"
+        ? css`
+            width: auto;
+            padding: 7px 20px;
+          `
+        : css``};
   }
 `;
 
