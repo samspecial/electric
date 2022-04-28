@@ -40,7 +40,6 @@ const SubscriptionState = (props) => {
       dispatch({ type: LOADING, payload: !initialState.loading });
       dispatch({ type: GET_SUBSCRIPTIONS, payload: res.data.data });
       // dispatch({ type: SUBSCRIPTION_SUCCESS, payload: res.data.status });
-      console.log(res.data.data);
     } catch (err) {
       console.log(err.response);
       dispatch({

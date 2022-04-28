@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import { Button, InputField } from "../Styles";
 import axios from "axios";
@@ -14,6 +14,7 @@ const Pricing = ({
   uuid,
   callToAction,
 }) => {
+  const navigate = useNavigate();
   let BASE_URL;
   process.env.NODE_ENV === "production"
     ? (BASE_URL = "")
@@ -28,6 +29,9 @@ const Pricing = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const userDetails = JSON.parse(localStorage.getItem("connId"));
+    console.log(typeof userDetails);
+    if (!userDetails) return navigate("/login");
     try {
       console.log(uuid);
       const res = await axios.post(
