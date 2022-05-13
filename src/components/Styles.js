@@ -1,11 +1,37 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import { MdClose } from "react-icons/md";
 
 export const Button = styled.button`
   width: 100%;
   height: 40px;
   padding: 5px 7px;
   background-color: #880212;
+  ${(props) =>
+    props.accent === "secondary"
+      ? css`
+          background: #e03c52;
+        `
+      : props.accent === "primary"
+      ? css`
+          background: #55608f;
+        `
+      : props.accent === "success"
+      ? css`
+          background: #179909;
+        `
+      : css`
+          background: #880212;
+        `};
+
+  ${(props) =>
+    props.smallWidth === "true"
+      ? css`
+          width: auto;
+          padding: 6px 20px;
+        `
+      : css``};
+
   color: white;
   font-size: 12px;
   border: none;
@@ -15,8 +41,27 @@ export const Button = styled.button`
 
   :hover {
     background-color: white;
-    color: #880212;
-    outline: 1px solid #880212;
+
+    ${(props) =>
+      props.accent === "secondary"
+        ? css`
+            color: #e03c52;
+            outline: 1px solid #e03c52;
+          `
+        : props.accent === "primary"
+        ? css`
+            color: #655dff;
+            outline: 1px solid #655dff;
+          `
+        : props.accent === "success"
+        ? css`
+            color: #179909;
+            outline: 1px solid #179909;
+          `
+        : css`
+            color: #880212;
+            outline: 1px solid #880212;
+          `};
   }
 
   @media only screen and (min-width: 480px) and (max-width: 768px) {
@@ -29,6 +74,38 @@ export const Button = styled.button`
     font-weight: 600;
     padding: 7px 0;
     height: 50px;
+    ${(props) =>
+      props.smallWidth === "true"
+        ? css`
+            width: auto;
+            padding: 7px 20px;
+          `
+        : css``};
+  }
+`;
+
+export const ButtonOutline = styled.button`
+  width: auto;
+  height: 40px;
+  border: 1px solid #ffffff;
+  padding: 0 0.75rem;
+  text-align: center;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  position: relative;
+`;
+
+export const InputText = styled.input`
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid #ffffff;
+  color: white;
+  height: 40px;
+  width: 80%;
+  margin-right: 40px;
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -179,22 +256,6 @@ export const Container = styled.section`
   }
 `;
 
-// export const SectionHeading = styled.h3`
-//   width: 100%;
-//   font-weight: 900;
-//   text-align: center;
-//   line-height: 1.2;
-//   margin: 3.5rem 0;
-//   font-size: 1.75rem;
-//   color: ${(props) => (props.color === "white" ? "white" : "#d0021b")};
-//   text-transform: capitalize;
-
-//   @media (max-width: 768px) {
-//     font-size: 1.15rem;
-//     margin-bottom: 1.15rem;
-//   }
-// `;
-
 export const FullWidth = styled.section`
   padding: 3rem 10rem;
   width: 100%;
@@ -247,21 +308,62 @@ export const ClientInfo = styled.div`
 
 export const InputField = styled.input`
   width: 100%;
-  padding: 8px;
+
+  ${(props) =>
+    props.row === "padding"
+      ? css`
+          padding: 8px 0 8px 30px;
+        `
+      : css`
+          padding: 8px;
+        `}
+  display: block;
   margin-bottom: 10px;
   border-radius: 4px;
   border: 1px solid #888;
+`;
+
+export const Label = styled.label`
+  font-size: 0.9rem;
+
+  ${(props) =>
+    props.row === "double"
+      ? css`
+          width: 47%;
+        `
+      : css`
+          width: 100%;
+        `}
+
+  span {
+    display: flex;
+    position: relative;
+  }
+`;
+
+export const Select = styled.select`
+  padding: 8px 14px;
+  cursor: pointer;
 `;
 
 export const FormComponent = styled.form`
   padding: 1.5rem 2.5rem;
   border-radius: 5px;
   background: white;
-  width: 40%;
-  min-height: 400px;
-  display: flex;
   flex-direction: column;
   justify-content: center;
+
+  ${(props) =>
+    props.addPlan === "add"
+      ? css`
+          width: 60%;
+        `
+      : css`
+          width: 40%;
+        `}
+
+  min-height: 400px;
+  display: flex;
 
   ${(props) =>
     props.form === "signin"
@@ -341,7 +443,176 @@ export const Link = styled(Link)`
       ? css`
           display: block;
         `
+      : props.padding === "true"
+      ? css`
+          padding: 0.8rem 1rem;
+        `
       : css`
           display: inline;
         `};
+`;
+
+export const NavLink = styled(Link)`
+  text-decoration: none;
+  color: #555;
+  display: flex;
+  align-items: center;
+  ${(props) =>
+    props.submenu === "secondary"
+      ? css`
+          font-size: 0.8rem;
+          padding: 0.5rem 0;
+        `
+      : css``};
+`;
+
+export const ModalComponent = styled.form`
+  ${(props) =>
+    props.modalName === "add"
+      ? css`
+          width: 100%;
+          height: 100%;
+        `
+      : css`
+          width: 45%;
+          height: 45%;
+        `};
+  box-shadow: 0px 3px 15px -3px rgba(0, 0, 0, 0.2);
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background: #fff;
+  padding: 2.5rem 3rem;
+  position: absolute;
+  transform: translate(-50%, -50%);
+
+  @media screen and (min-device-width: 481px) and (max-device-width: 768px) {
+    ${(props) =>
+      props.modalName === "add"
+        ? css`
+            padding: 1.5rem 1rem;
+            width: 100%;
+            height: 100%;
+          `
+        : css`
+            padding: 1.5rem 1rem;
+            width: 65%;
+            height: 60%;
+          `};
+
+    h {
+      font-size: 1rem;
+    }
+  }
+
+  @media screen and (max-device-width: 480px) {
+    ${(props) =>
+      props.modalName === "add"
+        ? css`
+            padding: 1.5rem 1rem;
+            width: 100%;
+            height: 100%;
+          `
+        : css`
+            padding: 1.5rem 1rem;
+            width: 85%;
+            height: 60%;
+          `};
+    h {
+      font-size: 1rem;
+      margin-bottom: 1.1rem;
+    }
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+`;
+
+export const ModalBackground = styled.section`
+  width: 100%;
+  height: calc(100vh - 50px);
+  position: relative;
+  background-color: #e5e5e5;
+  top: 0;
+  left: 0;
+`;
+
+export const CloseModalButton = styled(MdClose)`
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  background: #f2f2f2;
+  padding: 5px;
+  z-index: 10;
+  color: #880212;
+  @media screen and (max-device-width: 480px) {
+    top: 10px;
+    right: 10px;
+    padding: 3px;
+    width: 20px;
+    height: 20px;
+  }
+`;
+
+export const Table = styled.table`
+  min-width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
+  th,
+  td {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  thead {
+    th {
+      background-color: #55608f;
+    }
+  }
+
+  tbody {
+    background-color: #55608f;
+    min-height: 200px;
+    tr {
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+    td {
+      position: relative;
+      &:hover {
+        &:before {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: -9999px;
+          bottom: -9999px;
+          // background-color: rgba(255, 255, 255, 0.2);
+          background-color: #55608f;
+          z-index: -1;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 75%;
+    margin: 0 auto;
+  }
 `;

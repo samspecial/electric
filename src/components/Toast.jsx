@@ -44,8 +44,7 @@ const Div = styled.div`
   min-height: 80px;
   position: fixed;
   bottom: 5%;
-  z-index: 99;
-  // transition: 0.3s ease;
+  z-index: 999999999;
   pointer-events: auto;
   padding: 1rem;
   border-radius: 10px;
@@ -84,6 +83,7 @@ const Div = styled.div`
         `
       : css`
           background: green;
+          color: white;
         `};
 
   img {

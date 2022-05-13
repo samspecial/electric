@@ -38,12 +38,13 @@ const menuItem = [
 
 const SideBar = () => {
   const { user } = useAuthState();
+  const connString = JSON.parse(localStorage.getItem("connId"));
   return (
     <Aside>
       <section>
         {menuItem.map(
           (item) =>
-            item.role.includes(user.role) && (
+            item.role.includes(connString?.user.role) && (
               <div key={item.id}>
                 <h3>{item.header}</h3>
                 <DashboardLink dashboard={item.menuData} />
@@ -90,5 +91,11 @@ const Aside = styled.aside`
   li:hover,
   li:active {
     background: rgb(228, 228, 250);
+  }
+
+  @media screen and (max-device-width: 480px) {
+    section {
+      padding: 6px;
+    }
   }
 `;

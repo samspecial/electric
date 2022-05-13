@@ -1,4 +1,7 @@
 import join from "../assets/join.svg";
+import choose from "../assets/choose.svg";
+import booking from "../assets/booking.svg";
+import request from "../assets/request.svg";
 const data = [
   {
     id: 1,
@@ -9,17 +12,17 @@ const data = [
   },
   {
     id: 2,
-    heading: "Buy a plan",
+    heading: "Choose a plan",
     paragraph:
       "The first step to getting amazing jobs done is through registration",
-    illustration: join,
+    illustration: choose,
   },
   {
     id: 3,
     heading: "Raise a ticket",
     paragraph:
       "The first step to getting amazing jobs done is through registration",
-    illustration: join,
+    illustration: request,
   },
 ];
 

@@ -5,7 +5,7 @@ import * as types from "../actionTypes";
 let BASE_URL;
 process.env.NODE_ENV === "production"
   ? (BASE_URL = "")
-  : (BASE_URL = "http://localhost:4000/api/auth");
+  : (BASE_URL = process.env.REACT_APP_BASE_URL);
 
 // Function to register user. (Will sign the user up for the application and get a token for the user.)
 export const registerUser = async (dispatch, formData) => {
@@ -17,9 +17,12 @@ export const registerUser = async (dispatch, formData) => {
 
   try {
     dispatch({ type: types.SIGN_UP });
-    const response = await axios.post(`${BASE_URL}/signup`, formData, config);
+    const response = await axios.post(
+      `${BASE_URL}/auth/signup`,
+      formData,
+      config
+    );
     const { status } = response;
-    console.log(status);
 
     dispatch({
       type: types.SIGN_UP_SUCCESS,
@@ -43,7 +46,11 @@ export const loginUser = async (dispatch, formData) => {
 
   try {
     dispatch({ type: types.SIGN_IN, payload: true });
-    const response = await axios.post(`${BASE_URL}/signin`, formData, config);
+    const response = await axios.post(
+      `${BASE_URL}/auth/signin`,
+      formData,
+      config
+    );
     const { user } = response.data;
 
     if (user) {

@@ -7,6 +7,7 @@ import TimeLineContainer from "../HowItWorks/TimeLineContainer";
 import PricePanel from "../sections/PricingPanel";
 import TestimonialGroup from "../Testimonial/TestimonialGroup";
 import FaqList from "../FAQ/FaqList";
+import Newsletter from "../sections/Newsletter";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       <PricePanel />
       <TestimonialGroup />
       <FaqList />
+      <Newsletter />
     </div>
   );
 };

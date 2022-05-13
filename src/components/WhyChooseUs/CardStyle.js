@@ -42,7 +42,11 @@ export const PanelHorizontal = styled.div`
 export const TextContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  width: 80%;
+  width: 90%;
+`;
+
+export const Wrapper = styled.div`
+  width: 10%;
 `;
 
 export const Img = styled.img`

@@ -1,4 +1,3 @@
-// import axios from "axios";
 import React, { useState, useContext } from "react";
 import {
   useAuthDispatch,
@@ -28,6 +27,10 @@ const Signin = () => {
   const [errors, setErrors] = useState({});
 
   const history = useNavigate();
+  const logoutHandler = () => {
+    localStorage.removeItem("connId");
+    history("/login");
+  };
 
   const loginSubmit = async (e) => {
     e.preventDefault();
@@ -37,19 +40,15 @@ const Signin = () => {
       password: values.password,
     });
     if (response.user) {
-      const credentials = {
-        connId: response.user.connId,
-        isAuthenticated: true,
-      };
-      localStorage.setItem("connId", JSON.stringify(credentials));
       setValues(initialState);
       history("/dashboard");
+      setTimeout(logoutHandler, 200000000);
+      //3599999
     }
     if (response.err) {
       console.log(response.err);
     } else {
-      const { message } = errorMessage;
-      setAlert("Failed", message, "danger");
+      setAlert("Failed", errorMessage?.message, "danger");
     }
   };
 

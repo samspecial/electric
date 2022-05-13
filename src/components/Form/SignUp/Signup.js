@@ -6,11 +6,12 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { validateSignupInfo } from "../validateForm";
 import AlertContext from "../../../context/alert/alertContext";
 import "../../../App.css";
+import Toast from "../../Toast";
 
 const Signup = ({ setConfirmationToken }) => {
   const initialState = {
-    firstname: "",
-    lastname: "",
+    fullname: "",
+    phoneNumber: "",
     email: "",
     password: "",
   };
@@ -20,21 +21,23 @@ const Signup = ({ setConfirmationToken }) => {
   const [errors, setErrors] = useState({});
   const { setAlert } = useContext(AlertContext);
 
-  const BASE_URL = "http://localhost:4000/api/auth";
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const options = {
-    firstname: values.firstname,
-    lastname: values.lastname,
+    fullname: values.fullname,
+    phoneNumber: values.phoneNumber,
     email: values.email,
     password: values.password,
     role: "customer",
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       setErrors(validateSignupInfo(values));
-      let response = await axios.post(`${BASE_URL}/signup`, options);
+      let response = await axios.post(`${BASE_URL}/auth/signup`, options);
+
       setLoading(true);
-      setConfirmationToken(response.data.token);
+      setConfirmationToken(response.data.data);
       setValues(initialState);
       setLoading(false);
     } catch (error) {
@@ -46,31 +49,25 @@ const Signup = ({ setConfirmationToken }) => {
 
   return (
     <FormComponent onSubmit={handleSubmit}>
+      {/* <Toast /> */}
       <h4>Get started</h4>
       <h5>
         Already have an account? <Link to="/login">Login</Link>
       </h5>
-      <label htmlFor="firstname">
+      <label htmlFor="fullname">
         <InputField
-          className={errors.firstname ? "error-input" : ""}
+          className={errors.fullname ? "error-input" : ""}
           type="text"
-          placeholder="Firstname"
-          name="firstname"
-          value={values.firstname}
+          placeholder="Full name"
+          name="fullname"
+          value={values.fullname}
           onChange={onChange}
         />
+        {errors.fullname && (
+          <small className="error-small">{errors.fullname}</small>
+        )}
       </label>
-      <label htmlFor="lastname">
-        <InputField
-          id="lastname"
-          className={errors.lastname ? "error-input" : ""}
-          type="text"
-          placeholder="Lastname"
-          name="lastname"
-          value={values.lastname}
-          onChange={onChange}
-        />
-      </label>
+
       <label htmlFor="email">
         <InputField
           id="email"
@@ -81,11 +78,26 @@ const Signup = ({ setConfirmationToken }) => {
           value={values.email}
           onChange={onChange}
         />
+        {errors.email && <small className="error-small">{errors.email}</small>}
+      </label>
+      <label htmlFor="phoneNumber">
+        <InputField
+          id="phoneNumber"
+          className={errors.phoneNumber ? "error-input" : ""}
+          type="text"
+          placeholder="Phone number"
+          name="phoneNumber"
+          value={values.phoneNumber}
+          onChange={onChange}
+        />
+        {errors.phoneNumber && (
+          <small className="error-small">{errors.phoneNumber}</small>
+        )}
       </label>
       <label htmlFor="password" className="l-password">
         <InputField
           id="password"
-          type={showPassword ? "password" : "text"}
+          type={showPassword ? "text" : "password"}
           placeholder="Password"
           name="password"
           value={values.password}
