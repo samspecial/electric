@@ -13,6 +13,7 @@ import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
 import PrivateRoute from "./components/routing/PrivateRoute";
 
+
 export default function App({ hideLoader }) {
   useEffect(() => {
     hideLoader();

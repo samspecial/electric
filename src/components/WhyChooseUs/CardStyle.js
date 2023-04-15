@@ -26,6 +26,9 @@ export const PanelHorizontal = styled.div`
   align-items: flex-start;
   line-height: 1.5;
   background: rgb(238, 236, 236);
+  &:hover {
+    transform: translateY(-10px);
+  }
 
   @media only screen and (min-width: 480px) and (max-width: 768px) {
     width: 46%;
@@ -48,6 +51,7 @@ export const TextContainer = styled.div`
 export const Wrapper = styled.div`
   width: 10%;
 `;
+
 
 export const Img = styled.img`
   display: block;

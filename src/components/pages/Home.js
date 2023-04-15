@@ -8,6 +8,7 @@ import PricePanel from "../sections/PricingPanel";
 import TestimonialGroup from "../Testimonial/TestimonialGroup";
 import FaqList from "../FAQ/FaqList";
 import Newsletter from "../sections/Newsletter";
+// import Footer from "../Footer/Footer";
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
       <TestimonialGroup />
       <FaqList />
       <Newsletter />
+      {/* <Footer /> */}
     </div>
   );
 };
